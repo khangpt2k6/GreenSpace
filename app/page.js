@@ -67,6 +67,23 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="glass researchSection" data-reveal style={{ "--reveal-delay": "110ms" }}>
+        <h2>Featured Research: Consumer Behavior & Sustainability</h2>
+        <p>
+          Explore this USF student research article on how consumer choices shape
+          environmental outcomes and what actions can shift communities toward
+          sustainable futures.
+        </p>
+        <a
+          href="https://env-blog.vercel.app/"
+          target="_blank"
+          rel="noreferrer"
+          className="btnPrimary"
+        >
+          Open Research Page
+        </a>
+      </section>
+
       <section id="features" className="featureGrid" data-reveal style={{ "--reveal-delay": "140ms" }}>
         {features.map((feature, index) => (
           <article

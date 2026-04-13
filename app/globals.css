@@ -282,6 +282,21 @@ select {
   padding: 1.2rem;
 }
 
+.researchSection {
+  max-width: 980px;
+  margin: 1rem auto 0;
+  padding: 1.2rem;
+}
+
+.researchSection h2 {
+  margin-top: 0;
+}
+
+.researchSection p {
+  color: var(--text-soft);
+  margin-bottom: 0.9rem;
+}
+
 .metricSection h2,
 .feedbackSection h2,
 .productFeedbackLanding h2 {
