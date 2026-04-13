@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { platformImpactMetrics, studentHighlights } from "@/data/impact-metrics";
+import { products } from "@/data/products";
+import {
+  platformImpactMetrics,
+  productStudentFeedback,
+  studentHighlights
+} from "@/data/impact-metrics";
 
 const features = [
   {
@@ -20,6 +25,16 @@ const features = [
 ];
 
 export default function HomePage() {
+  const topStudentProductFeedback = productStudentFeedback
+    .slice()
+    .sort((a, b) => b.studentsUsed - a.studentsUsed)
+    .slice(0, 3)
+    .map((entry) => ({
+      ...entry,
+      productName:
+        products.find((product) => product.id === entry.productId)?.name || "Product"
+    }));
+
   return (
     <main className="page landingPage">
       <div className="ambient ambient--one" />
@@ -81,6 +96,20 @@ export default function HomePage() {
             <article key={item.id} className="feedbackCard">
               <p>"{item.text}"</p>
               <strong>{item.student}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="glass productFeedbackLanding">
+        <h2>Most Used Products by Students</h2>
+        <div className="feedbackGrid">
+          {topStudentProductFeedback.map((item) => (
+            <article key={item.productId} className="feedbackCard">
+              <p className="metricValue">{item.studentsUsed}</p>
+              <p className="metricLabel">Students used {item.productName}</p>
+              <p className="mutedLine">{item.reviews} feedback entries</p>
+              <p>"{item.feedback}"</p>
             </article>
           ))}
         </div>
