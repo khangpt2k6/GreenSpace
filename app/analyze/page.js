@@ -142,7 +142,15 @@ function ResultsView({ result, url }) {
       <section className="glass analyzeHero" data-reveal style={{ "--reveal-delay": "80ms" }}>
         <div className="analyzeHeroLeft">
           <h1 className="analyzeProductTitle">{product.title || "Product Analysis"}</h1>
-          <p className="analyzeProductDesc">{product.description || "No description available."}</p>
+          {product.description && (
+          <p className="analyzeProductDesc">{product.description}</p>
+        )}
+        {product.fetchWarning && (
+          <div className="analyzeFetchWarning">
+            <FiAlertCircle size={13} />
+            <span>{product.fetchWarning}</span>
+          </div>
+        )}
           <div className="analyzeHeroMeta">
             {product.price && (
               <span className="metaTag">{product.price}</span>
