@@ -1863,3 +1863,460 @@ select {
     gap: 0.35rem;
   }
 }
+
+/* ── Analyze page ──────────────────────────────────────── */
+
+.analyzeLoading,
+.analyzeError {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg);
+}
+
+.analyzeLoadingCard,
+.analyzeErrorCard {
+  max-width: 480px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.analyzeLoadingIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: rgba(34, 184, 106, 0.1);
+  border: 2px solid rgba(34, 184, 106, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  animation: loadIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadIconPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 184, 106, 0.2); }
+  50%       { box-shadow: 0 0 0 14px rgba(34, 184, 106, 0); }
+}
+
+.analyzeLoadingUrl {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  word-break: break-all;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  max-width: 100%;
+}
+
+.analyzeSteps {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.analyzeStep {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.5);
+  font-size: 0.86rem;
+  color: var(--text-soft);
+  transition: all 0.4s ease;
+}
+
+.analyzeStep--active {
+  border-color: rgba(34, 184, 106, 0.3);
+  background: rgba(34, 184, 106, 0.06);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.analyzeStep--done {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.2);
+  background: rgba(22, 163, 74, 0.05);
+}
+
+.analyzeStepIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.analyzeStepSpinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(34, 184, 106, 0.25);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Back bar */
+.analyzeBackBar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.analyzeBackBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.analyzeBackUrl {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Hero */
+.analyzeHero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  width: calc(100% - 4rem);
+}
+
+.analyzeHeroLeft {
+  flex: 1;
+  min-width: 0;
+}
+
+.analyzeProductTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 0.55rem;
+  line-height: 1.25;
+}
+
+.analyzeProductDesc {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.analyzeHeroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+}
+
+.analyzeHeroSummary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 0.65rem;
+  color: var(--text);
+}
+
+.analyzeHeroRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.scoreRingSvg {
+  width: 110px;
+  height: 110px;
+}
+
+.analyzeScoreLabel {
+  font-size: 0.78rem;
+  text-align: center;
+  color: var(--text-soft);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Grid */
+.analyzeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  width: calc(100% - 4rem);
+}
+
+.analyzeCard {
+  padding: 1.4rem 1.5rem;
+}
+
+.analyzeCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.analyzeCardHeader h2,
+.analyzeCardHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Category bars */
+.analyzeCatGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.analyzeCatRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.analyzeCatLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.analyzeCatBar {
+  height: 7px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.analyzeCatFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Lists */
+.analyzeList {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.analyzeList li {
+  padding: 0.45rem 0.7rem 0.45rem 2rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  position: relative;
+}
+
+.analyzeList li::before {
+  content: "";
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+}
+
+.analyzeList--green li {
+  background: rgba(22, 163, 74, 0.07);
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+.analyzeList--green li::before { background: #16a34a; }
+
+.analyzeList--red li {
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+}
+.analyzeList--red li::before { background: #dc2626; }
+
+.analyzeList--blue li {
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+}
+.analyzeList--blue li::before { background: #2563eb; }
+
+/* Alternatives section */
+.analyzeAltSection {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  width: calc(100% - 4rem);
+  padding: 1.6rem 1.8rem;
+}
+
+.analyzeAltGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.analyzeAltCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(34, 184, 106, 0.2);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.6);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.analyzeAltCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(21, 125, 70, 0.14);
+  border-color: var(--accent);
+}
+
+.analyzeAltTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.analyzeAltTop h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.analyzeAltReason {
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.analyzeAltScore {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+.analyzeAltLink {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: auto;
+}
+
+/* Analyze another */
+.analyzeAnotherSection {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+  width: calc(100% - 4rem);
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.analyzeAnotherSection > div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.analyzeAnotherSection h3 { margin: 0 0 0.2rem; font-size: 1rem; }
+
+.analyzeAnotherForm {
+  display: flex;
+  gap: 0.6rem;
+  flex: 2;
+  min-width: 260px;
+}
+
+.analyzeAnotherInput {
+  flex: 1;
+  border: 1.5px solid rgba(24, 127, 75, 0.2);
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.85);
+  color: var(--text);
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analyzeAnotherInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(34, 184, 106, 0.14);
+}
+
+@media (max-width: 840px) {
+  .analyzeHero {
+    flex-direction: column;
+    width: calc(100% - 2rem);
+    padding: 1.5rem;
+  }
+
+  .analyzeGrid {
+    grid-template-columns: 1fr;
+    width: calc(100% - 2rem);
+  }
+
+  .analyzeAltSection,
+  .analyzeAnotherSection {
+    width: calc(100% - 2rem);
+  }
+
+  .analyzeBackBar {
+    padding: 0.6rem 1rem;
+  }
+
+  .analyzeAnotherSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analyzeAnotherForm {
+    width: 100%;
+    flex-direction: column;
+  }
+}
