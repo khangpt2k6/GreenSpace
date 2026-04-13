@@ -87,6 +87,8 @@ export default function CommunityPage() {
           <Link href="/">Home</Link>
           <Link href="/marketplace">Marketplace</Link>
           <Link href="/community">Community</Link>
+          <Link href="/guide">Guide</Link>
+          <Link href="/survey">Survey</Link>
         </nav>
       </header>
 

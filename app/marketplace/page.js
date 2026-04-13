@@ -20,9 +20,9 @@ function badgeClass(value) {
 
 export default function MarketplacePage() {
   const [query, setQuery] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState(["EcoLiving", "EcoTech"]);
+  const [selectedCategories, setSelectedCategories] = useState(["EcoLiving", "EcoTech", "EcoFashion"]);
   const [minRating, setMinRating] = useState(3);
-  const [maxPrice, setMaxPrice] = useState(150);
+  const [maxPrice, setMaxPrice] = useState(450);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -107,6 +107,8 @@ export default function MarketplacePage() {
           <Link href="/">Home</Link>
           <Link href="/marketplace">Marketplace</Link>
           <Link href="/community">Community</Link>
+          <Link href="/guide">Guide</Link>
+          <Link href="/survey">Survey</Link>
         </nav>
       </header>
 
@@ -147,6 +149,14 @@ export default function MarketplacePage() {
             />
             EcoTech
           </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes("EcoFashion")}
+              onChange={() => toggleCategory("EcoFashion")}
+            />
+            EcoFashion
+          </label>
 
           <h3>Rating</h3>
           <div className="rangeRow">
@@ -167,7 +177,7 @@ export default function MarketplacePage() {
             <input
               type="range"
               min={20}
-              max={200}
+              max={450}
               step={1}
               value={maxPrice}
               onChange={(event) => setMaxPrice(Number(event.target.value))}
@@ -189,9 +199,15 @@ export default function MarketplacePage() {
                 <p className="mutedLine">
                   ${product.price.toFixed(2)} · {product.rating.toFixed(1)} stars
                 </p>
-                <p className={scoreClass(product.sustainability)}>
-                  Sustainability {product.sustainability}/100
-                </p>
+                <div className="productTagRow">
+                  <span className={scoreClass(product.sustainability)}>
+                    {product.sustainability}/100
+                  </span>
+                  {product.resale && (
+                    <span className="badge badge--resale">♻ Resale</span>
+                  )}
+                  <span className="badge badge--muted">{product.category}</span>
+                </div>
                 {feedbackByProductId[product.id] ? (
                   <div className="productFeedbackMeta">
                     <p className="mutedLine">

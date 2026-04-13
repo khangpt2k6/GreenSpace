@@ -1,0 +1,52 @@
+---
+description: Icon usage standards — always use react-icons, never emoji or text icons
+globs: **/*.js,**/*.jsx,**/*.ts,**/*.tsx
+alwaysApply: true
+---
+
+# Icon Standards
+
+**Always** use proper SVG icons from the `react-icons` library. **Never** use emoji, unicode symbols, or text characters as icons (e.g. ✕, ↑, 🌿, ✓).
+
+## Install
+
+```bash
+npm install react-icons
+```
+
+## Usage
+
+```jsx
+// ✅ GOOD — import from react-icons
+import { FiSend, FiX, FiLeaf, FiArrowUp } from "react-icons/fi";
+import { MdEco, MdVolunteerActivism } from "react-icons/md";
+
+<FiSend size={18} />
+<FiX size={16} />
+```
+
+```jsx
+// ❌ BAD — never use emoji or unicode as icons
+<button>↑</button>
+<button>✕</button>
+<span>🌿</span>
+```
+
+## Common Icon Sets
+
+| Set | Import path | Use for |
+|-----|-------------|---------|
+| Feather | `react-icons/fi` | UI actions (send, close, search, arrow) |
+| Material | `react-icons/md` | Eco/environment/general purpose |
+| Heroicons | `react-icons/hi` | Navigation, status |
+| Phosphor  | `react-icons/ph` | Modern UI accents |
+
+## Sizing & Styling
+
+```jsx
+// Size via prop
+<FiLeaf size={20} />
+
+// Color via style or className
+<FiLeaf size={20} style={{ color: "var(--accent)" }} />
+```

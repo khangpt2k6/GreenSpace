@@ -4,8 +4,15 @@ import { useEffect } from "react";
 
 export default function MotionInit() {
   useEffect(() => {
+    document.documentElement.classList.add("motion-ready");
+
     const nodes = document.querySelectorAll("[data-reveal]");
     if (!nodes.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -20,7 +27,15 @@ export default function MotionInit() {
     );
 
     nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+
+    const fallbackTimer = window.setTimeout(() => {
+      nodes.forEach((node) => node.classList.add("is-visible"));
+    }, 1200);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
   }, []);
 
   return null;

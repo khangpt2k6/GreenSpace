@@ -24,6 +24,24 @@ const features = [
   }
 ];
 
+const posters = [
+  {
+    title: "Eco Action Campaign",
+    description:
+      "A student awareness poster focused on reducing single-use plastic and promoting reusable choices."
+  },
+  {
+    title: "Green Living Guide",
+    description:
+      "A visual poster that highlights simple daily habits for lower carbon impact in homes and dorms."
+  },
+  {
+    title: "Future of Sustainable Shopping",
+    description:
+      "A concept poster presenting how AI can help consumers make cleaner, smarter purchases."
+  }
+];
+
 export default function HomePage() {
   const topStudentProductFeedback = productStudentFeedback
     .slice()
@@ -46,24 +64,25 @@ export default function HomePage() {
           <Link href="/">Home</Link>
           <Link href="/marketplace">Marketplace</Link>
           <Link href="/community">Community</Link>
+          <Link href="/guide">Guide</Link>
+          <Link href="/survey">Survey</Link>
         </nav>
       </header>
 
       <section className="hero glass" data-reveal style={{ "--reveal-delay": "80ms" }}>
         <p className="eyebrow">Smart Shopping Meets Sustainability</p>
-        <h1>Shop cleaner products with confidence.</h1>
+        <h1>GreenCart app for real user shopping decisions.</h1>
         <p className="subtext">
-          GreenCart helps people discover eco-friendly products, understand real
-          sustainability claims, and switch to better alternatives with clear AI
-          insights.
+          Use the marketplace filters, open product pages, and run AI analysis to
+          compare sustainability before buying.
         </p>
         <div className="heroActions">
           <Link href="/marketplace" className="btnPrimary">
             Open Marketplace
           </Link>
-          <a href="#features" className="btnGhost">
-            Explore Features
-          </a>
+          <Link href="/marketplace#analyzer" className="btnGhost">
+            Use AI Analyzer
+          </Link>
         </div>
       </section>
 
@@ -137,15 +156,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="posters" className="glass posterSection" data-reveal style={{ "--reveal-delay": "350ms" }}>
+        <h2>Portfolio Add-on: Some of my posters that I created</h2>
+        <p>
+          This section is optional for presentation; the main experience remains
+          focused on Marketplace and AI tools for users.
+        </p>
+        <div className="posterGrid">
+          {posters.map((poster) => (
+            <article key={poster.title} className="posterCard">
+              <h3>{poster.title}</h3>
+              <p>{poster.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="glass ctaSection" data-reveal style={{ "--reveal-delay": "380ms" }}>
         <h2>Ready to build a cleaner cart?</h2>
         <p>
           Start browsing sustainable products and run AI analysis on any product
           page now.
         </p>
-        <Link href="/marketplace" className="btnPrimary">
-          Go to Marketplace
-        </Link>
+        <div className="heroActions">
+          <Link href="/marketplace" className="btnPrimary">
+            Go to Marketplace
+          </Link>
+          <Link href="/marketplace#analyzer" className="btnGhost">
+            Analyze Product URL
+          </Link>
+        </div>
       </section>
     </main>
   );
