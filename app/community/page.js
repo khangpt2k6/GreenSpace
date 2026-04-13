@@ -81,7 +81,7 @@ export default function CommunityPage() {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass">
+      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
         <p className="brand">GreenCart</p>
         <nav>
           <Link href="/">Home</Link>
@@ -90,7 +90,7 @@ export default function CommunityPage() {
         </nav>
       </header>
 
-      <section className="glass marketHeader">
+      <section className="glass marketHeader" data-reveal style={{ "--reveal-delay": "70ms" }}>
         <h1>Tampa Eco Community</h1>
         <p>
           A social environmental hub: share updates, connect with local organizations,
@@ -98,7 +98,7 @@ export default function CommunityPage() {
         </p>
       </section>
 
-      <section className="glass projectStudio">
+      <section className="glass projectStudio" data-reveal style={{ "--reveal-delay": "130ms" }}>
         <h2>{finalProjectBrief.title}</h2>
         <p>{finalProjectBrief.intro}</p>
         <p>{finalProjectBrief.objective}</p>
@@ -133,8 +133,8 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="communityLayout">
-        <aside className="glass communityPanel">
+      <section className="communityLayout" data-reveal style={{ "--reveal-delay": "190ms" }}>
+        <aside className="glass communityPanel" data-reveal style={{ "--reveal-delay": "230ms" }}>
           <h3>Your Cause Interests</h3>
           <div className="chipWrap">
             {causes.map((cause) => (
@@ -178,7 +178,7 @@ export default function CommunityPage() {
         </aside>
 
         <section className="communityFeed">
-          <article className="glass feedComposer">
+          <article className="glass feedComposer" data-reveal style={{ "--reveal-delay": "260ms" }}>
             <h3>Share an Update</h3>
             <form onSubmit={handlePost} className="composerForm">
               <textarea
@@ -193,7 +193,7 @@ export default function CommunityPage() {
             </form>
           </article>
 
-          <article className="glass feedCard">
+          <article className="glass feedCard" data-reveal style={{ "--reveal-delay": "300ms" }}>
             <h3>Community Feed</h3>
             <div className="feedList">
               {allPosts.map((post) => (
@@ -220,7 +220,7 @@ export default function CommunityPage() {
           </article>
         </section>
 
-        <section className="glass suggestionPanel">
+        <section className="glass suggestionPanel" data-reveal style={{ "--reveal-delay": "340ms" }}>
           <h3>Recommended Volunteer Opportunities</h3>
           <p className="mutedLine">
             Ranked by your selected causes and availability.

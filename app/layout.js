@@ -1,4 +1,5 @@
 import "./globals.css";
+import MotionInit from "@/components/motion-init";
 
 export const metadata = {
   title: "GreenCart - Sustainable Product Intelligence",
@@ -9,7 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MotionInit />
+        {children}
+      </body>
     </html>
   );
 }

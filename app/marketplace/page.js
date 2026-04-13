@@ -101,7 +101,7 @@ export default function MarketplacePage() {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass">
+      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
         <p className="brand">GreenCart</p>
         <nav>
           <Link href="/">Home</Link>
@@ -110,7 +110,7 @@ export default function MarketplacePage() {
         </nav>
       </header>
 
-      <section className="glass marketHeader">
+      <section className="glass marketHeader" data-reveal style={{ "--reveal-delay": "70ms" }}>
         <h1>Green Marketplace</h1>
         <p>
           Discover products with better environmental profiles and analyze any
@@ -128,8 +128,8 @@ export default function MarketplacePage() {
         />
       </section>
 
-      <section className="marketLayout">
-        <aside className="glass filterPanel">
+      <section className="marketLayout" data-reveal style={{ "--reveal-delay": "120ms" }}>
+        <aside className="glass filterPanel" data-reveal style={{ "--reveal-delay": "180ms" }}>
           <h3>Category</h3>
           <label>
             <input
@@ -176,8 +176,13 @@ export default function MarketplacePage() {
         </aside>
 
         <section className="productGrid">
-          {filteredProducts.map((product) => (
-            <article key={product.id} className="glass productCard">
+          {filteredProducts.map((product, index) => (
+            <article
+              key={product.id}
+              className="glass productCard"
+              data-reveal
+              style={{ "--reveal-delay": `${240 + (index % 6) * 45}ms` }}
+            >
               <img src={product.image} alt={product.name} />
               <div className="productBody">
                 <h4>{product.name}</h4>
@@ -216,7 +221,12 @@ export default function MarketplacePage() {
         </section>
       </section>
 
-      <section className="glass analyzerBlock" id="analyzer">
+      <section
+        className="glass analyzerBlock"
+        id="analyzer"
+        data-reveal
+        style={{ "--reveal-delay": "220ms" }}
+      >
         <h2>Analyze Any Product URL</h2>
         <p className="mutedLine">
           {selectedCount > 0
@@ -239,7 +249,7 @@ export default function MarketplacePage() {
       </section>
 
       {result ? (
-        <section className="resultsGrid">
+        <section className="resultsGrid" data-reveal style={{ "--reveal-delay": "280ms" }}>
           <article className="glass panel">
             <h2>Product Snapshot</h2>
             <p>

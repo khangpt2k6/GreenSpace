@@ -40,7 +40,7 @@ export default function HomePage() {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass">
+      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
         <p className="brand">GreenCart</p>
         <nav>
           <Link href="/">Home</Link>
@@ -49,7 +49,7 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section className="hero glass">
+      <section className="hero glass" data-reveal style={{ "--reveal-delay": "80ms" }}>
         <p className="eyebrow">Smart Shopping Meets Sustainability</p>
         <h1>Shop cleaner products with confidence.</h1>
         <p className="subtext">
@@ -67,16 +67,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="features" className="featureGrid">
-        {features.map((feature) => (
-          <article key={feature.title} className="glass featureCard">
+      <section id="features" className="featureGrid" data-reveal style={{ "--reveal-delay": "140ms" }}>
+        {features.map((feature, index) => (
+          <article
+            key={feature.title}
+            className="glass featureCard"
+            data-reveal
+            style={{ "--reveal-delay": `${220 + index * 90}ms` }}
+          >
             <h2>{feature.title}</h2>
             <p>{feature.description}</p>
           </article>
         ))}
       </section>
 
-      <section className="glass metricSection">
+      <section className="glass metricSection" data-reveal style={{ "--reveal-delay": "200ms" }}>
         <h2>Student Impact Metrics</h2>
         <div className="metricGrid">
           {platformImpactMetrics.map((metric) => (
@@ -89,7 +94,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="glass feedbackSection">
+      <section className="glass feedbackSection" data-reveal style={{ "--reveal-delay": "260ms" }}>
         <h2>What Students Say</h2>
         <div className="feedbackGrid">
           {studentHighlights.map((item) => (
@@ -101,7 +106,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="glass productFeedbackLanding">
+      <section className="glass productFeedbackLanding" data-reveal style={{ "--reveal-delay": "320ms" }}>
         <h2>Most Used Products by Students</h2>
         <div className="feedbackGrid">
           {topStudentProductFeedback.map((item) => (
@@ -115,7 +120,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="glass ctaSection">
+      <section className="glass ctaSection" data-reveal style={{ "--reveal-delay": "380ms" }}>
         <h2>Ready to build a cleaner cart?</h2>
         <p>
           Start browsing sustainable products and run AI analysis on any product

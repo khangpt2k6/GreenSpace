@@ -23,17 +23,28 @@ html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text);
   background: linear-gradient(160deg, var(--bg), var(--bg-soft));
+  background-size: 150% 150%;
   min-height: 100vh;
+  animation: backgroundDrift 16s ease infinite;
 }
 
 a {
   color: var(--accent-strong);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  transition: all 0.25s ease;
 }
 
 .page {
@@ -96,6 +107,7 @@ a {
   z-index: 0;
   border-radius: 999px;
   filter: blur(40px);
+  animation: floatAmbient 8s ease-in-out infinite;
 }
 
 .ambient--one {
@@ -112,6 +124,7 @@ a {
   left: -110px;
   bottom: -120px;
   background: rgba(120, 231, 158, 0.4);
+  animation-delay: -3.2s;
 }
 
 .glass {
@@ -168,11 +181,27 @@ a {
   border: 1px solid transparent;
   cursor: pointer;
   font: inherit;
+  position: relative;
+  overflow: hidden;
 }
 
 .btnPrimary {
   background: linear-gradient(120deg, var(--accent), var(--accent-sky));
   color: #ffffff;
+}
+
+.btnPrimary::after {
+  content: "";
+  position: absolute;
+  inset: -200% -30%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%) rotate(12deg);
+  animation: buttonShimmer 3.4s linear infinite;
 }
 
 .btnGhost {
@@ -436,6 +465,11 @@ a {
   height: 145px;
   object-fit: cover;
   display: block;
+  transition: transform 0.45s ease;
+}
+
+.productCard:hover img {
+  transform: scale(1.04);
 }
 
 .productBody {
@@ -677,6 +711,54 @@ a {
   margin-bottom: 0.35rem;
 }
 
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+  filter: blur(8px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    filter 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+@keyframes backgroundDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatAmbient {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.04);
+  }
+}
+
+@keyframes buttonShimmer {
+  0% {
+    transform: translateX(-120%) rotate(12deg);
+  }
+  100% {
+    transform: translateX(120%) rotate(12deg);
+  }
+}
+
 .panel {
   padding: 1.3rem;
 }
@@ -796,6 +878,10 @@ a {
   .siteNav {
     padding: 0.8rem;
     align-items: flex-start;
+  }
+
+  [data-reveal] {
+    transition-duration: 0.45s;
   }
 
   .featureGrid {
