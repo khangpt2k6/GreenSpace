@@ -1,0 +1,18 @@
+{
+  "name": "greencart-platform",
+  "version": "1.0.0",
+  "description": "GreenCart sustainability platform built with Next.js and Anthropic AI.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
+    "cheerio": "^1.1.0",
+    "next": "^15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
