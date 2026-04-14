@@ -11,7 +11,7 @@ What GreenCart offers:
 - Community Hub: A social feed for Tampa-area eco citizens. Users can post sustainability updates, filter volunteer opportunities by cause and availability, and explore local organizations like Keep Tampa Bay Beautiful, Tampa Bay Watch, Sierra Club Suncoast, Hillsborough Riverkeeper, and FNPS Suncoast.
 - Semester Project Studio: Embedded inside the Community page, this section guides students through their IDH 3350 semester environmental action project — expectations, project ideas, and reflection requirements.
 - Research Link: GreenCart features a USF student research paper on Consumer Behavior & Environmental Sustainability at https://env-blog.vercel.app/
-- Landing page: Shows platform metrics (1,248 students, 9,372 analyses, 92% positive feedback, 316 projects), student testimonials, and top products used by students.
+- Landing page: Shows platform metrics (9,372 analyses, 92% positive feedback, 316 projects), student testimonials, and top products used by students.
 
 Navigation:
 - / = Landing page

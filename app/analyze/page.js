@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Navbar from "@/components/navbar";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import {
@@ -189,16 +190,7 @@ function ResultsView({ result, url }) {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass analyzeEnter" style={{ "--enter-delay": "0ms" }}>
-        <p className="brand">GreenCart</p>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/marketplace">Marketplace</Link>
-          <Link href="/community">Community</Link>
-          <Link href="/guide">Guide</Link>
-          <Link href="/survey">Survey</Link>
-        </nav>
-      </header>
+      <Navbar />
 
       {/* Back bar */}
       <div className="analyzeBackBar analyzeEnter" style={{ "--enter-delay": "60ms" }}>

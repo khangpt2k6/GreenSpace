@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 import {
   FiSearch, FiSliders, FiZap, FiExternalLink,
   FiStar, FiRefreshCw, FiGrid, FiList, FiUpload,
   FiX, FiImage, FiCheck, FiPlus
 } from "react-icons/fi";
+import Navbar from "@/components/navbar";
 import {
   MdEco, MdDevices, MdCheckroom, MdHome,
   MdVerified, MdTrendingUp, MdLocalOffer
@@ -265,7 +266,7 @@ export default function MarketplacePage() {
   const { user, isLoaded } = useUser();
 
   const [allProducts, setAllProducts]   = useState(staticProducts);
-  const [loadingDB, setLoadingDB]       = useState(true);
+  const [loadingDB, setLoadingDB]       = useState(false);
   const [query, setQuery]               = useState("");
   const [activeTab, setActiveTab]       = useState("all");
   const [minRating, setMinRating]       = useState(3);
@@ -309,7 +310,9 @@ export default function MarketplacePage() {
   const featured = allProducts.filter((p) => p.sustainability >= 88).slice(0, 3);
 
   function analyze(product) {
-    router.push(`/analyze?url=${encodeURIComponent(product.url)}`);
+    const href = product.url || product.productUrl;
+    if (!href) return;
+    router.push(`/analyze?url=${encodeURIComponent(href)}`);
   }
 
   function handleAnalyze(e) {
@@ -335,36 +338,13 @@ export default function MarketplacePage() {
         />
       )}
 
-      {/* ── Navbar ── */}
-      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
-        <p className="brand">GreenCart</p>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/marketplace">Marketplace</Link>
-          <Link href="/community">Community</Link>
-          <Link href="/guide">Guide</Link>
-          <Link href="/survey">Survey</Link>
-        </nav>
-        <div className="navAuthRow">
-          {isLoaded && (
-            user ? (
-              <>
-                <button
-                  className="mktUploadNavBtn"
-                  onClick={() => setShowUpload(true)}
-                >
-                  <FiPlus size={14} /> List Product
-                </button>
-                <UserButton afterSignOutUrl="/marketplace" />
-              </>
-            ) : (
-              <SignInButton mode="modal">
-                <button className="navSignInBtn">Sign in</button>
-              </SignInButton>
-            )
-          )}
-        </div>
-      </header>
+      <Navbar
+        action={isLoaded && user ? (
+          <button className="mktUploadNavBtn" onClick={() => setShowUpload(true)}>
+            <FiPlus size={14} /> List Product
+          </button>
+        ) : null}
+      />
 
       {/* ── Search bar ── */}
       <div className="mktSearchBar glass" data-reveal style={{ "--reveal-delay": "50ms" }}>
@@ -417,7 +397,7 @@ export default function MarketplacePage() {
               onClick={() => analyze(p)}
               title={`Analyze ${p.name}`}
             >
-              <img src={p.image} alt={p.name} />
+              <img src={p.image || p.imageUrl || "/products_flat_lay.jpg"} alt={p.name} />
               <div className="mktHeroCardBody">
                 <p>{p.name}</p>
                 <ScorePill value={p.sustainability} />
@@ -559,7 +539,7 @@ export default function MarketplacePage() {
             >
               {/* Image */}
               <div className="mktCardImg">
-                <img src={product.image} alt={product.name} loading="lazy" />
+                <img src={product.image || product.imageUrl || "/products_flat_lay.jpg"} alt={product.name} loading="lazy" />
                 {product.resale && (
                   <span className="mktCardResaleBadge">
                     <FiRefreshCw size={10} /> Resale

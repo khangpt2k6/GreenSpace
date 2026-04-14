@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 import {
   FiHeart,
   FiMessageCircle,
   FiShare2,
   FiSend,
-  FiSearch,
   FiBell,
   FiUser,
   FiMapPin,
@@ -20,6 +19,7 @@ import {
   FiCheck
 } from "react-icons/fi";
 import { MdEco, MdVolunteerActivism, MdNaturePeople } from "react-icons/md";
+import Navbar from "@/components/navbar";
 import {
   tampaCommunityPosts,
   tampaOrganizations,
@@ -224,7 +224,7 @@ export default function CommunityPage() {
   const [availability, setAvailability]     = useState("Any");
   const [postText, setPostText]             = useState("");
   const [allPosts, setAllPosts]             = useState(tampaCommunityPosts);
-  const [loadingPosts, setLoadingPosts]     = useState(true);
+  const [loadingPosts, setLoadingPosts]     = useState(false);
   const [searchQuery, setSearchQuery]       = useState("");
   const [submitting, setSubmitting]         = useState(false);
   const [postError, setPostError]           = useState("");
@@ -339,48 +339,7 @@ export default function CommunityPage() {
 
   return (
     <main className="snPage">
-      {/* ── Top Navigation ── */}
-      <header className="snNav glass">
-        <Link href="/" className="snNavBrand">
-          <MdEco size={22} />
-          GreenCart
-        </Link>
-
-        <nav className="snNavLinks">
-          <Link href="/" className="snNavLink">Home</Link>
-          <Link href="/marketplace" className="snNavLink">Marketplace</Link>
-          <Link href="/community" className="snNavLink snNavLink--active">Community</Link>
-          <Link href="/guide" className="snNavLink">Guide</Link>
-          <Link href="/analyze" className="snNavLink">Analyze</Link>
-        </nav>
-
-        <div className="snNavRight">
-          <div className="snSearchBar">
-            <FiSearch size={15} />
-            <input
-              type="text"
-              placeholder="Search community..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          <button type="button" className="snIconBtn">
-            <FiBell size={18} />
-            <span className="snNotifDot" />
-          </button>
-          <div className="snNavAvatar">
-            {isLoaded && (
-              user ? (
-                <UserButton afterSignOutUrl="/community" />
-              ) : (
-                <SignInButton mode="modal">
-                  <button className="navSignInBtn">Sign in</button>
-                </SignInButton>
-              )
-            )}
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* ── Three-column layout ── */}
       <div className="snLayout">

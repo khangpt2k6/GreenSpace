@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import Navbar from "@/components/navbar";
 import { LIKERT_SCALE, surveyMeta, surveyQuestions } from "@/data/survey";
 
 const SECTIONS = [...new Set(surveyQuestions.map((q) => q.section))];
@@ -80,16 +81,7 @@ export default function SurveyPage() {
         <div className="ambient ambient--one" />
         <div className="ambient ambient--two" />
 
-        <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
-          <p className="brand">GreenCart</p>
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/marketplace">Marketplace</Link>
-            <Link href="/community">Community</Link>
-            <Link href="/guide">Guide</Link>
-            <Link href="/survey">Survey</Link>
-          </nav>
-        </header>
+        <Navbar />
 
         <section className="glass surveyResultsHero" data-reveal style={{ "--reveal-delay": "60ms" }}>
           <p className="eyebrow">Survey Complete</p>
@@ -184,16 +176,7 @@ export default function SurveyPage() {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
-        <p className="brand">GreenCart</p>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/marketplace">Marketplace</Link>
-          <Link href="/community">Community</Link>
-          <Link href="/guide">Guide</Link>
-          <Link href="/survey">Survey</Link>
-        </nav>
-      </header>
+      <Navbar />
 
       <section className="glass marketHeader" data-reveal style={{ "--reveal-delay": "60ms" }}>
         <h1>{surveyMeta.title}</h1>

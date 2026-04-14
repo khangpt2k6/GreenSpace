@@ -1,11 +1,5 @@
 export const platformImpactMetrics = [
   {
-    id: "students",
-    label: "Students Using GreenCart",
-    value: "1,248",
-    note: "Across sustainability and environmental studies courses"
-  },
-  {
     id: "analyses",
     label: "Product Analyses Completed",
     value: "9,372",

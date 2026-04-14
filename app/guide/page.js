@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FiCamera, FiSearch } from "react-icons/fi";
+import Navbar from "@/components/navbar";
 import {
   MdStorefront, MdBiotech, MdBarChart, MdGroups,
   MdAssignment, MdSmartToy, MdCheckCircle
@@ -102,16 +103,7 @@ export default function GuidePage() {
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
-        <p className="brand">GreenCart</p>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/marketplace">Marketplace</Link>
-          <Link href="/community">Community</Link>
-          <Link href="/guide">Guide</Link>
-          <Link href="/survey">Survey</Link>
-        </nav>
-      </header>
+      <Navbar />
 
       <section className="glass marketHeader" data-reveal style={{ "--reveal-delay": "60ms" }}>
         <h1>How to Use GreenCart</h1>
