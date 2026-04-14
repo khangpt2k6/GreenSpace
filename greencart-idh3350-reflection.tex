@@ -1,0 +1,115 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\onehalfspacing
+
+\definecolor{gcgreen}{HTML}{22B86A}
+\newcommand{\GC}{\textcolor{gcgreen}{GreenCart}}
+
+\title{\GC: IDH 3350 Semester Reflection}
+\author{Tuan Khang Phan\\IDH 3350: Natural Science\\University of South Florida}
+\date{Spring 2025}
+
+\begin{document}
+\maketitle
+
+\section{Project Overview}
+This semester project focuses on building \GC, a practical sustainability platform for students and local community members in Tampa Bay. The goal is to reduce the gap between caring about the environment and making sustainable everyday choices. The live platform is available at \href{https://green-space-three.vercel.app/}{green-space-three.vercel.app}.
+
+\subsection*{Quick Product Preview}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{public/reflection/market_place.png}
+  \caption{Marketplace view with curated products, filters, and sustainability focus.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{"public/reflection/analyzing page.png"}
+  \caption{Product analysis view with AI-generated sustainability insights.}
+\end{figure}
+
+\section{Documentation of Activity}
+Over the semester, I built and improved five main features:
+\begin{itemize}[leftmargin=1.2em]
+  \item Marketplace with 190+ eco products and filters.
+  \item AI analysis tool that scores product sustainability from a URL.
+  \item Community page for local sharing and volunteer matching.
+  \item Student survey on consumer behavior and sustainability.
+  \item Guide page for onboarding and class project support.
+\end{itemize}
+
+Main tools used: Next.js, React, Supabase, Clerk authentication, and the Anthropic API.
+
+\section{Resulting Product}
+The final product is a working web app that helps users:
+\begin{enumerate}[leftmargin=1.3em]
+  \item discover better products,
+  \item compare sustainability impact,
+  \item reflect on personal behavior,
+  \item connect with local environmental opportunities.
+\end{enumerate}
+
+This project combines technical implementation and environmental engagement. It was designed around real barriers such as lack of trusted information, convenience, and habit.
+
+\section{Reflection}
+This project was challenging and meaningful. The most important lesson for me was that sustainability is not only a science issue; it is also a design and information problem. If people can get clear and useful information quickly, they are more likely to make better choices.
+
+Building \GC changed how I shop and how I think about impact. I now pay more attention to product lifecycle and alternatives instead of only price or convenience.
+
+I plan to continue improving this project by expanding local community features and improving survey analytics.
+
+\section{Class Concept Connection}
+This work directly connects to the attitude--behavior gap discussed in class. Many people care about sustainability but do not act consistently. \GC addresses this by making sustainable action easier, clearer, and more social.
+
+\section{Screenshots and Evidence}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{public/reflection/landing_page.png}
+  \caption{Landing page of \GC.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{public/reflection/community.png}
+  \caption{Community page with posting and volunteer matching.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{public/reflection/AI-chatbot.png}
+  \caption{Built-in chatbot assistant for sustainability questions.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{public/reflection/survey_place.png}
+  \caption{Survey interface on environmental awareness and behavior.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{public/reflection/research_blog.png}
+  \caption{Companion research blog used in the project.}
+\end{figure}
+
+\section{Links}
+\begin{itemize}[leftmargin=1.2em]
+  \item Platform: \href{https://green-space-three.vercel.app/}{green-space-three.vercel.app}
+  \item Research blog: \href{https://env-blog.vercel.app/}{env-blog.vercel.app}
+\end{itemize}
+
+\end{document}
