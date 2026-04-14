@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import MotionInit from "@/components/motion-init";
 import ChatBubble from "@/components/chat-bubble";
 
@@ -10,15 +11,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body>
-        <MotionInit />
-        {children}
-        <ChatBubble />
-        <footer className="siteCredit">
-          Powered by Tuan Khang Phan - IDH 3350
-        </footer>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" data-scroll-behavior="smooth">
+        <body>
+          <MotionInit />
+          {children}
+          <ChatBubble />
+          <footer className="siteCredit">
+            Powered by Tuan Khang Phan - IDH 3350
+          </footer>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

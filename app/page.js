@@ -1,192 +1,254 @@
 import Link from "next/link";
+import Image from "next/image";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { MdBarChart, MdSwapHoriz } from "react-icons/md";
 import { products } from "@/data/products";
 import {
   platformImpactMetrics,
-  productStudentFeedback,
   studentHighlights
 } from "@/data/impact-metrics";
 
-const features = [
-  {
-    title: "AI Sustainability Scoring",
-    description:
-      "Get a transparent score for every product across materials, labor ethics, and lifecycle impact."
-  },
-  {
-    title: "Eco Marketplace Discovery",
-    description:
-      "Browse curated products by sustainability score, price, and category in one clean marketplace."
-  },
-  {
-    title: "Greener Alternatives",
-    description:
-      "Instantly compare cleaner alternatives from other platforms before making a purchase."
-  }
-];
-
-const posters = [
-  {
-    title: "Eco Action Campaign",
-    description:
-      "A student awareness poster focused on reducing single-use plastic and promoting reusable choices."
-  },
-  {
-    title: "Green Living Guide",
-    description:
-      "A visual poster that highlights simple daily habits for lower carbon impact in homes and dorms."
-  },
-  {
-    title: "Future of Sustainable Shopping",
-    description:
-      "A concept poster presenting how AI can help consumers make cleaner, smarter purchases."
-  }
-];
-
 export default function HomePage() {
-  const topStudentProductFeedback = productStudentFeedback
-    .slice()
-    .sort((a, b) => b.studentsUsed - a.studentsUsed)
-    .slice(0, 3)
-    .map((entry) => ({
-      ...entry,
-      productName:
-        products.find((product) => product.id === entry.productId)?.name || "Product"
-    }));
-
   return (
-    <main className="page landingPage">
-      <div className="ambient ambient--one" />
-      <div className="ambient ambient--two" />
+    <main className="lp">
 
-      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
-        <p className="brand">GreenCart</p>
-        <nav>
-          <Link href="/">Home</Link>
+      {/* ── Nav ── */}
+      <header className="lpNav">
+        <span className="lpNavBrand">GreenCart</span>
+        <nav className="lpNavLinks">
           <Link href="/marketplace">Marketplace</Link>
           <Link href="/community">Community</Link>
           <Link href="/guide">Guide</Link>
           <Link href="/survey">Survey</Link>
+          <Link href="/analyze" className="lpNavCta">Analyze →</Link>
         </nav>
       </header>
 
-      <section className="hero glass" data-reveal style={{ "--reveal-delay": "80ms" }}>
-        <p className="eyebrow">Smart Shopping Meets Sustainability</p>
-        <h1>GreenCart app for real user shopping decisions.</h1>
-        <p className="subtext">
-          Use the marketplace filters, open product pages, and run AI analysis to
-          compare sustainability before buying.
-        </p>
-        <div className="heroActions">
-          <Link href="/marketplace" className="btnPrimary">
-            Open Marketplace
-          </Link>
-          <Link href="/marketplace#analyzer" className="btnGhost">
-            Use AI Analyzer
-          </Link>
+      {/* ── Hero ── */}
+      <section className="lpHero">
+        <div className="lpHeroContent">
+          <p className="lpEyebrow">Smart Shopping · Tampa Bay</p>
+          <h1 className="lpHeroH1">
+            Shop greener.<br />Score smarter.
+          </h1>
+          <p className="lpHeroSub">
+            AI sustainability scoring for 40+ eco products. Analyze any URL,
+            find better alternatives, and track your impact.
+          </p>
+          <div className="lpHeroActions">
+            <Link href="/marketplace" className="lpBtnDark">
+              Open Marketplace <FiArrowRight size={16} />
+            </Link>
+            <Link href="/analyze" className="lpBtnDarkOutline">
+              Analyze a Product
+            </Link>
+          </div>
+        </div>
+        <div className="lpHeroCard">
+          <Image
+            src="/hero_sustainable shopping.webp"
+            alt="Sustainable shopping"
+            fill
+            priority
+            className="lpHeroCardImg"
+            sizes="(max-width: 768px) 90vw, 420px"
+          />
         </div>
       </section>
 
-      <section className="glass researchSection" data-reveal style={{ "--reveal-delay": "110ms" }}>
-        <h2>Featured Research: Consumer Behavior & Sustainability</h2>
-        <p>
-          Explore this USF student research article on how consumer choices shape
-          environmental outcomes and what actions can shift communities toward
-          sustainable futures.
-        </p>
-        <a
-          href="https://env-blog.vercel.app/"
-          target="_blank"
-          rel="noreferrer"
-          className="btnPrimary"
-        >
-          Open Research Page
-        </a>
-      </section>
-
-      <section id="features" className="featureGrid" data-reveal style={{ "--reveal-delay": "140ms" }}>
-        {features.map((feature, index) => (
-          <article
-            key={feature.title}
-            className="glass featureCard"
-            data-reveal
-            style={{ "--reveal-delay": `${220 + index * 90}ms` }}
-          >
-            <h2>{feature.title}</h2>
-            <p>{feature.description}</p>
-          </article>
+      {/* ── Stats strip ── */}
+      <section className="lpStats">
+        {platformImpactMetrics.map((m, i) => (
+          <div key={m.id} className="lpStat">
+            <span className="lpStatVal">{m.value}</span>
+            <span className="lpStatLabel">{m.label}</span>
+            {i < platformImpactMetrics.length - 1 && <div className="lpStatDivider" />}
+          </div>
         ))}
       </section>
 
-      <section className="glass metricSection" data-reveal style={{ "--reveal-delay": "200ms" }}>
-        <h2>Student Impact Metrics</h2>
-        <div className="metricGrid">
-          {platformImpactMetrics.map((metric) => (
-            <article key={metric.id} className="metricCard">
-              <p className="metricValue">{metric.value}</p>
-              <p className="metricLabel">{metric.label}</p>
-              <p className="mutedLine">{metric.note}</p>
-            </article>
-          ))}
+      {/* ── Features row ── */}
+      <section className="lpFeatureRow">
+        <div className="lpFeatureCol">
+          <div className="lpFeatureColImg">
+            <Image
+              src="/ai_sustainable_score.png"
+              alt="AI sustainability score dashboard"
+              fill
+              className="lpFeatureImgEl"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <span className="lpFeatureTag">
+            <MdBarChart size={13} /> AI Analysis
+          </span>
+          <h3>Transparent sustainability scoring</h3>
+          <p>
+            Paste any product URL and get a 0–100 score across materials,
+            labor ethics, packaging, and lifecycle.
+          </p>
+          <Link href="/analyze" className="lpLink">
+            Try the analyzer <FiArrowUpRight size={13} />
+          </Link>
+        </div>
+
+        <div className="lpFeatureCol">
+          <div className="lpFeatureColImg">
+            <Image
+              src="/products_flat_lay.jpg"
+              alt="Eco products flat lay"
+              fill
+              className="lpFeatureImgEl"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <span className="lpFeatureTag">
+            <MdSwapHoriz size={13} /> Marketplace
+          </span>
+          <h3>40+ curated eco products</h3>
+          <p>
+            Browse by sustainability score, price, and category — with
+            student feedback from USF, HCC, and UTampa.
+          </p>
+          <Link href="/marketplace" className="lpLink">
+            Browse marketplace <FiArrowUpRight size={13} />
+          </Link>
+        </div>
+
+        <div className="lpFeatureCol">
+          <div className="lpFeatureColImg">
+            <Image
+              src="/greener_alternatives.jpg"
+              alt="Greener product alternatives"
+              fill
+              className="lpFeatureImgEl"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <span className="lpFeatureTag">
+            <MdSwapHoriz size={13} /> Alternatives
+          </span>
+          <h3>Find cleaner alternatives before you buy</h3>
+          <p>
+            The AI surfaces better-rated swaps from across platforms
+            without sacrificing quality or budget.
+          </p>
+          <Link href="/analyze" className="lpLink">
+            See how it works <FiArrowUpRight size={13} />
+          </Link>
         </div>
       </section>
 
-      <section className="glass feedbackSection" data-reveal style={{ "--reveal-delay": "260ms" }}>
-        <h2>What Students Say</h2>
-        <div className="feedbackGrid">
+      {/* ── Quotes ── */}
+      <section className="lpQuotes">
+        <p className="lpQuotesEyebrow">Student Voices</p>
+        <div className="lpQuoteGrid">
           {studentHighlights.map((item) => (
-            <article key={item.id} className="feedbackCard">
+            <blockquote key={item.id} className="lpQuote">
               <p>"{item.text}"</p>
-              <strong>{item.student}</strong>
-            </article>
+              <footer>{item.student}</footer>
+            </blockquote>
           ))}
         </div>
       </section>
 
-      <section className="glass productFeedbackLanding" data-reveal style={{ "--reveal-delay": "320ms" }}>
-        <h2>Most Used Products by Students</h2>
-        <div className="feedbackGrid">
-          {topStudentProductFeedback.map((item) => (
-            <article key={item.productId} className="feedbackCard">
-              <p className="metricValue">{item.studentsUsed}</p>
-              <p className="metricLabel">Students used {item.productName}</p>
-              <p className="mutedLine">{item.reviews} feedback entries</p>
-              <p>"{item.feedback}"</p>
-            </article>
-          ))}
+      {/* ── Posters ── */}
+      <section className="lpPosters">
+        <div className="lpPostersHeader">
+          <span className="lpPostersEyebrow">Portfolio</span>
+          <h2>Research Posters</h2>
+        </div>
+        <div className="lpPosterGrid">
+          <div className="lpPosterItem">
+            <div className="lpPosterImgWrap">
+              <Image
+                src="/poster1.png"
+                alt="Eco Action Campaign poster"
+                fill
+                className="lpPosterImgEl"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
+            <div className="lpPosterMeta">
+              <strong>Eco Action Campaign</strong>
+              <span>Single-use plastic awareness &amp; reusable swaps</span>
+            </div>
+          </div>
+          <div className="lpPosterItem">
+            <div className="lpPosterImgWrap">
+              <Image
+                src="/poster2_green_living_guide.png"
+                alt="Green Living Guide poster"
+                fill
+                className="lpPosterImgEl"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
+            <div className="lpPosterMeta">
+              <strong>Green Living Guide</strong>
+              <span>Daily habits for lower carbon impact in dorms</span>
+            </div>
+          </div>
+          <div className="lpPosterItem">
+            <div className="lpPosterImgWrap">
+              <Image
+                src="/thumbnail.png"
+                alt="GreenCart thumbnail"
+                fill
+                className="lpPosterImgEl"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
+            <div className="lpPosterMeta">
+              <strong>Future of Sustainable Shopping</strong>
+              <span>How AI helps consumers make cleaner purchases</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="posters" className="glass posterSection" data-reveal style={{ "--reveal-delay": "350ms" }}>
-        <h2>Portfolio Add-on: Some of my posters that I created</h2>
-        <p>
-          This section is optional for presentation; the main experience remains
-          focused on Marketplace and AI tools for users.
-        </p>
-        <div className="posterGrid">
-          {posters.map((poster) => (
-            <article key={poster.title} className="posterCard">
-              <h3>{poster.title}</h3>
-              <p>{poster.description}</p>
-            </article>
-          ))}
+      {/* ── Research ── */}
+      <section className="lpResearch">
+        <div className="lpResearchText">
+          <p className="lpPostersEyebrow">Featured Research</p>
+          <h2>Consumer Behavior &amp; Sustainability</h2>
+          <p>
+            USF student research on how daily choices shape environmental
+            outcomes — published as a live case study.
+          </p>
+          <a
+            href="https://env-blog.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="lpLink"
+          >
+            Read the research <FiArrowUpRight size={15} />
+          </a>
+        </div>
+        <div className="lpResearchImg">
+          <Image
+            src="/background_landing.jpg"
+            alt="Research background"
+            fill
+            className="lpFeatureImgEl"
+            sizes="(max-width: 768px) 100vw, 45vw"
+          />
         </div>
       </section>
 
-      <section className="glass ctaSection" data-reveal style={{ "--reveal-delay": "380ms" }}>
+      {/* ── CTA ── */}
+      <section className="lpCta">
         <h2>Ready to build a cleaner cart?</h2>
-        <p>
-          Start browsing sustainable products and run AI analysis on any product
-          page now.
-        </p>
-        <div className="heroActions">
-          <Link href="/marketplace" className="btnPrimary">
-            Go to Marketplace
+        <div className="lpCtaActions">
+          <Link href="/marketplace" className="lpBtnDark">
+            Go to Marketplace <FiArrowRight size={16} />
           </Link>
-          <Link href="/marketplace#analyzer" className="btnGhost">
-            Analyze Product URL
+          <Link href="/analyze" className="lpBtnDarkOutline">
+            Analyze a URL
           </Link>
         </div>
       </section>
+
     </main>
   );
 }

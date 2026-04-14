@@ -5,9 +5,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import {
   FiArrowLeft, FiExternalLink, FiAlertCircle,
-  FiCheckCircle, FiShield, FiTrendingUp, FiList, FiZap
+  FiCheckCircle, FiShield, FiTrendingUp, FiList, FiZap,
+  FiWind, FiInfo
 } from "react-icons/fi";
-import { MdEco, MdRecycling, MdOutlineEnergySavingsLeaf } from "react-icons/md";
+import { MdEco, MdRecycling, MdOutlineEnergySavingsLeaf, MdCo2 } from "react-icons/md";
 
 function scoreColor(v) {
   if (v >= 80) return "#16a34a";
@@ -19,6 +20,74 @@ function scoreBg(v) {
   if (v >= 80) return "#dcfce7";
   if (v >= 60) return "#fef9c3";
   return "#fee2e2";
+}
+
+function carbonColor(cat) {
+  const map = { "Very Low": "#16a34a", "Low": "#65a30d", "Moderate": "#ca8a04", "High": "#ea580c", "Very High": "#dc2626" };
+  return map[cat] || "#6b7280";
+}
+
+function carbonBg(cat) {
+  const map = { "Very Low": "#dcfce7", "Low": "#ecfccb", "Moderate": "#fef9c3", "High": "#ffedd5", "Very High": "#fee2e2" };
+  return map[cat] || "#f3f4f6";
+}
+
+function carbonBarWidth(cat) {
+  const map = { "Very Low": 15, "Low": 32, "Moderate": 55, "High": 76, "Very High": 95 };
+  return map[cat] || 50;
+}
+
+function CarbonCard({ carbon }) {
+  if (!carbon) return null;
+  const { kgCO2e, category, comparison, lifecycle, mainDrivers } = carbon;
+  const color = carbonColor(category);
+  const bg = carbonBg(category);
+  const barW = carbonBarWidth(category);
+
+  return (
+    <article className="glass analyzeCard analyzeCarbonCard analyzeEnter" style={{ "--enter-delay": "260ms" }}>
+      <div className="analyzeCardHeader">
+        <MdCo2 size={22} style={{ color }} />
+        <h3>Carbon Footprint Estimate</h3>
+        <span className="carbonBadge" style={{ background: bg, color }}>{category}</span>
+      </div>
+
+      <div className="carbonKgRow">
+        <span className="carbonKgNum" style={{ color }}>{kgCO2e}</span>
+        <span className="carbonKgUnit">kg CO₂e</span>
+      </div>
+
+      <div className="carbonBar">
+        <div className="carbonBarFill" style={{ width: `${barW}%`, background: color }} />
+        <div className="carbonBarLabels">
+          <span>Very Low</span><span>Low</span><span>Moderate</span><span>High</span><span>Very High</span>
+        </div>
+      </div>
+
+      <div className="carbonComparison">
+        <FiWind size={14} style={{ color: "#6b7280", flexShrink: 0 }} />
+        <span>{comparison}</span>
+      </div>
+
+      {lifecycle && (
+        <div className="carbonLifecycle">
+          <FiInfo size={13} style={{ color: "#6b7280", flexShrink: 0, marginTop: 2 }} />
+          <span>{lifecycle}</span>
+        </div>
+      )}
+
+      {mainDrivers?.length > 0 && (
+        <div className="carbonDrivers">
+          <p className="carbonDriversLabel">Main emission drivers</p>
+          <div className="carbonDriversList">
+            {mainDrivers.map((d, i) => (
+              <span key={i} className="carbonDriver">{d}</span>
+            ))}
+          </div>
+        </div>
+      )}
+    </article>
+  );
 }
 
 function ScoreRing({ value }) {
@@ -113,13 +182,14 @@ function ResultsView({ result, url }) {
   const score = analysis.overallScore || 0;
   const categoryScores = Object.entries(analysis.categoryScores || {});
   const alternatives = analysis.greenerAlternatives || [];
+  const carbon = analysis.carbonEstimate || null;
 
   return (
     <main className="page">
       <div className="ambient ambient--one" />
       <div className="ambient ambient--two" />
 
-      <header className="siteNav glass" data-reveal style={{ "--reveal-delay": "0ms" }}>
+      <header className="siteNav glass analyzeEnter" style={{ "--enter-delay": "0ms" }}>
         <p className="brand">GreenCart</p>
         <nav>
           <Link href="/">Home</Link>
@@ -131,7 +201,7 @@ function ResultsView({ result, url }) {
       </header>
 
       {/* Back bar */}
-      <div className="analyzeBackBar" data-reveal style={{ "--reveal-delay": "40ms" }}>
+      <div className="analyzeBackBar analyzeEnter" style={{ "--enter-delay": "60ms" }}>
         <button className="btnGhost analyzeBackBtn" onClick={() => router.back()}>
           <FiArrowLeft size={15} /> Back to Marketplace
         </button>
@@ -139,7 +209,7 @@ function ResultsView({ result, url }) {
       </div>
 
       {/* Hero score */}
-      <section className="glass analyzeHero" data-reveal style={{ "--reveal-delay": "80ms" }}>
+      <section className="glass analyzeHero analyzeEnter" style={{ "--enter-delay": "120ms" }}>
         <div className="analyzeHeroLeft">
           <h1 className="analyzeProductTitle">{product.title || "Product Analysis"}</h1>
           {product.description && (
@@ -172,7 +242,7 @@ function ResultsView({ result, url }) {
       </section>
 
       {/* Category breakdown */}
-      <section className="analyzeGrid" data-reveal style={{ "--reveal-delay": "140ms" }}>
+      <section className="analyzeGrid analyzeEnter" style={{ "--enter-delay": "200ms" }}>
         <article className="glass analyzeCard">
           <div className="analyzeCardHeader">
             <FiTrendingUp size={18} style={{ color: "var(--accent)" }} />
@@ -195,6 +265,8 @@ function ResultsView({ result, url }) {
             ))}
           </div>
         </article>
+
+        <CarbonCard carbon={carbon} />
 
         <article className="glass analyzeCard">
           <div className="analyzeCardHeader">
@@ -235,7 +307,7 @@ function ResultsView({ result, url }) {
 
       {/* Greener alternatives */}
       {alternatives.length > 0 && (
-        <section className="glass analyzeAltSection" data-reveal style={{ "--reveal-delay": "200ms" }}>
+        <section className="glass analyzeAltSection analyzeEnter" style={{ "--enter-delay": "300ms" }}>
           <div className="analyzeCardHeader">
             <MdRecycling size={22} style={{ color: "var(--accent)" }} />
             <h2>Greener Alternatives Found</h2>
@@ -272,7 +344,7 @@ function ResultsView({ result, url }) {
       )}
 
       {/* Analyze another */}
-      <section className="glass analyzeAnotherSection" data-reveal style={{ "--reveal-delay": "260ms" }}>
+      <section className="glass analyzeAnotherSection analyzeEnter" style={{ "--enter-delay": "380ms" }}>
         <FiList size={20} style={{ color: "var(--accent)" }} />
         <div>
           <h3>Analyze Another Product</h3>
