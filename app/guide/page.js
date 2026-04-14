@@ -13,9 +13,7 @@ const steps = [
     title: "Browse the Marketplace",
     href: "/marketplace",
     bullets: ["Filter by EcoLiving, EcoTech, EcoFashion", "Sort by rating & price range", "Look for ♻ Resale badges", "Search by name or keyword"],
-    imgLabel: "Marketplace page screenshot",
-    imgHint: "Screenshot of localhost:3000/marketplace",
-    imgGradient: "linear-gradient(135deg,#d1fae5,#6ee7b7)"
+    imageSrc: "/reflection/market_place.png"
   },
   {
     number: "02", color: "#0ea5e9",
@@ -23,9 +21,7 @@ const steps = [
     title: "AI Product Analysis",
     href: "/marketplace#analyzer",
     bullets: ['Click "Analyze This" on any card', "Or paste any product URL manually", "AI scrapes & scores in ~15 seconds", "Get alternatives + carbon estimate"],
-    imgLabel: "Analyze results page screenshot",
-    imgHint: "Screenshot of localhost:3000/analyze",
-    imgGradient: "linear-gradient(135deg,#e0f2fe,#7dd3fc)"
+    imageSrc: "/reflection/analyzing%20page.png"
   },
   {
     number: "03", color: "#ca8a04",
@@ -33,9 +29,7 @@ const steps = [
     title: "Understanding the Score",
     href: "/marketplace",
     bullets: ["Materials: sourcing & recyclability", "Manufacturing: energy & emissions", "Packaging: minimal or compostable", "Ethics & Labor: supply chain fairness", "Durability: longevity & repairability"],
-    imgLabel: "Score breakdown infographic",
-    imgHint: "Unsplash: 'sustainability score infographic'",
-    imgGradient: "linear-gradient(135deg,#fef9c3,#fde68a)"
+    imageSrc: "/reflection/landing_page.png"
   },
   {
     number: "04", color: "#16a34a",
@@ -43,9 +37,7 @@ const steps = [
     title: "Join Tampa Eco Community",
     href: "/community",
     bullets: ["Select your cause interests", "Set your availability", "Get ranked volunteer matches", "Share your sustainability updates"],
-    imgLabel: "Community page screenshot",
-    imgHint: "Screenshot of localhost:3000/community",
-    imgGradient: "linear-gradient(135deg,#dcfce7,#bbf7d0)"
+    imageSrc: "/reflection/community.png"
   },
   {
     number: "05", color: "#8b5cf6",
@@ -53,9 +45,7 @@ const steps = [
     title: "IDH 3350 Semester Project",
     href: "/community",
     bullets: ["Read project expectations", "Pick from suggested directions", "Review reflection requirements", "Document progress in the community feed"],
-    imgLabel: "Student working on eco project",
-    imgHint: "Unsplash: 'student project environment campus'",
-    imgGradient: "linear-gradient(135deg,#ede9fe,#c4b5fd)"
+    imageSrc: "/reflection/research_blog.png"
   },
   {
     number: "06", color: "#0ea5e9",
@@ -63,9 +53,7 @@ const steps = [
     title: "GreenCart AI Chat",
     href: "#",
     bullets: ["Click the leaf icon (bottom-right)", "Use quick prompt buttons", "Ask about products, scores, Tampa events", "Conversation remembers context"],
-    imgLabel: "Chat bubble open screenshot",
-    imgHint: "Screenshot of GreenCart AI chatbot open",
-    imgGradient: "linear-gradient(135deg,#e0f2fe,#93c5fd)"
+    imageSrc: "/reflection/AI-chatbot.png"
   }
 ];
 
@@ -105,8 +93,9 @@ export default function GuidePage() {
               <Link
                 href={step.href}
                 className="guideStepLink"
-                style={{ background: step.imgGradient }}
               >
+                <img src={step.imageSrc} alt={step.title} className="guideStepImage" />
+                <div className="guideStepOverlay" />
                 <step.icon size={32} style={{ color: step.color }} />
                 <span className="guideStepLinkLabel">{step.title}</span>
                 <span className="guideStepLinkCta">
@@ -116,8 +105,9 @@ export default function GuidePage() {
             ) : (
               <div
                 className="guideStepLink guideStepLink--static"
-                style={{ background: step.imgGradient }}
               >
+                <img src={step.imageSrc} alt={step.title} className="guideStepImage" />
+                <div className="guideStepOverlay" />
                 <step.icon size={32} style={{ color: step.color }} />
                 <span className="guideStepLinkLabel">{step.title}</span>
                 <span className="guideStepLinkCta" style={{ opacity: 0.5 }}>

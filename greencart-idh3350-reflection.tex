@@ -39,7 +39,7 @@
 \usepackage{titlesec}
 \titleformat{\section}[block]
   {\large\bfseries\color{gcdeep}}
-  {\thesection.}{0.6em}{}[\vspace{-0.3em}\color{gcgreen}\rule{\linewidth}{1.5pt}\vspace{0.3em}]
+  {\thesection.}{0.6em}{}
 
 \titleformat{\subsection}[block]
   {\normalsize\bfseries\color{gcdeep}}
@@ -49,7 +49,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
 \fancyhead[L]{\small\color{gcgray} IDH 3350 \textperiodcentered{} Semester Environmental Action Project}
 \fancyhead[R]{\small\color{gcgray} Tuan Khang Phan}
 \fancyfoot[C]{\small\thepage}
@@ -90,9 +90,9 @@
 \usepackage{mdframed}
 \newmdenv[
   backgroundcolor = gclight,
-  linecolor       = gcgreen,
-  linewidth       = 1.5pt,
-  leftline        = true,
+  linecolor       = gclight,
+  linewidth       = 0pt,
+  leftline        = false,
   rightline       = false,
   topline         = false,
   bottomline      = false,
@@ -121,15 +121,10 @@
   \centering
   \vspace*{1.2in}
 
-  {\color{gcgreen}\rule{\linewidth}{2pt}}\vspace{6pt}
-
   {\Huge\bfseries\color{gcdeep} GreenCart}\\[6pt]
   {\large\color{gcgray}
     An AI-Powered Sustainable Shopping Platform for the\\
     Tampa Bay Student Community}
-
-  \vspace{6pt}
-  {\color{gcgreen}\rule{\linewidth}{2pt}}
 
   \vspace{1.2in}
 
@@ -151,9 +146,6 @@
     Research blog:  \href{https://env-blog.vercel.app/}{env-blog.vercel.app}\\[4pt]
     \textit{Submitted in partial fulfillment of the IDH 3350 semester project requirement.}
   }
-
-  \vspace{0.5in}
-  {\color{gcgreen}\rule{\linewidth}{1pt}}
 \end{titlepage}
 
 % -- Table of Contents --------------------------------------
@@ -633,30 +625,18 @@ committed practitioner of the sustainable futures we discussed in class.
 \section{Platform Screenshots}
 % ===========================================================
 
-\textit{The figures below reference screenshots of the GreenCart platform. Replace the
-\texttt{\textbackslash includegraphics} paths with your actual screenshot files before compiling
-for final submission.}
+\textit{The figures below are screenshots captured from GreenCart and related project outputs.}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/landing.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    GreenCart landing page: hero section with impact metrics and feature overview\\
-    \small\url{https://green-cart-six.vercel.app/}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/landing_page.png}
   \caption{GreenCart landing page showing the platform's value proposition and animated
            sustainability impact metrics.}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/analyzer.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    AI Analyzer results page: score ring, category breakdown, carbon estimate, greener alternatives\\
-    \small\url{https://green-cart-six.vercel.app/analyze}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/analyzing page.png}
   \caption{AI Analyzer output showing the sustainability score ring, five-dimension category
            scores, kg CO\textsubscript{2}e carbon estimate with lifecycle breakdown, and
            recommended greener alternatives.}
@@ -664,24 +644,14 @@ for final submission.}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/marketplace.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    Eco Marketplace: product grid with sustainability scores, resale badges, category filters\\
-    \small\url{https://green-cart-six.vercel.app/marketplace}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/market_place.png}
   \caption{Eco Marketplace catalog with sustainability score pills, resale/secondhand
            badges, category filters, and direct links to the AI Analyzer.}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/community.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    Community Hub: three-column layout, post composer, volunteer matching, Tampa Bay orgs\\
-    \small\url{https://green-cart-six.vercel.app/community}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/community.png}
   \caption{Community Hub with the social post composer (showing Feeling picker and
            Location features), cause-matched volunteer opportunities, and local Tampa Bay
            organization directory.}
@@ -689,12 +659,14 @@ for final submission.}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/survey.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    Consumer Behavior Survey: Likert scale interface and personalized results page\\
-    \small\url{https://green-cart-six.vercel.app/survey}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/AI-chatbot.png}
+  \caption{GreenCart AI chatbot assistant interface used for quick sustainability guidance,
+           product-related questions, and follow-up learning prompts.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{public/reflection/survey_place.png}
   \caption{Consumer Behavior Survey interface (22 questions, 6 sections) and the
            post-submission results page showing verdict, per-section score bars, and
            full question breakdown.}
@@ -702,12 +674,7 @@ for final submission.}
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.9\linewidth]{screenshots/blog.png}
-  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
-    \textbf{[Figure placeholder]}\\
-    Companion research blog at env-blog.vercel.app\\
-    \small\url{https://env-blog.vercel.app/}
-    \vspace{1.5cm}}}
+  \includegraphics[width=0.9\linewidth]{public/reflection/research_blog.png}
   \caption{Companion research blog publishing the IDH 3350 paper \emph{``Consumer Behavior
            Impacts on Environmental Sustainability''} with abstract, literature review,
            and discussion sections.}
