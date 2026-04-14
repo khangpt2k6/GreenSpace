@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import { MdEco } from "react-icons/md";
+import { FiSun, FiMoon } from "react-icons/fi";
+import { useTheme } from "@/components/theme-provider";
 
 const NAV_LINKS = [
   { href: "/",            label: "Home" },
@@ -21,6 +23,11 @@ const NAV_LINKS = [
 export default function Navbar({ action }) {
   const pathname = usePathname();
   const { user, isLoaded } = useUser();
+  const { theme, setTheme } = useTheme();
+
+  function toggleTheme() {
+    setTheme(theme === "light" ? "dark" : "light");
+  }
 
   return (
     <header className="globalNav">
@@ -46,6 +53,17 @@ export default function Navbar({ action }) {
 
       <div className="globalNavRight">
         {action && <div className="globalNavAction">{action}</div>}
+
+        {/* Theme toggle */}
+        <button
+          className="globalNavThemeBtn"
+          onClick={toggleTheme}
+          title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <FiSun size={16} /> : <FiMoon size={16} />}
+        </button>
+
         {isLoaded && (
           user ? (
             <UserButton afterSignOutUrl="/" />

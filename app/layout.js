@@ -2,6 +2,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import MotionInit from "@/components/motion-init";
 import ChatBubble from "@/components/chat-bubble";
+import ThemeProvider from "@/components/theme-provider";
 
 export const metadata = {
   title: "GreenCart - Sustainable Product Intelligence",
@@ -12,14 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" data-scroll-behavior="smooth">
+      <html lang="en" data-scroll-behavior="smooth" data-theme="light">
         <body>
-          <MotionInit />
-          {children}
-          <ChatBubble />
-          <footer className="siteCredit">
-            Powered by Tuan Khang Phan - IDH 3350
-          </footer>
+          <ThemeProvider>
+            <MotionInit />
+            {children}
+            <ChatBubble />
+            <footer className="siteCredit">
+              Powered by Tuan Khang Phan - IDH 3350
+            </footer>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

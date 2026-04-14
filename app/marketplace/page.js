@@ -397,7 +397,11 @@ export default function MarketplacePage() {
               onClick={() => analyze(p)}
               title={`Analyze ${p.name}`}
             >
-              <img src={p.image || p.imageUrl || "/products_flat_lay.jpg"} alt={p.name} />
+              <img
+                src={p.image || p.imageUrl || "/products_flat_lay.jpg"}
+                alt={p.name}
+                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/products_flat_lay.jpg"; }}
+              />
               <div className="mktHeroCardBody">
                 <p>{p.name}</p>
                 <ScorePill value={p.sustainability} />
@@ -539,7 +543,12 @@ export default function MarketplacePage() {
             >
               {/* Image */}
               <div className="mktCardImg">
-                <img src={product.image || product.imageUrl || "/products_flat_lay.jpg"} alt={product.name} loading="lazy" />
+                <img
+                  src={product.image || product.imageUrl || "/products_flat_lay.jpg"}
+                  alt={product.name}
+                  loading="lazy"
+                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/products_flat_lay.jpg"; }}
+                />
                 {product.resale && (
                   <span className="mktCardResaleBadge">
                     <FiRefreshCw size={10} /> Resale

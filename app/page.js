@@ -114,6 +114,30 @@ export default function HomePage() {
         ))}
       </section>
 
+      {/* ── Research ── */}
+      <section className="lpResearch">
+        <ScrollReveal className="lpResearchText" delay={0}>
+          <p className="lpPostersEyebrow">Featured Research</p>
+          <h2>Consumer Behavior &amp; Sustainability</h2>
+          <p>
+            USF student research on how daily choices shape environmental
+            outcomes — published as a live case study.
+          </p>
+          <a href="https://env-blog.vercel.app/" target="_blank" rel="noreferrer" className="lpLink">
+            Read the research <FiArrowUpRight size={15} />
+          </a>
+        </ScrollReveal>
+        <div className="lpResearchImg">
+          <Image
+            src="/background_landing.jpg"
+            alt="Research background"
+            fill
+            className="lpFeatureImgEl"
+            sizes="(max-width: 768px) 100vw, 45vw"
+          />
+        </div>
+      </section>
+
       {/* ── Quotes ── */}
       <ScrollReveal className="lpQuotes">
         <p className="lpQuotesEyebrow">Student Voices</p>
@@ -151,30 +175,6 @@ export default function HomePage() {
           ))}
         </div>
       </ScrollReveal>
-
-      {/* ── Research ── */}
-      <section className="lpResearch">
-        <ScrollReveal className="lpResearchText" delay={0}>
-          <p className="lpPostersEyebrow">Featured Research</p>
-          <h2>Consumer Behavior &amp; Sustainability</h2>
-          <p>
-            USF student research on how daily choices shape environmental
-            outcomes — published as a live case study.
-          </p>
-          <a href="https://env-blog.vercel.app/" target="_blank" rel="noreferrer" className="lpLink">
-            Read the research <FiArrowUpRight size={15} />
-          </a>
-        </ScrollReveal>
-        <div className="lpResearchImg">
-          <Image
-            src="/background_landing.jpg"
-            alt="Research background"
-            fill
-            className="lpFeatureImgEl"
-            sizes="(max-width: 768px) 100vw, 45vw"
-          />
-        </div>
-      </section>
 
       {/* ── CTA ── */}
       <ScrollReveal className="lpCta">
