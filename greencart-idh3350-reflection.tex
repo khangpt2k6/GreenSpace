@@ -1,0 +1,773 @@
+% ============================================================
+%  GreenCart - IDH 3350 Semester Environmental Action Project
+%  Author : Tuan Khang Phan
+%  Course : IDH 3350: Natural Science
+%  Prof   : Andrew Hargrove
+%  School : University of South Florida, Tampa, FL
+% ============================================================
+
+\documentclass[12pt, letterpaper]{article}
+
+% -- Encoding & fonts (Times New Roman via newtxtext) -------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{microtype}
+
+% -- Page layout --------------------------------------------
+\usepackage[
+  top=1in, bottom=1in,
+  left=1.25in, right=1.25in
+]{geometry}
+
+% -- Typography extras --------------------------------------
+\usepackage{setspace}
+\usepackage{parskip}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+% -- Colours ------------------------------------------------
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{gcgreen}{HTML}{22b86a}
+\definecolor{gcdeep}{HTML}{10663a}
+\definecolor{gcgray}{HTML}{6b7280}
+\definecolor{gclight}{HTML}{f0faf4}
+\definecolor{linkblue}{HTML}{1a56db}
+
+% -- Section formatting -------------------------------------
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\large\bfseries\color{gcdeep}}
+  {\thesection.}{0.6em}{}[\vspace{-0.3em}\color{gcgreen}\rule{\linewidth}{1.5pt}\vspace{0.3em}]
+
+\titleformat{\subsection}[block]
+  {\normalsize\bfseries\color{gcdeep}}
+  {\thesubsection.}{0.5em}{}
+
+% -- Header / footer ----------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\color{gcgray} IDH 3350 \textperiodcentered{} Semester Environmental Action Project}
+\fancyhead[R]{\small\color{gcgray} Tuan Khang Phan}
+\fancyfoot[C]{\small\thepage}
+
+% -- Lists --------------------------------------------------
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=3pt, leftmargin=1.4em}
+\setlist[enumerate]{noitemsep, topsep=3pt, leftmargin=1.4em}
+
+% -- Tables -------------------------------------------------
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% -- Figures ------------------------------------------------
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{
+  font=small,
+  labelfont={bf, color=gcdeep},
+  labelsep=period
+}
+\usepackage{float}
+
+% -- Hyperlinks ---------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  urlcolor   = linkblue,
+  linkcolor  = gcdeep,
+  citecolor  = gcdeep,
+  pdfauthor  = {Tuan Khang Phan},
+  pdftitle   = {GreenCart: IDH 3350 Semester Environmental Action Project},
+  pdfsubject = {Environmental Action, Sustainable Consumer Behavior, Web Development}
+}
+
+% -- Callout box --------------------------------------------
+\usepackage{mdframed}
+\newmdenv[
+  backgroundcolor = gclight,
+  linecolor       = gcgreen,
+  linewidth       = 1.5pt,
+  leftline        = true,
+  rightline       = false,
+  topline         = false,
+  bottomline      = false,
+  innerleftmargin = 10pt,
+  innerrightmargin= 8pt,
+  innertopmargin  = 6pt,
+  innerbottommargin= 6pt,
+  skipabove       = 8pt,
+  skipbelow       = 8pt
+]{greenbox}
+
+% -- Quote style --------------------------------------------
+\usepackage{csquotes}
+
+% -- Date ---------------------------------------------------
+\usepackage{datetime2}
+
+% ===========================================================
+%  DOCUMENT
+% ===========================================================
+\begin{document}
+\pagenumbering{arabic}
+
+% -- Title page ---------------------------------------------
+\begin{titlepage}
+  \centering
+  \vspace*{1.2in}
+
+  {\color{gcgreen}\rule{\linewidth}{2pt}}\vspace{6pt}
+
+  {\Huge\bfseries\color{gcdeep} GreenCart}\\[6pt]
+  {\large\color{gcgray}
+    An AI-Powered Sustainable Shopping Platform for the\\
+    Tampa Bay Student Community}
+
+  \vspace{6pt}
+  {\color{gcgreen}\rule{\linewidth}{2pt}}
+
+  \vspace{1.2in}
+
+  {\large\bfseries Semester Environmental Action Project}\\[4pt]
+  {\normalsize IDH 3350: Natural Science}\\[2pt]
+  {\normalsize Prof.\ Andrew Hargrove}\\[2pt]
+  {\normalsize College of Arts and Sciences}\\[2pt]
+  {\normalsize University of South Florida $\cdot$ Tampa, FL}
+
+  \vspace{1in}
+
+  {\large\bfseries Tuan Khang Phan}\\[4pt]
+  {\normalsize Spring 2025}
+
+  \vfill
+
+  {\small\color{gcgray}
+    Live platform: \href{https://green-cart-six.vercel.app/}{green-cart-six.vercel.app}\\
+    Research blog:  \href{https://env-blog.vercel.app/}{env-blog.vercel.app}\\[4pt]
+    \textit{Submitted in partial fulfillment of the IDH 3350 semester project requirement.}
+  }
+
+  \vspace{0.5in}
+  {\color{gcgreen}\rule{\linewidth}{1pt}}
+\end{titlepage}
+
+% -- Table of Contents --------------------------------------
+\tableofcontents
+\newpage
+
+% ===========================================================
+\section{Abstract}
+% ===========================================================
+
+This document chronicles the development of \textbf{GreenCart}, a full-stack web application
+built over the Spring 2025 semester as a practical environmental action project for IDH 3350 at the
+University of South Florida. GreenCart addresses the \emph{attitude--behavior gap} in sustainable
+consumer behavior by giving students and Tampa Bay residents the tools to discover eco-conscious
+products, receive AI-generated sustainability scores for arbitrary product URLs, engage with local
+environmental organizations, and collectively reflect on their purchasing habits through a
+research-grade survey instrument. The project combines software engineering, behavioral science, and
+community design to lower the friction between caring about sustainability and acting on that care.
+This report documents the activity timeline and deliverables, describes the resulting platform and
+its five core modules, reflects on how the project connects to key class concepts, and offers an
+honest introspective account of what the process felt like and how it has changed my outlook as a
+consumer and a builder.
+
+% ===========================================================
+\section{Introduction and Motivation}
+% ===========================================================
+
+\begin{greenbox}
+  \enquote{Consumer behavior is one of the most significant drivers of environmental change in
+  the modern world. Every purchasing decision, travel habit, and disposal choice made by billions
+  of people adds up to a planetary impact that science can no longer ignore.}\\
+  \hfill \textit{Tuan Khang Phan, ``Consumer Behavior Impacts on Environmental
+  Sustainability,'' IDH 3350 research paper}
+\end{greenbox}
+
+When I enrolled in IDH 3350, I was already studying computer science and had a growing interest in
+applying technology to sustainability challenges. The semester project prompt asked us to engage in
+an activity that creates \emph{real positive impact} on an environment we inhabit, not a hypothetical
+proposal, but something we actually build, do, and live with.
+
+For me, the most natural response was to build a platform. I had watched family and friends struggle
+to answer a simple question when shopping online: \emph{``Is this product actually good for the
+environment, or is this just marketing?''} Greenwashing is rampant, eco-labels are inconsistent, and
+the cognitive effort required to cross-reference certifications, read ingredient lists, and compare
+carbon estimates is far beyond what the average shopper will invest at the moment of purchase.
+
+That is the gap GreenCart is designed to close. It sits at the intersection of three circles: the
+behavioral science concept of the attitude--behavior gap (which we explored extensively in class),
+the emerging capability of large-language-model AI to synthesize complex product information, and
+the social fabric of a student community that actually cares about these issues but lacks an easy
+on-ramp to act on that care.
+
+% ===========================================================
+\section{Documentation of the Activity}
+% ===========================================================
+
+\subsection{Project Timeline}
+
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\linewidth}{>{\bfseries}p{2.6cm} X}
+    \toprule
+    \textbf{Phase / Weeks} & \textbf{Activity} \\
+    \midrule
+    Weeks 1--2  & Research and ideation. Read consumer behavior and sustainability literature
+                  (\emph{attitude--behavior gap}, social norms, information asymmetry).
+                  Drafted research paper for the class. \\
+    Weeks 3--4  & Technology prototyping. Stood up a Next.js 15 project, configured
+                  Clerk authentication, Supabase database and storage, and tested
+                  the Anthropic Claude API for sustainability scoring. \\
+    Weeks 5--7  & Core feature development. Built the AI Analyzer pipeline, Marketplace
+                  catalog with filters, and initial product data set ($\sim$190 items). \\
+    Weeks 8--10 & Community module. Designed and implemented the three-column social feed,
+                  volunteer opportunity matching, Tampa Bay organization directory,
+                  and user post creation with image upload. \\
+    Weeks 11--12 & Survey instrument. Designed a 22-question, 6-section Likert survey
+                   grounded in class concepts (awareness, attitudes, behavior, social
+                   influence, barriers, platform impact). \\
+    Weeks 13--14 & Guide, landing page, and publication. Wrote onboarding content, user guide
+                   (with IDH 3350 references), and deployed to Vercel. Published companion
+                   research blog at \href{https://env-blog.vercel.app/}{env-blog.vercel.app}. \\
+    Finals week  & Documentation, reflection writing, and final polish. \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Semester development timeline for GreenCart.}
+\end{table}
+
+\subsection{Technology Stack and Tools}
+
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\linewidth}{>{\bfseries}p{3.2cm} X}
+    \toprule
+    \textbf{Technology} & \textbf{Role in GreenCart} \\
+    \midrule
+    Next.js 15 (React 19) & Full-stack app framework; server and client components, API routes \\
+    Anthropic Claude API   & AI sustainability scoring engine; generates scores, carbon estimates,
+                             concerns, strengths, and greener alternatives \\
+    Supabase               & PostgreSQL database (posts, comments, products) and object storage
+                             (user-uploaded images) \\
+    Clerk                  & User authentication and identity management \\
+    Cheerio                & Server-side HTML scraping to extract product metadata from
+                             arbitrary URLs \\
+    Vercel                 & Continuous deployment; live at
+                             \href{https://green-cart-six.vercel.app/}{green-cart-six.vercel.app} \\
+    OpenStreetMap Nominatim & Reverse geocoding for the community Location feature \\
+    React Icons            & Consistent SVG icon library throughout the UI \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Core technology stack powering GreenCart.}
+\end{table}
+
+\subsection{Deliverables and Evidence}
+
+The following deliverables document the activity. Links are clickable in the PDF.
+
+\begin{enumerate}
+  \item \textbf{Live web platform:}
+        \href{https://green-cart-six.vercel.app/}{green-cart-six.vercel.app}\\
+        A publicly accessible, fully deployed web application with five distinct feature modules.
+
+  \item \textbf{Research blog:}
+        \href{https://env-blog.vercel.app/}{env-blog.vercel.app}\\
+        A companion blog presenting the academic research paper \emph{``Consumer Behavior Impacts
+        on Environmental Sustainability''} written for IDH 3350, complete with abstract, body,
+        references, and visual layout.
+
+  \item \textbf{Source code:} available in the project repository.\\
+        The full Next.js codebase (app router, API routes, data modules, components, styles)
+        constitutes the primary technical artifact of this project.
+
+  \item \textbf{Survey instrument:} 22 Likert-scale questions across 6 sections, embedded
+        at \texttt{/survey}, designed to collect real data on student sustainable consumer
+        behavior and attitudes toward the platform.
+
+  \item \textbf{Community data seed:} A curated dataset of Tampa Bay environmental
+        organizations, volunteer opportunities (mangrove restoration, coastal cleanups, zero-waste
+        workshops, water quality sampling, native plant gardens), and community posts.
+
+  \item \textbf{Sustainability product catalog:} 190+ eco-labeled products across three
+        categories (EcoLiving, EcoTech, EcoFashion) with sustainability scores, resale flags,
+        pricing, and student feedback.
+\end{enumerate}
+
+% ===========================================================
+\section{The Resulting Product: GreenCart Platform}
+% ===========================================================
+
+GreenCart is organized into five interconnected modules. Each module addresses a distinct barrier
+in the journey from environmental awareness to action.
+
+\subsection{Module 1: AI Product Analyzer (\texttt{/analyze})}
+
+The centerpiece of GreenCart is the AI Analyzer. A user pastes any product URL from any retailer;
+the server scrapes the product page, sends the extracted content to Claude (Anthropic's large
+language model), and returns a structured sustainability report containing:
+
+\begin{itemize}
+  \item An \textbf{overall sustainability score} (0--100) rendered as an animated SVG ring
+  \item \textbf{Category scores} across five dimensions: materials \& ingredients, manufacturing
+        processes, labor \& ethics, packaging, and durability/repairability
+  \item A \textbf{carbon estimate} in kg CO\textsubscript{2}e with lifecycle breakdown and
+        qualitative band (e.g., ``Low,'' ``Moderate,'' ``High'')
+  \item \textbf{Strengths} and \textbf{concerns} listed as bullet points
+  \item \textbf{Actionable recommendations} for the consumer
+  \item \textbf{Greener alternatives} with names, links, estimated scores, and justification
+\end{itemize}
+
+The key design decision was to present AI scoring as \emph{guidance}, not certification, keeping
+the user's critical judgment in the loop while dramatically reducing the time cost of sustainability
+research.
+
+\subsection{Module 2: Eco Marketplace (\texttt{/marketplace})}
+
+The Marketplace provides a curated catalog of 190+ products tagged with sustainability scores,
+resale/secondhand badges, category labels (EcoLiving, EcoTech, EcoFashion), student feedback
+quotes, price, and star ratings. Users can:
+
+\begin{itemize}
+  \item Filter by category, minimum rating, maximum price, or resale-only
+  \item Switch between grid and list views
+  \item Click ``AI Score'' on any listing to route directly to the Analyzer
+  \item Submit their own product listings (authenticated users), with optional image upload to
+        Supabase storage
+\end{itemize}
+
+The explicit \textbf{resale filter} is intentional: secondhand and refurbished goods consistently
+represent the highest-impact consumption choice a person can make, and surfacing them alongside
+new products normalizes circular economy behavior.
+
+\subsection{Module 3: Community Hub (\texttt{/community})}
+
+The Community module is a three-column social interface modeled loosely on professional social
+networks but focused entirely on local environmental action in Tampa Bay. It includes:
+
+\begin{itemize}
+  \item A \textbf{social feed} where authenticated users can post sustainability updates, share
+        links (with auto-linked URLs), attach photos (uploaded to Supabase), tag their feeling
+        (with an emoji picker), and add their location (typed or auto-detected via the browser
+        Geolocation API and OpenStreetMap reverse geocoding)
+  \item A \textbf{volunteer opportunity matcher} that ranks local opportunities by overlap
+        with the user's selected cause interests and availability schedule
+  \item A curated \textbf{Tampa Bay organization directory} with links to real local groups
+        working on coastal restoration, water quality, biodiversity, and zero-waste initiatives
+  \item \textbf{Trending hashtags} (e.g., \texttt{\#MangroveRestoration},
+        \texttt{\#ZeroWaste}, \texttt{\#TampaBayWatch}) to create a sense of shared
+        local momentum
+  \item \textbf{Cause interest chips} (cleanup, marine, restoration, climate, water,
+        education, biodiversity) that personalize the volunteer feed
+\end{itemize}
+
+\subsection{Module 4: Consumer Behavior Survey (\texttt{/survey})}
+
+The survey instrument was designed to serve double duty: it provides useful data for my IDH 3350
+research paper, and it prompts users to reflect on their own behavior, which is itself an
+intervention. The 22 questions are organized into six sections:
+
+\begin{enumerate}[label=\Alph*.]
+  \item Environmental Awareness (4 items)
+  \item Attitudes Toward Sustainable Consumption (4 items)
+  \item Actual Purchasing Behavior (4 items)
+  \item Social \& Peer Influence (3 items)
+  \item Barriers to Sustainable Shopping (3 items)
+  \item GreenCart Platform Impact (4 items)
+\end{enumerate}
+
+After submission, users receive a personalized \textbf{verdict} (e.g., ``Strongly
+Pro-Sustainability,'' ``Eco-Conscious but Constrained,'' ``Low Eco-Consciousness Indicated''),
+per-section averages visualized as colored bars, and a full per-question breakdown. Seeing their
+own scores laid out clearly is intended to create a moment of self-reflection that nudges behavior.
+
+\subsection{Module 5: User Guide (\texttt{/guide})}
+
+A step-by-step onboarding page written specifically with IDH 3350 students in mind, explaining how
+to use each feature, what the scores mean (and don't mean), and how GreenCart connects to the
+course's sustainability concepts.
+
+% ===========================================================
+\section{Connection to Class Concepts}
+% ===========================================================
+
+\subsection{The Attitude--Behavior Gap}
+
+Perhaps the most important concept from IDH 3350 for understanding GreenCart is the
+\textbf{attitude--behavior gap}: the well-documented tendency for people to hold pro-environmental
+values without translating those values into action. Research consistently shows that most consumers
+\emph{care} about sustainability but are stymied by information costs, price premiums, inconvenience,
+and social norms that make conventional consumption the path of least resistance
+\cite{kollmuss2002mind}.
+
+GreenCart attacks each of these friction points directly:
+\begin{itemize}
+  \item \textbf{Information costs:} AI Analyzer produces a score in seconds instead
+        of requiring hours of research.
+  \item \textbf{Price barriers:} Marketplace surfaces budget-friendly resale options
+        alongside new eco products.
+  \item \textbf{Inconvenience:} The platform integrates discovery, scoring, and
+        community in a single interface rather than requiring visits to multiple sites.
+  \item \textbf{Social norms:} The Community feed, trending tags, and volunteer
+        matching create visible peer activity around sustainable choices, leveraging social proof
+        as a positive influence.
+\end{itemize}
+
+\subsection{Information Asymmetry and Greenwashing}
+
+A recurring theme in class was the problem of \textbf{information asymmetry} in markets: companies
+know far more about the true environmental impact of their products than consumers do, and this gap
+is frequently exploited through greenwashing. The AI Analyzer is, at its core, an attempt to
+partially close this asymmetry. By applying a consistent scoring rubric across product categories
+and surfacing specific concerns (e.g., ``Contains microplastics,'' ``No living-wage certification
+visible''), it shifts the information balance toward the consumer.
+
+The platform also acknowledges its own epistemic limits; scores are labeled as ``AI guidance,
+not certification,'' which is itself an exercise in honest framing that class readings on
+scientific literacy and risk communication emphasize as essential for public trust.
+
+\subsection{Collective Action and Community Organizing}
+
+IDH 3350 taught us that individual behavior change, while necessary, is insufficient on its own.
+Sustainable futures are built through \textbf{collective action} at multiple scales: peer networks,
+community organizations, advocacy, and infrastructure change. The Community module of GreenCart is
+designed with this understanding. Volunteer matching is not merely a convenience feature; it is an
+attempt to lower the activation energy for someone to move from passive awareness to organized
+participation in Tampa Bay's environmental groups. The cause-matching algorithm prioritizes
+alignment between user interests (e.g., marine restoration, climate education) and opportunity
+type, making the translation from \emph{interest} to \emph{action} as frictionless as possible.
+
+\subsection{Systems Thinking and Lifecycle Awareness}
+
+The carbon estimate card in the Analyzer module is the most direct expression of \textbf{systems
+thinking} in GreenCart. Rather than presenting a single ``eco'' badge, it breaks down CO\textsubscript{2}e
+by lifecycle stage: raw materials extraction, manufacturing, transportation, use phase, and
+end-of-life, and identifies the main impact drivers. This mirrors the lifecycle thinking we
+discussed in class as a prerequisite for genuine environmental literacy, as opposed to the
+superficial green labeling that dominates mainstream consumer culture.
+
+\subsection{Consumer Sovereignty and Agency}
+
+A philosophical premise running through the platform is that consumers are \textbf{not passive
+recipients} of market forces but active agents whose aggregated choices shape production systems
+over time. The survey's Section B (\emph{Attitudes Toward Sustainable Consumption}) explicitly
+probes this belief: \enquote{I believe individual purchasing choices can make a meaningful
+difference to the environment.} Seeing one's own score on this dimension, alongside the scores
+for barriers and actual behavior, creates a feedback loop between self-perception and potential
+agency that the platform is designed to catalyze.
+
+% ===========================================================
+\section{Impact on the Environments I Engage With}
+% ===========================================================
+
+\subsection{The Student Community (Level 2 \& 3 Scopes)}
+
+The most immediate environment GreenCart is designed to impact is the student community at USF and
+the broader Tampa Bay area. By providing a free, publicly accessible tool that reduces the effort
+required to shop sustainably, the platform has the potential to shift purchasing patterns for
+anyone who uses it. The $\sim$190 products in the Marketplace represent real purchasing alternatives;
+the volunteer opportunities represent real organizations doing real restoration and education work;
+and the social feed creates a real space for community visibility around environmental choices.
+
+Critically, the platform is also a \textbf{shared reference point}. When I posted about GreenCart
+in the IDH 3350 community and shared the research blog, I was contributing to a common vocabulary
+around the attitude--behavior gap and sustainable consumption that the class had been building all
+semester. A tool that makes that vocabulary actionable, turning a theoretical concept into a
+button you can click, bridges the gap between the academic and the lived.
+
+\subsection{The Information Environment}
+
+Beyond individual behavior, GreenCart makes a small contribution to a larger and more important
+project: improving the quality of sustainability information available to everyday consumers. Every
+analysis run through the platform produces a structured, multi-dimensional assessment that goes
+significantly beyond the binary eco/not-eco framing of most current labeling systems. If enough
+people use and trust tools like this, market pressure on producers to improve their sustainability
+profiles will increase, creating a systems-level feedback loop.
+
+\subsection{My Own Environment: Skills, Habits, and Dispositions}
+
+Building GreenCart has changed the way I personally shop. I now run product URLs through the
+Analyzer before significant purchases. I have switched several of my routine purchases to
+secondhand options surfaced by the Marketplace filters. More fundamentally, the act of
+building the survey instrument forced me to confront my own answers to those 22 questions, and
+several of my responses in Sections C and E (actual behavior and barriers) were less flattering
+than my responses in Section B (attitudes). That gap is uncomfortable and instructive.
+
+% ===========================================================
+\section{Introspective Reflection}
+% ===========================================================
+
+\subsection{How It Felt to Do This Project}
+
+Honestly, this project was one of the more demanding things I have undertaken as an undergraduate
+student, not because the individual technical components were unfamiliar, but because the goal was
+to build something \emph{real}: something that would actually be used, that would reflect my own
+values in its design decisions, and that would be evaluated not only on technical execution but on
+genuine impact.
+
+There were weeks when the gap between what I had built and what I imagined was discouraging. The
+AI scraping pipeline frequently ran into retailer bot-detection; the Supabase schema needed to be
+redesigned twice; the Community module took far longer than expected because designing a social
+experience that feels natural is genuinely hard. But there was also something deeply motivating
+about working toward a problem I actually care about. Knowing that the survey questions would
+produce data relevant to a paper I had written for this class gave the code a weight it would
+not have had if I were building a generic todo app.
+
+One moment stands out in particular. About ten weeks in, I ran the Analyzer on a product I had
+purchased a month earlier and was surprised to find a sustainability score of 28 out of 100, with
+concerns including non-recyclable composite materials and supply chain opacity. I had bought it
+without thinking. That moment of confronting my own behavior through a tool I had built was
+strange and clarifying in equal measure. It is one thing to understand the attitude--behavior gap
+as a concept; it is another to see your own score.
+
+\subsection{How This Project Has Changed Me}
+
+Before this semester, I thought of sustainability as a domain issue, something for environmental
+science students, policy researchers, or activists. Building GreenCart has convinced me that it is
+equally, maybe more urgently, a \textbf{design and information problem}. The environmental outcomes
+we care about are downstream of millions of small decisions made by people who are not experts,
+who are busy, and who are navigating markets designed to obscure the information they need to
+decide well. Making that information legible, accessible, and actionable is work that technologists
+and designers are uniquely positioned to do, and it is work that matters.
+
+I have also become more comfortable with what I would call \textbf{productive humility}: the
+platform does not solve greenwashing, it does not replace lifecycle assessments, and its AI scores
+are imperfect. But imperfect, accessible, and free is often more impactful than perfect,
+inaccessible, and paywalled. Naming that clearly in the platform's own copy (``AI guidance, not
+certification'') was an important lesson in honest communication under uncertainty; something the
+class reading on scientific literacy and public trust made very clear.
+
+\subsection{Will I Continue?}
+
+Yes, without question. The most significant outcome of this project is not the platform itself
+(though I intend to keep it running and improving), but the clarity it has given me about what I
+want to do with my skills. I am planning to:
+
+\begin{itemize}
+  \item Continue developing GreenCart post-semester, with a focus on making the survey
+        data collection more robust (server-side persistence to Supabase, aggregate
+        visualizations, shareable results).
+  \item Expand the community module to include real-time events posted by Tampa Bay
+        environmental organizations.
+  \item Build additional AI analysis dimensions, including a supply chain transparency
+        score and a circularity index.
+  \item Share the platform actively with student organizations at USF and HCC as a
+        practical tool for sustainability education.
+  \item Explore whether the platform's survey data, if enough responses are collected,
+        could become the basis of a more formal undergraduate research project.
+\end{itemize}
+
+More broadly, I intend to keep asking the question this project taught me to ask: \emph{Where is
+the gap between what people care about and what they do, and how can better design and information
+close it?} That question is not limited to sustainability. But sustainability is where I found it
+first, and it is where the stakes are highest.
+
+% ===========================================================
+\section{Conclusion}
+% ===========================================================
+
+GreenCart began as a semester project and became, over fourteen weeks, a real tool that real people
+can use to make more informed choices about the products they buy and the communities they join. It
+is an expression of a conviction this class helped me develop: that engaged citizens do not only
+vote and volunteer and reduce and reuse; they also build. They build platforms and instruments and
+communities and knowledge systems that make sustainable living easier for the people around them.
+
+The attitude--behavior gap is real. Information asymmetry is real. The inconvenience of sustainable
+consumption is real. But none of these are fixed features of the world. They are design problems,
+and design problems have solutions. GreenCart is one small attempt at a few of those solutions, and
+building it has made me a more intentional consumer, a more honest communicator, and a more
+committed practitioner of the sustainable futures we discussed in class.
+
+\newpage
+
+% ===========================================================
+\section*{References}
+% ===========================================================
+\addcontentsline{toc}{section}{References}
+
+\begin{enumerate}[label={[\arabic*]}]
+  \item Kollmuss, A., \& Agyeman, J. (2002). Mind the gap: Why do people act environmentally and
+        what are the barriers to pro-environmental behavior? \textit{Environmental Education
+        Research}, 8(3), 239--260. \url{https://doi.org/10.1080/13504620220145401}
+
+  \item Thaler, R. H., \& Sunstein, C. R. (2008). \textit{Nudge: Improving Decisions About
+        Health, Wealth, and Happiness}. Yale University Press.
+
+  \item Cialdini, R. B. (1984). \textit{Influence: The Psychology of Persuasion}. Harper Collins.
+
+  \item Stern, P. C. (2000). New environmental theories: Toward a coherent theory of
+        environmentally significant behavior. \textit{Journal of Social Issues}, 56(3), 407--424.
+        \url{https://doi.org/10.1111/0022-4537.00175}
+
+  \item Ellen MacArthur Foundation. (2013). \textit{Towards the Circular Economy: Economic and
+        Business Rationale for an Accelerated Transition}. Ellen MacArthur Foundation.
+        \url{https://ellenmacarthurfoundation.org/towards-the-circular-economy-vol-1-an-economic-and-business-rationale-for-an}
+
+  \item Ipsos. (2023). \textit{Global Trends: Sustainability \& Consumer Behavior Report}.
+        Ipsos Group.
+
+  \item Phan, T. K. (2025). Consumer behavior impacts on environmental sustainability.
+        \textit{IDH 3350: Natural Science, University of South Florida}.
+        \url{https://env-blog.vercel.app/}
+
+  \item Vercel Inc. (2024). \textit{Next.js 15 Documentation}.
+        \url{https://nextjs.org/docs}
+
+  \item Anthropic. (2024). \textit{Claude API Documentation}.
+        \url{https://docs.anthropic.com}
+
+  \item OpenStreetMap Foundation. (2024). \textit{Nominatim API Documentation}.
+        \url{https://nominatim.org/release-docs/latest/}
+\end{enumerate}
+
+\newpage
+
+% ===========================================================
+\appendix
+\section{Platform Screenshots}
+% ===========================================================
+
+\textit{The figures below reference screenshots of the GreenCart platform. Replace the
+\texttt{\textbackslash includegraphics} paths with your actual screenshot files before compiling
+for final submission.}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/landing.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    GreenCart landing page: hero section with impact metrics and feature overview\\
+    \small\url{https://green-cart-six.vercel.app/}
+    \vspace{1.5cm}}}
+  \caption{GreenCart landing page showing the platform's value proposition and animated
+           sustainability impact metrics.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/analyzer.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    AI Analyzer results page: score ring, category breakdown, carbon estimate, greener alternatives\\
+    \small\url{https://green-cart-six.vercel.app/analyze}
+    \vspace{1.5cm}}}
+  \caption{AI Analyzer output showing the sustainability score ring, five-dimension category
+           scores, kg CO\textsubscript{2}e carbon estimate with lifecycle breakdown, and
+           recommended greener alternatives.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/marketplace.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    Eco Marketplace: product grid with sustainability scores, resale badges, category filters\\
+    \small\url{https://green-cart-six.vercel.app/marketplace}
+    \vspace{1.5cm}}}
+  \caption{Eco Marketplace catalog with sustainability score pills, resale/secondhand
+           badges, category filters, and direct links to the AI Analyzer.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/community.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    Community Hub: three-column layout, post composer, volunteer matching, Tampa Bay orgs\\
+    \small\url{https://green-cart-six.vercel.app/community}
+    \vspace{1.5cm}}}
+  \caption{Community Hub with the social post composer (showing Feeling picker and
+           Location features), cause-matched volunteer opportunities, and local Tampa Bay
+           organization directory.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/survey.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    Consumer Behavior Survey: Likert scale interface and personalized results page\\
+    \small\url{https://green-cart-six.vercel.app/survey}
+    \vspace{1.5cm}}}
+  \caption{Consumer Behavior Survey interface (22 questions, 6 sections) and the
+           post-submission results page showing verdict, per-section score bars, and
+           full question breakdown.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.9\linewidth]{screenshots/blog.png}
+  \fbox{\parbox{0.88\linewidth}{\centering\vspace{1.5cm}
+    \textbf{[Figure placeholder]}\\
+    Companion research blog at env-blog.vercel.app\\
+    \small\url{https://env-blog.vercel.app/}
+    \vspace{1.5cm}}}
+  \caption{Companion research blog publishing the IDH 3350 paper \emph{``Consumer Behavior
+           Impacts on Environmental Sustainability''} with abstract, literature review,
+           and discussion sections.}
+\end{figure}
+
+% ===========================================================
+\section{Survey Instrument (Full Question List)}
+% ===========================================================
+
+\textbf{Scale:} 1 = Strongly Disagree \quad 2 = Moderately Disagree \quad 3 = Neutral \quad
+4 = Moderately Agree \quad 5 = Strongly Agree
+
+\bigskip
+\textbf{Section A: Environmental Awareness}
+\begin{enumerate}[label=A\arabic*.]
+  \item I am aware of the environmental impact of the products I purchase daily.
+  \item I regularly look for eco-labels or sustainability certifications when shopping.
+  \item I understand what the terms ``carbon footprint'' and ``circular economy'' mean.
+  \item I feel informed enough to make environmentally responsible purchasing decisions.
+\end{enumerate}
+
+\textbf{Section B: Attitudes Toward Sustainable Consumption}
+\begin{enumerate}[label=B\arabic*.]
+  \item Buying sustainably made products is important to me personally.
+  \item I believe individual purchasing choices can make a meaningful difference to the environment.
+  \item I would pay a premium for a product that is certified as environmentally friendly.
+  \item I prefer buying secondhand or refurbished products over buying new when possible.
+\end{enumerate}
+
+\textbf{Section C: Actual Purchasing Behavior}
+\begin{enumerate}[label=C\arabic*.]
+  \item In the past month, I consciously avoided buying a product due to environmental concerns.
+  \item I actively reduce the amount of single-use plastics I purchase.
+  \item I research a brand's environmental practices before making a significant purchase.
+  \item I choose local or low-packaging options at grocery stores or markets.
+\end{enumerate}
+
+\textbf{Section D: Social \& Peer Influence}
+\begin{enumerate}[label=D\arabic*.]
+  \item My friends and peers influence my decision to buy eco-friendly products.
+  \item I have shared information about sustainable products or practices on social media.
+  \item I feel social pressure to appear environmentally conscious in my choices.
+\end{enumerate}
+
+\textbf{Section E: Barriers to Sustainable Shopping}
+\begin{enumerate}[label=E\arabic*.]
+  \item Price is the biggest barrier preventing me from buying more eco-friendly products.
+  \item It is difficult to find trustworthy information about a product's sustainability.
+  \item I find it inconvenient to shop sustainably compared to conventional shopping.
+\end{enumerate}
+
+\textbf{Section F: GreenCart Platform Impact}
+\begin{enumerate}[label=F\arabic*.]
+  \item A platform like GreenCart that scores product sustainability would change how I shop.
+  \item Seeing a sustainability score on a product page would make me more likely to choose an
+        eco-friendly option.
+  \item Access to greener alternatives suggested by AI would help me make better purchasing
+        decisions.
+  \item Community features (volunteer matching, social feed) motivate me to take environmental
+        action.
+\end{enumerate}
+
+\end{document}

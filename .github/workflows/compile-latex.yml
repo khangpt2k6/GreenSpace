@@ -1,0 +1,56 @@
+# ============================================================
+#  GreenCart — Auto-compile LaTeX to PDF and commit back
+#  Triggers on any push that modifies a .tex file on main
+# ============================================================
+
+name: Compile LaTeX and Publish PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.tex"
+  workflow_dispatch:        # allow manual trigger from the Actions tab
+
+permissions:
+  contents: write           # needed to commit the PDF back
+
+jobs:
+  build-pdf:
+    name: Build PDF
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history so the commit step works correctly
+
+      # 2. Compile the LaTeX document
+      #    xu-cheng/latex-action uses a full TeX Live Docker image.
+      #    newtxtext / newtxmath are part of texlive-fonts-extra which is
+      #    included in the full image used by this action.
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: greencart-idh3350-reflection.tex
+          latexmk_use_lualatex: false   # pdflatex is the default; keep it
+          args: >-
+            -pdf
+            -file-line-error
+            -halt-on-error
+            -interaction=nonstopmode
+            -outdir=.
+
+      # 3. Commit the generated PDF back to the repository
+      - name: Commit PDF to repository
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: auto-generate PDF from LaTeX source [skip ci]"
+          file_pattern: "greencart-idh3350-reflection.pdf"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          skip_dirty_check: false       # only commit if the PDF actually changed
