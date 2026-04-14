@@ -375,6 +375,48 @@ function AnalyzeAnotherForm() {
   );
 }
 
+function AnalyzeLanding() {
+  const router = useRouter();
+  const [val, setVal] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const trimmed = val.trim();
+    if (!trimmed) return;
+    router.push(`/analyze?url=${encodeURIComponent(trimmed)}`);
+  }
+
+  return (
+    <main className="page">
+      <div className="ambient ambient--one" />
+      <div className="ambient ambient--two" />
+      <Navbar />
+      <div className="analyzeError">
+        <div className="analyzeErrorCard glass" style={{ textAlign: "center" }}>
+          <MdOutlineEnergySavingsLeaf size={48} style={{ color: "var(--accent)" }} />
+          <h2 style={{ marginTop: "0.75rem" }}>Analyze Any Product</h2>
+          <p style={{ color: "var(--text-soft)", marginBottom: "1.5rem" }}>
+            Paste a product URL to get an AI sustainability score, carbon estimate, and greener alternatives.
+          </p>
+          <form onSubmit={handleSubmit} className="analyzeAnotherForm" style={{ flexDirection: "column", gap: "0.75rem" }}>
+            <input
+              type="url"
+              placeholder="https://store.com/product-page"
+              value={val}
+              onChange={(e) => setVal(e.target.value)}
+              className="analyzeAnotherInput"
+              autoFocus
+            />
+            <button type="submit" className="btnPrimary" disabled={!val.trim()} style={{ width: "100%" }}>
+              <FiZap size={14} /> Analyze Product
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  );
+}
+
 function AnalyzePageInner() {
   const searchParams = useSearchParams();
   const url = searchParams.get("url") || "";
@@ -384,7 +426,6 @@ function AnalyzePageInner() {
 
   useEffect(() => {
     if (!url) {
-      setError("No product URL provided.");
       setLoading(false);
       return;
     }
@@ -418,6 +459,7 @@ function AnalyzePageInner() {
   }, [url]);
 
   if (loading) return <LoadingState url={url} />;
+  if (!url)    return <AnalyzeLanding />;
   if (error)   return <ErrorState message={error} url={url} />;
   return <ResultsView result={result} url={url} />;
 }

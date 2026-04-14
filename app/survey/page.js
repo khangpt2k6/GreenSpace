@@ -83,7 +83,7 @@ export default function SurveyPage() {
 
         <Navbar />
 
-        <section className="glass surveyResultsHero" data-reveal style={{ "--reveal-delay": "60ms" }}>
+        <section className="glass surveyResultsHero">
           <p className="eyebrow">Survey Complete</p>
           <h1>Your Sustainability Profile</h1>
           <div className="surveyVerdict" style={{ color: verdict.color }}>
@@ -95,7 +95,7 @@ export default function SurveyPage() {
           </p>
         </section>
 
-        <section className="surveySectionResults" data-reveal style={{ "--reveal-delay": "120ms" }}>
+        <section className="surveySectionResults">
           {sectionAverages.map(({ section, avg }) => (
             <article key={section} className="glass sectionResultCard">
               <h3>{section}</h3>
@@ -108,7 +108,7 @@ export default function SurveyPage() {
           ))}
         </section>
 
-        <section className="glass surveyBreakdown" data-reveal style={{ "--reveal-delay": "180ms" }}>
+        <section className="glass surveyBreakdown">
           <h2>Full Response Breakdown</h2>
           {SECTIONS.map((section) => (
             <div key={section} className="breakdownSection">
@@ -147,7 +147,7 @@ export default function SurveyPage() {
           ))}
         </section>
 
-        <section className="glass ctaSection" data-reveal style={{ "--reveal-delay": "240ms" }}>
+        <section className="glass ctaSection">
           <h2>Thank you for completing the survey.</h2>
           <p>
             Your responses contribute to USF research on student consumer behavior

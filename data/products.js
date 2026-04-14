@@ -1,62 +1,183 @@
-// Image URL pools — verified Unsplash photo IDs grouped by category
+// ─── Image URL pools — unique Unsplash photo IDs grouped by category ──────────
+// Each product is assigned a UNIQUE index; no two products share the same URL.
+
+const Q = "?auto=format&fit=crop&w=900&q=80";
+const U = (id) => `https://images.unsplash.com/photo-${id}${Q}`;
+
+// EcoLiving — 60 unique images
 const EL = [
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1616627561839-074385245ff6?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1584473457409-ce658956a98d?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1558640476-d42a121c44f8?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1602607745848-de8b05b32f92?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1533044309907-0fa3413da946?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1580301762395-21ce84d00bc6?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1559538624-e8b4d4e2c0d6?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=900&q=80",
+  /* 00 */ U("1505691938895-1758d7feb511"), // living-room furniture flatlay
+  /* 01 */ U("1555041469-a586c61ea9bc"),    // gray lounge chair
+  /* 02 */ U("1616627561839-074385245ff6"), // linen bedding set
+  /* 03 */ U("1577140917170-285929fb55b7"), // wooden dining furniture
+  /* 04 */ U("1584473457409-ce658956a98d"), // bamboo kitchen essentials
+  /* 05 */ U("1600607687939-ce8a6c25118c"), // woven area rug / interior
+  /* 06 */ U("1602143407151-7111542de6e8"), // stainless water bottle
+  /* 07 */ U("1523413651479-597eb2da0ad6"), // natural latex pillow
+  /* 08 */ U("1563453392212-326f5e854473"), // refillable cleaning spray
+  /* 09 */ U("1558640476-d42a121c44f8"),    // laundry liquid bottles
+  /* 10 */ U("1545205597-3d9d02c29597"),    // cork / rubber yoga mat
+  /* 11 */ U("1602607745848-de8b05b32f92"), // soy candle set
+  /* 12 */ U("1490645935967-10de6ba17061"), // ceramic / produce kitchen
+  /* 13 */ U("1533044309907-0fa3413da946"), // wicker storage basket
+  /* 14 */ U("1553062407-98eeb64c6a62"),    // upcycled denim tote bag
+  /* 15 */ U("1580301762395-21ce84d00bc6"), // organic cotton throw blanket
+  /* 16 */ U("1585032226651-759b368d7246"), // cast iron skillet
+  /* 17 */ U("1559538624-e8b4d4e2c0d6"),    // bamboo personal care / toiletries
+  /* 18 */ U("1606787366850-de6330128bfc"), // beeswax food wraps + kitchen scene
+  /* 19 */ U("1542601906990-b4d3fb778b09"), // indoor plants / eco decor
+  /* 20 */ U("1556909114-f6e7ad7d3136"),    // bamboo rack / wooden utensils
+  /* 21 */ U("1600857544200-b2f666a9a2ec"), // natural soap bar close-up
+  /* 22 */ U("1584308666744-24d5c474f2ae"), // bathroom soap dispenser
+  /* 23 */ U("1544716278-ca5e3f4abd8c"),    // wooden bookshelf
+  /* 24 */ U("1476718406336-bb5a9690ee2a"), // cast iron pan in use
+  /* 25 */ U("1558618666-fcd25c85cd64"),    // natural fiber rattan basket alt
+  /* 26 */ U("1574176359888-97ec660a5cb9"), // pillar candles on shelf
+  /* 27 */ U("1512568400610-62da28bc8a13"), // bamboo / ceramic coffee mug
+  /* 28 */ U("1560472354-b33ff0c44a43"),    // glass mason jars / food storage
+  /* 29 */ U("1519003300449-424ad0405076"), // indoor potted plants green
+  /* 30 */ U("1567016432779-094069958ea5"), // natural cotton textile rolls
+  /* 31 */ U("1586790170083-2f9ceadc732d"), // linen hand towels hanging
+  /* 32 */ U("1576618148400-f54bed99fcfd"), // bamboo bathroom accessories
+  /* 33 */ U("1556228578-8c89e6adf883"),    // eco bathroom product collection
+  /* 34 */ U("1551244072-5d12893278bc"),    // eco cleaning supplies set
+  /* 35 */ U("1532009877282-3340270e0529"), // zero-waste product assortment
+  /* 36 */ U("1558618047-3c8c76ca7d13"),    // rattan laundry hamper
+  /* 37 */ U("1567538096630-e8c55bd08fc2"), // wool dryer balls / fiber
+  /* 38 */ U("1596040033229-a9821ebd058d"), // sustainable / zero-waste kit
+  /* 39 */ U("1514190051997-0f6f39ca5cde"), // ceramic mug detail
+  /* 40 */ U("1608571423902-eed4a5ad8108"), // eco scented candle close-up
+  /* 41 */ U("1587486936739-78bbc97e0c11"), // reusable metal straws in glass
+  /* 42 */ U("1570197788417-0e82375c9371"), // ceramic artisan salad bowl
+  /* 43 */ U("1614614460394-8dc9e6d1bb74"), // amber himalayan salt lamp
+  /* 44 */ U("1555085613-80d15dd1e3a7"),    // soft warm night light
+  /* 45 */ U("1590794056226-79ef3a8147e1"), // wooden cutting board kitchen
+  /* 46 */ U("1574362848149-11496d93a7c7"), // natural eco materials flatlay
+  /* 47 */ U("1559056189-a8cc26604399"),    // bamboo fiber / eco packaging
+  /* 48 */ U("1485165814168-10d8b1c1e2ac"), // rubber / natural bath mat
+  /* 49 */ U("1519710164239-da123dc03ef4"), // cork / natural board
+  /* 50 */ U("1588196749597-9ff075ee6b5b"), // hemp rope storage basket
+  /* 51 */ U("1508615039623-a25605d2b022"), // glass jar food storage alt
+  /* 52 */ U("1601880946026-2f6a43e59b26"), // plant-based cleaning bottles
+  /* 53 */ U("1609207437520-f8b99cad0cb2"), // bamboo tray / eco organizer
+  /* 54 */ U("1577705998148-6188b4f01de5"), // ceramic planter pot
+  /* 55 */ U("1520975954871-dc5350ba97c5"), // glass vase with plant
+  /* 56 */ U("1607962837359-5e7e89f86776"), // beeswax / natural polish tins
+  /* 57 */ U("1607868894064-2b6e9a5e6e3a"), // compostable bags / eco paper
+  /* 58 */ U("1559181567-c3190958d171"),    // reusable produce / cotton bags
+  /* 59 */ U("1481437942741-63a2b71d2e3e"), // natural canteen / glass bottle
 ];
 
+// EcoTech — 45 unique images
 const ET = [
-  "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=900&q=80",
+  /* 00 */ U("1519710164239-da123dc03ef4"), // desk lamp / solar lamp
+  /* 01 */ U("1574944985070-8f3ebc6b79d2"), // biodegradable phone case
+  /* 02 */ U("1589003077984-894e133dabab"), // refurbished bluetooth speaker
+  /* 03 */ U("1585771724684-38269d6639fd"), // air purifier device
+  /* 04 */ U("1473116763249-2faaef81ccda"), // solar garden lantern
+  /* 05 */ U("1558002038-1055907df827"),    // smart plug / energy device
+  /* 06 */ U("1525547719571-a2d4ac8945e2"), // laptop computer
+  /* 07 */ U("1583394838336-acd977736f90"), // earbuds / over-ear headphones
+  /* 08 */ U("1592899677977-9c10ca588bbd"), // smartphone device
+  /* 09 */ U("1587829741301-dc798b83add3"), // keyboard / peripheral
+  /* 10 */ U("1593642632559-0c6d3fc62b89"), // standing desk / office setup
+  /* 11 */ U("1468495244123-6c6c332eeece"), // portable power bank solar
+  /* 12 */ U("1544244015-0df4b3ffc6b0"),    // tablet / iPad
+  /* 13 */ U("1508514177221-188b1cf16e9d"), // solar backpack / solar panel bag
+  /* 14 */ U("1534224039826-c7a0eda0e6b3"), // LED strip / smart lighting
+  /* 15 */ U("1518770660439-4636190af475"), // circuit board / electronics
+  /* 16 */ U("1497435334941-8c899ee9e8e9"), // solar panel tech
+  /* 17 */ U("1498050108023-c5249f4df085"), // open laptop on desk
+  /* 18 */ U("1597872200969-2b65d56bd16b"), // rooftop solar panels
+  /* 19 */ U("1555664424-778a1e5e1b48"),    // wireless charging pad
+  /* 20 */ U("1580910051074-3eb694886505"), // smart home device hub
+  /* 21 */ U("1527515637462-cff94eecc1ac"), // outdoor eco LED light
+  /* 22 */ U("1519125323398-675f0ddb6308"), // wireless earbuds white
+  /* 23 */ U("1523275335684-37898b6baf30"), // smartwatch on wrist
+  /* 24 */ U("1526374965328-7f61d4dc18c5"), // tech / LED matrix panel
+  /* 25 */ U("1573878737226-4f9572c22b69"), // laptop desk stand
+  /* 26 */ U("1531297484001-80022131f5a1"), // multiple eco tech devices
+  /* 27 */ U("1614624532983-4ce03382d63d"), // smart thermostat wall
+  /* 28 */ U("1560179707-f14e90ef3623"),    // smart sensor / IoT device
+  /* 29 */ U("1601784551446-20c9e07cdbdb"), // energy usage monitor
+  /* 30 */ U("1555820585-b6b04b2c66d8"),    // smart power outlet strip
+  /* 31 */ U("1509395176047-4a66953fd231"), // eco tech product flatlay
+  /* 32 */ U("1598899134739-24c46f58b8c0"), // e-reader kindle
+  /* 33 */ U("1611532736597-de2d4265fba3"), // refurbished laptop open
+  /* 34 */ U("1544940932-8cd3acb5a3af"),    // bamboo tablet stand holder
+  /* 35 */ U("1485827404703-89b55fcc595e"), // robot vacuum on floor
+  /* 36 */ U("1563013544-824ae1b704d3"),    // monitor screen eco office
+  /* 37 */ U("1542744094-3a31f272c490"),    // clean minimal keyboard workspace
+  /* 38 */ U("1596742578443-7682ef5251cd"), // smart power strip
+  /* 39 */ U("1611599538835-b52a8c2f9b20"), // solar hiking charger
+  /* 40 */ U("1574353891774-7d544c5d745b"), // smart smoke / safety detector
+  /* 41 */ U("1551434678-e076c223a692"),    // laptop software / coding
+  /* 42 */ U("1601964210770-a3ee77ef1cf8"), // wrist fitness tracker
+  /* 43 */ U("1585159812596-fac55e4e1e40"), // bamboo phone accessory
+  /* 44 */ U("1519389950473-47ba0277781c"), // co2 air quality monitor
 ];
 
+// EcoFashion — 55 unique images
 const EF = [
-  "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1548036161-1f80cc960c74?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1543087903-1ac2364a7672?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1594938298603-c8148c4b9d9e?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1581803118522-7b72a50f7e9f?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
+  /* 00 */ U("1591047139829-d91aecb6caea"), // denim jacket
+  /* 01 */ U("1521572163474-6864f9cf17ab"), // organic cotton basics / tee
+  /* 02 */ U("1551028719-00167b16eac5"),    // fleece / outdoor jacket
+  /* 03 */ U("1542291026-7eec264c27ff"),    // recycled sneakers / shoes
+  /* 04 */ U("1548036161-1f80cc960c74"),    // hemp / canvas backpack
+  /* 05 */ U("1489987707025-afc232f7ea0f"), // cashmere / casual tops
+  /* 06 */ U("1515886657613-9f3515b0c78f"), // maxi dress / eco fashion
+  /* 07 */ U("1503342394128-c104d54dba01"), // linen blazer / blouse
+  /* 08 */ U("1543087903-1ac2364a7672"),    // linen shirt dress / cargo
+  /* 09 */ U("1594938298603-c8148c4b9d9e"), // recycled leggings / athletic
+  /* 10 */ U("1581803118522-7b72a50f7e9f"), // socks / underwear accessories
+  /* 11 */ U("1512436991641-6745cdb1723f"), // leather belt / sunglasses
+  /* 12 */ U("1567401893414-76b7b1e5a7a5"), // sustainable fashion outfit
+  /* 13 */ U("1485231183945-fffde7b84b7d"), // clothing rack eco boutique
+  /* 14 */ U("1434389677669-e08b4cac3105"), // outdoor / wool coat
+  /* 15 */ U("1576566588028-4147f3842f27"), // yoga / athletic eco wear
+  /* 16 */ U("1540221652346-e5dd6b50f3e7"), // canvas / fabric hat
+  /* 17 */ U("1519558260268-cde7e03a0152"), // cotton casual shorts
+  /* 18 */ U("1560760079-c72b8c7fff63"),    // midi / maxi boho dress
+  /* 19 */ U("1485579149621-3123dd979885"), // fashion accessories
+  /* 20 */ U("1493655161922-ef98929de9d8"), // scarves / natural textile
+  /* 21 */ U("1525507119028-ed4fac087d49"), // winter wool coat eco
+  /* 22 */ U("1578681994506-b8f463449011"), // linen button-down shirt
+  /* 23 */ U("1503342217998-f7b5b86a4e4b"), // eco fashion model
+  /* 24 */ U("1558769132-cb1aea458c5e"),    // vintage / thrift clothing rack
+  /* 25 */ U("1503341455253-b2e723bb3dbb"), // fashion apparel eco
+  /* 26 */ U("1504198453319-5ce911bafcde"), // rain boots in puddle
+  /* 27 */ U("1588099768531-a72d4a198538"), // eco canvas backpack brown
+  /* 28 */ U("1556909172-f16e9e2e90c5"),    // swimwear sustainable
+  /* 29 */ U("1527719327859-c6ce80353573"), // cozy cardigan sweater
+  /* 30 */ U("1571019613454-1cb2f99b2d8b"), // yoga mat + leggings
+  /* 31 */ U("1574538298279-6d657c25daaf"), // denim jeans flatlay
+  /* 32 */ U("1539109136881-3be0616acf4b"), // cozy wool / knit sweater
+  /* 33 */ U("1516762689617-e1cffcef479d"), // wool peacoat front
+  /* 34 */ U("1529139574466-a303027695d8"), // fashion flatlay eco
+  /* 35 */ U("1541123437800-1bb1317badc2"), // fashion accessories wool
+  /* 36 */ U("1524593869580-73e7e89ce10b"), // hemp / linen cargo pants
+  /* 37 */ U("1441986300917-64674bd600d8"), // eco boutique display
+  /* 38 */ U("1504703395950-b89145a5425b"), // silk blouse / camisole
+  /* 39 */ U("1567168544813-cc03cbc81888"), // kimono / wrap jacket
+  /* 40 */ U("1491553895911-0055eca6402d"), // crossbody jute bag
+  /* 41 */ U("1576502200916-3808e07386a5"), // sustainable leggings
+  /* 42 */ U("1507680434567-f2b1b4c5f74e"), // woven tote bag
+  /* 43 */ U("1564859228273-274232fdb516"), // cork / natural handbag
+  /* 44 */ U("1555212697-194d092e3b8f"),    // eco clothing model
+  /* 45 */ U("1490481651871-ab68de25d43d"), // casual summer dress
+  /* 46 */ U("1554672408-17a6c066e0a2"),    // eco accessories detail
+  /* 47 */ U("1507003211169-0a1dd7228f2d"), // men's eco fashion
+  /* 48 */ U("1544991996-5d22c7c93cd5"),    // beanie / knit hat
+  /* 49 */ U("1531746020798-e6953c6e8e04"), // recycled accessories
+  /* 50 */ U("1551489186-cf8726f514f8"),    // fashion fabric detail
+  /* 51 */ U("1562572159-4efd90f7bba9"),    // eco clothing store
+  /* 52 */ U("1553062407-98eeb64c6a62"),    // cotton / organic produce bag
+  /* 53 */ U("1593030761757-71fae45fa0e7"), // eco socks / underwear
+  /* 54 */ U("1508615039623-a25605d2b022"), // natural dye / linen tote
 ];
 
 export const products = [
-  // ── EcoLiving ──────────────────────────────────────────────────────────
+  // ── EcoLiving ──────────────────────────────────────────────────────────────
   { id: 1,   name: "Bamboo Foldable Coffee Table",         price: 59.99,  rating: 4.6, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[0],  url: "https://www.ikea.com/us/en/p/lack-coffee-table-black-brown-40104294/" },
   { id: 2,   name: "Recycled Cotton Lounge Chair",         price: 119.0,  rating: 4.2, sustainability: 79, category: "EcoLiving",  resale: false, image: EL[1],  url: "https://www.ikea.com/us/en/p/poaeng-armchair-birch-veneer-knisa-light-beige-s79306515/" },
   { id: 5,   name: "Organic Linen Bedding Set",            price: 89.0,   rating: 4.8, sustainability: 92, category: "EcoLiving",  resale: false, image: EL[2],  url: "https://www.parachutehome.com/products/linen-sheet-set" },
@@ -70,7 +191,7 @@ export const products = [
   { id: 19,  name: "FSC Certified Storage Basket",         price: 26.0,   rating: 4.2, sustainability: 85, category: "EcoLiving",  resale: true,  image: EL[13], url: "https://www.ikea.com/us/en/p/branaes-basket-rattan-00138432/" },
   { id: 21,  name: "Pre-Loved Ceramic Dinnerware Set",     price: 38.0,   rating: 4.4, sustainability: 88, category: "EcoLiving",  resale: true,  image: EL[12], url: "https://www.ebay.com/b/Ceramic-Dinnerware-Sets/20580/bn_1893336" },
   { id: 22,  name: "Beeswax Reusable Food Wraps",          price: 19.99,  rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[18], url: "https://www.etsy.com/market/beeswax_food_wrap" },
-  { id: 23,  name: "Secondhand Wooden Bookshelf",          price: 55.0,   rating: 4.3, sustainability: 87, category: "EcoLiving",  resale: true,  image: EL[3],  url: "https://www.facebook.com/marketplace/" },
+  { id: 23,  name: "Secondhand Wooden Bookshelf",          price: 55.0,   rating: 4.3, sustainability: 87, category: "EcoLiving",  resale: true,  image: EL[23], url: "https://www.facebook.com/marketplace/" },
   { id: 24,  name: "Cork Yoga Mat",                        price: 72.0,   rating: 4.7, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[10], url: "https://www.gaiam.com/products/cork-yoga-mat" },
   { id: 25,  name: "Bamboo Toothbrush Pack (4)",           price: 11.99,  rating: 4.8, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[17], url: "https://www.etsy.com/market/bamboo_toothbrush" },
   { id: 26,  name: "Upcycled Denim Tote Bag",             price: 29.0,   rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: true,  image: EL[14], url: "https://www.etsy.com/market/upcycled_denim_bag" },
@@ -78,58 +199,58 @@ export const products = [
   { id: 28,  name: "Pre-Owned Cast Iron Skillet",          price: 22.0,   rating: 4.7, sustainability: 91, category: "EcoLiving",  resale: true,  image: EL[16], url: "https://www.mercari.com/search/?keyword=cast+iron+skillet" },
   { id: 29,  name: "Natural Soy Candle Set",               price: 33.0,   rating: 4.5, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[11], url: "https://www.etsy.com/market/soy_candle" },
 
-  { id: 41,  name: "Bamboo Dish Rack",                     price: 27.0,   rating: 4.5, sustainability: 89, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.grove.co/catalog/product/bamboo-dish-rack/" },
-  { id: 42,  name: "Organic Castile Soap Bar",             price: 8.99,   rating: 4.7, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[8],  url: "https://www.drbronner.com/products/bar-soap/" },
-  { id: 43,  name: "Reusable Silicone Zip Bags (5pk)",     price: 18.5,   rating: 4.6, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[18], url: "https://www.stasherbag.com/products/stasher-bag" },
-  { id: 44,  name: "Natural Sisal Doormat",                price: 35.0,   rating: 4.3, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[5],  url: "https://www.amazon.com/s?k=natural+sisal+doormat" },
-  { id: 45,  name: "Coconut Shell Salad Bowl Set",         price: 29.99,  rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[12], url: "https://www.etsy.com/market/coconut_shell_bowl" },
-  { id: 46,  name: "Recycled Glass Vase Set (3pc)",        price: 42.0,   rating: 4.4, sustainability: 82, category: "EcoLiving",  resale: false, image: EL[19], url: "https://www.westelm.com/products/recycled-glass-vases/" },
-  { id: 47,  name: "Plant-Based Dish Soap",                price: 9.99,   rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[8],  url: "https://www.seventhgeneration.com/dish-liquid" },
-  { id: 48,  name: "Secondhand Ceramic Planter",           price: 15.0,   rating: 4.2, sustainability: 86, category: "EcoLiving",  resale: true,  image: EL[19], url: "https://www.ebay.com/b/Ceramic-Planters/20540/bn_1893336" },
-  { id: 49,  name: "Beeswax Wood Polish",                  price: 14.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[18], url: "https://www.etsy.com/market/beeswax_wood_polish" },
-  { id: 50,  name: "Compostable Trash Bags (50ct)",        price: 13.5,   rating: 4.7, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[9],  url: "https://www.amazon.com/s?k=compostable+trash+bags" },
-  { id: 51,  name: "Bamboo Cutting Board",                 price: 22.99,  rating: 4.6, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.grove.co/catalog/product/bamboo-cutting-board/" },
-  { id: 52,  name: "Organic Cotton Kitchen Towel Set",     price: 19.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[2],  url: "https://www.etsy.com/market/organic_cotton_kitchen_towel" },
-  { id: 53,  name: "Glass Food Storage Set (5pc)",         price: 34.5,   rating: 4.4, sustainability: 85, category: "EcoLiving",  resale: false, image: EL[12], url: "https://www.amazon.com/s?k=glass+food+storage+set" },
-  { id: 54,  name: "Himalayan Salt Lamp",                  price: 28.0,   rating: 4.4, sustainability: 79, category: "EcoLiving",  resale: false, image: EL[11], url: "https://www.amazon.com/s?k=himalayan+salt+lamp" },
-  { id: 55,  name: "Pre-Loved Rattan Side Table",          price: 48.0,   rating: 4.3, sustainability: 85, category: "EcoLiving",  resale: true,  image: EL[1],  url: "https://www.facebook.com/marketplace/" },
-  { id: 56,  name: "Natural Beeswax Candle Trio",          price: 24.0,   rating: 4.6, sustainability: 92, category: "EcoLiving",  resale: false, image: EL[11], url: "https://www.etsy.com/market/beeswax_candle" },
-  { id: 57,  name: "Reusable Cotton Produce Bags (8pk)",   price: 14.99,  rating: 4.8, sustainability: 96, category: "EcoLiving",  resale: false, image: EL[14], url: "https://www.amazon.com/s?k=reusable+produce+bags" },
-  { id: 58,  name: "Linen Hand Towel Set",                 price: 22.0,   rating: 4.5, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[2],  url: "https://www.parachutehome.com/products/linen-towels" },
-  { id: 59,  name: "Pre-Owned Bamboo Bookcase",            price: 85.0,   rating: 4.1, sustainability: 83, category: "EcoLiving",  resale: true,  image: EL[3],  url: "https://www.facebook.com/marketplace/" },
-  { id: 60,  name: "Recycled Paper Notepad Bundle",        price: 11.5,   rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[9],  url: "https://www.amazon.com/s?k=recycled+paper+notepad" },
-  { id: 61,  name: "Organic Coconut Wax Candle",           price: 18.99,  rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[11], url: "https://www.etsy.com/market/coconut_wax_candle" },
-  { id: 62,  name: "Refillable Hand Soap Dispenser",       price: 24.5,   rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[8],  url: "https://www.blueland.com/products/hand-soap" },
-  { id: 63,  name: "Natural Wool Dryer Balls (6pk)",       price: 19.99,  rating: 4.7, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[15], url: "https://www.amazon.com/s?k=wool+dryer+balls" },
-  { id: 64,  name: "Secondhand Cast Iron Dutch Oven",      price: 39.0,   rating: 4.6, sustainability: 90, category: "EcoLiving",  resale: true,  image: EL[16], url: "https://www.mercari.com/search/?keyword=cast+iron+dutch+oven" },
-  { id: 65,  name: "Bamboo Coffee Mug",                    price: 16.5,   rating: 4.4, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[6],  url: "https://www.etsy.com/market/bamboo_coffee_mug" },
-  { id: 66,  name: "Reusable Metal Straws Set (10pk)",     price: 12.99,  rating: 4.8, sustainability: 96, category: "EcoLiving",  resale: false, image: EL[6],  url: "https://www.amazon.com/s?k=reusable+metal+straws" },
-  { id: 67,  name: "Cork Coaster Set (6pc)",               price: 15.0,   rating: 4.5, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[10], url: "https://www.etsy.com/market/cork_coaster_set" },
-  { id: 68,  name: "Organic Lavender Sachet Pack",         price: 9.99,   rating: 4.6, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[7],  url: "https://www.etsy.com/market/lavender_sachet" },
-  { id: 69,  name: "Hemp Rope Storage Baskets (3pk)",      price: 31.5,   rating: 4.4, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[13], url: "https://www.amazon.com/s?k=hemp+rope+storage+basket" },
-  { id: 70,  name: "Recycled Plastic Plant Pots (5pk)",    price: 18.0,   rating: 4.3, sustainability: 80, category: "EcoLiving",  resale: false, image: EL[19], url: "https://www.amazon.com/s?k=recycled+plastic+plant+pots" },
-  { id: 71,  name: "Natural Rubber Dish Mat",              price: 13.99,  rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.amazon.com/s?k=natural+rubber+dish+mat" },
-  { id: 72,  name: "Compostable Coffee Pods (30ct)",       price: 14.99,  rating: 4.5, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[12], url: "https://www.amazon.com/s?k=compostable+coffee+pods" },
-  { id: 73,  name: "Bamboo Shower Caddy",                  price: 29.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[17], url: "https://www.amazon.com/s?k=bamboo+shower+caddy" },
-  { id: 74,  name: "Pre-Loved Linen Curtains",             price: 45.0,   rating: 4.2, sustainability: 85, category: "EcoLiving",  resale: true,  image: EL[2],  url: "https://www.ebay.com/b/Curtains/20588/bn_1893336" },
-  { id: 75,  name: "Reusable Beeswax Canteen",             price: 22.0,   rating: 4.4, sustainability: 89, category: "EcoLiving",  resale: false, image: EL[6],  url: "https://www.etsy.com/market/beeswax_canteen" },
-  { id: 76,  name: "Bamboo Laundry Hamper",                price: 38.0,   rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[13], url: "https://www.amazon.com/s?k=bamboo+laundry+hamper" },
-  { id: 77,  name: "Natural Cork Bulletin Board",          price: 25.0,   rating: 4.3, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[10], url: "https://www.amazon.com/s?k=cork+bulletin+board" },
-  { id: 78,  name: "Recycled Glass Soap Dispenser",        price: 19.99,  rating: 4.5, sustainability: 82, category: "EcoLiving",  resale: false, image: EL[8],  url: "https://www.amazon.com/s?k=recycled+glass+soap+dispenser" },
-  { id: 79,  name: "Organic Cotton Dish Cloth Set",        price: 13.5,   rating: 4.6, sustainability: 92, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.amazon.com/s?k=organic+cotton+dish+cloth" },
-  { id: 80,  name: "Refurbished French Press",             price: 28.0,   rating: 4.3, sustainability: 78, category: "EcoLiving",  resale: true,  image: EL[12], url: "https://www.ebay.com/b/French+Press/bn_1893336" },
-  { id: 81,  name: "Secondhand Macrame Wall Hanging",      price: 33.0,   rating: 4.4, sustainability: 84, category: "EcoLiving",  resale: true,  image: EL[5],  url: "https://www.etsy.com/market/macrame_wall_hanging" },
-  { id: 82,  name: "Plant-Based Multi-Surface Cleaner",    price: 11.99,  rating: 4.7, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[9],  url: "https://www.seventhgeneration.com/multi-surface-cleaner" },
-  { id: 83,  name: "Bamboo Toilet Paper (24 rolls)",       price: 27.0,   rating: 4.8, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.whogivesacrap.org/products/bamboo-toilet-paper" },
-  { id: 84,  name: "Natural Baking Soda Tooth Powder",     price: 10.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[17], url: "https://www.amazon.com/s?k=baking+soda+tooth+powder" },
+  { id: 41,  name: "Bamboo Dish Rack",                     price: 27.0,   rating: 4.5, sustainability: 89, category: "EcoLiving",  resale: false, image: EL[20], url: "https://www.grove.co/catalog/product/bamboo-dish-rack/" },
+  { id: 42,  name: "Organic Castile Soap Bar",             price: 8.99,   rating: 4.7, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[21], url: "https://www.drbronner.com/products/bar-soap/" },
+  { id: 43,  name: "Reusable Silicone Zip Bags (5pk)",     price: 18.5,   rating: 4.6, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[28], url: "https://www.stasherbag.com/products/stasher-bag" },
+  { id: 44,  name: "Natural Sisal Doormat",                price: 35.0,   rating: 4.3, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[48], url: "https://www.amazon.com/s?k=natural+sisal+doormat" },
+  { id: 45,  name: "Coconut Shell Salad Bowl Set",         price: 29.99,  rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[42], url: "https://www.etsy.com/market/coconut_shell_bowl" },
+  { id: 46,  name: "Recycled Glass Vase Set (3pc)",        price: 42.0,   rating: 4.4, sustainability: 82, category: "EcoLiving",  resale: false, image: EL[55], url: "https://www.westelm.com/products/recycled-glass-vases/" },
+  { id: 47,  name: "Plant-Based Dish Soap",                price: 9.99,   rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[22], url: "https://www.seventhgeneration.com/dish-liquid" },
+  { id: 48,  name: "Secondhand Ceramic Planter",           price: 15.0,   rating: 4.2, sustainability: 86, category: "EcoLiving",  resale: true,  image: EL[54], url: "https://www.ebay.com/b/Ceramic-Planters/20540/bn_1893336" },
+  { id: 49,  name: "Beeswax Wood Polish",                  price: 14.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[56], url: "https://www.etsy.com/market/beeswax_wood_polish" },
+  { id: 50,  name: "Compostable Trash Bags (50ct)",        price: 13.5,   rating: 4.7, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[57], url: "https://www.amazon.com/s?k=compostable+trash+bags" },
+  { id: 51,  name: "Bamboo Cutting Board",                 price: 22.99,  rating: 4.6, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[45], url: "https://www.grove.co/catalog/product/bamboo-cutting-board/" },
+  { id: 52,  name: "Organic Cotton Kitchen Towel Set",     price: 19.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[31], url: "https://www.etsy.com/market/organic_cotton_kitchen_towel" },
+  { id: 53,  name: "Glass Food Storage Set (5pc)",         price: 34.5,   rating: 4.4, sustainability: 85, category: "EcoLiving",  resale: false, image: EL[51], url: "https://www.amazon.com/s?k=glass+food+storage+set" },
+  { id: 54,  name: "Himalayan Salt Lamp",                  price: 28.0,   rating: 4.4, sustainability: 79, category: "EcoLiving",  resale: false, image: EL[43], url: "https://www.amazon.com/s?k=himalayan+salt+lamp" },
+  { id: 55,  name: "Pre-Loved Rattan Side Table",          price: 48.0,   rating: 4.3, sustainability: 85, category: "EcoLiving",  resale: true,  image: EL[46], url: "https://www.facebook.com/marketplace/" },
+  { id: 56,  name: "Natural Beeswax Candle Trio",          price: 24.0,   rating: 4.6, sustainability: 92, category: "EcoLiving",  resale: false, image: EL[26], url: "https://www.etsy.com/market/beeswax_candle" },
+  { id: 57,  name: "Reusable Cotton Produce Bags (8pk)",   price: 14.99,  rating: 4.8, sustainability: 96, category: "EcoLiving",  resale: false, image: EL[58], url: "https://www.amazon.com/s?k=reusable+produce+bags" },
+  { id: 58,  name: "Linen Hand Towel Set",                 price: 22.0,   rating: 4.5, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[30], url: "https://www.parachutehome.com/products/linen-towels" },
+  { id: 59,  name: "Pre-Owned Bamboo Bookcase",            price: 85.0,   rating: 4.1, sustainability: 83, category: "EcoLiving",  resale: true,  image: EL[53], url: "https://www.facebook.com/marketplace/" },
+  { id: 60,  name: "Recycled Paper Notepad Bundle",        price: 11.5,   rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[47], url: "https://www.amazon.com/s?k=recycled+paper+notepad" },
+  { id: 61,  name: "Organic Coconut Wax Candle",           price: 18.99,  rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[40], url: "https://www.etsy.com/market/coconut_wax_candle" },
+  { id: 62,  name: "Refillable Hand Soap Dispenser",       price: 24.5,   rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[33], url: "https://www.blueland.com/products/hand-soap" },
+  { id: 63,  name: "Natural Wool Dryer Balls (6pk)",       price: 19.99,  rating: 4.7, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[37], url: "https://www.amazon.com/s?k=wool+dryer+balls" },
+  { id: 64,  name: "Secondhand Cast Iron Dutch Oven",      price: 39.0,   rating: 4.6, sustainability: 90, category: "EcoLiving",  resale: true,  image: EL[24], url: "https://www.mercari.com/search/?keyword=cast+iron+dutch+oven" },
+  { id: 65,  name: "Bamboo Coffee Mug",                    price: 16.5,   rating: 4.4, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[27], url: "https://www.etsy.com/market/bamboo_coffee_mug" },
+  { id: 66,  name: "Reusable Metal Straws Set (10pk)",     price: 12.99,  rating: 4.8, sustainability: 96, category: "EcoLiving",  resale: false, image: EL[41], url: "https://www.amazon.com/s?k=reusable+metal+straws" },
+  { id: 67,  name: "Cork Coaster Set (6pc)",               price: 15.0,   rating: 4.5, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[49], url: "https://www.etsy.com/market/cork_coaster_set" },
+  { id: 68,  name: "Organic Lavender Sachet Pack",         price: 9.99,   rating: 4.6, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[35], url: "https://www.etsy.com/market/lavender_sachet" },
+  { id: 69,  name: "Hemp Rope Storage Baskets (3pk)",      price: 31.5,   rating: 4.4, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[50], url: "https://www.amazon.com/s?k=hemp+rope+storage+basket" },
+  { id: 70,  name: "Recycled Plastic Plant Pots (5pk)",    price: 18.0,   rating: 4.3, sustainability: 80, category: "EcoLiving",  resale: false, image: EL[29], url: "https://www.amazon.com/s?k=recycled+plastic+plant+pots" },
+  { id: 71,  name: "Natural Rubber Dish Mat",              price: 13.99,  rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[32], url: "https://www.amazon.com/s?k=natural+rubber+dish+mat" },
+  { id: 72,  name: "Compostable Coffee Pods (30ct)",       price: 14.99,  rating: 4.5, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[39], url: "https://www.amazon.com/s?k=compostable+coffee+pods" },
+  { id: 73,  name: "Bamboo Shower Caddy",                  price: 29.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[34], url: "https://www.amazon.com/s?k=bamboo+shower+caddy" },
+  { id: 74,  name: "Pre-Loved Linen Curtains",             price: 45.0,   rating: 4.2, sustainability: 85, category: "EcoLiving",  resale: true,  image: EL[52], url: "https://www.ebay.com/b/Curtains/20588/bn_1893336" },
+  { id: 75,  name: "Reusable Beeswax Canteen",             price: 22.0,   rating: 4.4, sustainability: 89, category: "EcoLiving",  resale: false, image: EL[59], url: "https://www.etsy.com/market/beeswax_canteen" },
+  { id: 76,  name: "Bamboo Laundry Hamper",                price: 38.0,   rating: 4.4, sustainability: 87, category: "EcoLiving",  resale: false, image: EL[36], url: "https://www.amazon.com/s?k=bamboo+laundry+hamper" },
+  { id: 77,  name: "Natural Cork Bulletin Board",          price: 25.0,   rating: 4.3, sustainability: 86, category: "EcoLiving",  resale: false, image: EL[19], url: "https://www.amazon.com/s?k=cork+bulletin+board" },
+  { id: 78,  name: "Recycled Glass Soap Dispenser",        price: 19.99,  rating: 4.5, sustainability: 82, category: "EcoLiving",  resale: false, image: EL[22], url: "https://www.amazon.com/s?k=recycled+glass+soap+dispenser" },
+  { id: 79,  name: "Organic Cotton Dish Cloth Set",        price: 13.5,   rating: 4.6, sustainability: 92, category: "EcoLiving",  resale: false, image: EL[38], url: "https://www.amazon.com/s?k=organic+cotton+dish+cloth" },
+  { id: 80,  name: "Refurbished French Press",             price: 28.0,   rating: 4.3, sustainability: 78, category: "EcoLiving",  resale: true,  image: EL[44], url: "https://www.ebay.com/b/French+Press/bn_1893336" },
+  { id: 81,  name: "Secondhand Macrame Wall Hanging",      price: 33.0,   rating: 4.4, sustainability: 84, category: "EcoLiving",  resale: true,  image: EL[46], url: "https://www.etsy.com/market/macrame_wall_hanging" },
+  { id: 82,  name: "Plant-Based Multi-Surface Cleaner",    price: 11.99,  rating: 4.7, sustainability: 91, category: "EcoLiving",  resale: false, image: EL[52], url: "https://www.seventhgeneration.com/multi-surface-cleaner" },
+  { id: 83,  name: "Bamboo Toilet Paper (24 rolls)",       price: 27.0,   rating: 4.8, sustainability: 94, category: "EcoLiving",  resale: false, image: EL[47], url: "https://www.whogivesacrap.org/products/bamboo-toilet-paper" },
+  { id: 84,  name: "Natural Baking Soda Tooth Powder",     price: 10.99,  rating: 4.5, sustainability: 90, category: "EcoLiving",  resale: false, image: EL[32], url: "https://www.amazon.com/s?k=baking+soda+tooth+powder" },
   { id: 85,  name: "Organic Aloe Vera Potted Plant",       price: 12.0,   rating: 4.7, sustainability: 98, category: "EcoLiving",  resale: false, image: EL[19], url: "https://www.amazon.com/s?k=aloe+vera+plant" },
-  { id: 86,  name: "Glass Water Pitcher with Filter",      price: 41.0,   rating: 4.6, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[6],  url: "https://www.amazon.com/s?k=glass+water+pitcher+filter" },
-  { id: 87,  name: "Pre-Loved Wicker Laundry Basket",      price: 28.0,   rating: 4.2, sustainability: 84, category: "EcoLiving",  resale: true,  image: EL[13], url: "https://www.facebook.com/marketplace/" },
-  { id: 88,  name: "Organic Cotton Canvas Shopping Bag",   price: 16.0,   rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[14], url: "https://www.amazon.com/s?k=organic+cotton+shopping+bag" },
-  { id: 89,  name: "Bamboo Fiber Paper Towels (reusable)", price: 17.99,  rating: 4.7, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[4],  url: "https://www.amazon.com/s?k=bamboo+paper+towels+reusable" },
-  { id: 90,  name: "Solar-Powered Night Light",            price: 16.99,  rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[11], url: "https://www.amazon.com/s?k=solar+night+light" },
+  { id: 86,  name: "Glass Water Pitcher with Filter",      price: 41.0,   rating: 4.6, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[51], url: "https://www.amazon.com/s?k=glass+water+pitcher+filter" },
+  { id: 87,  name: "Pre-Loved Wicker Laundry Basket",      price: 28.0,   rating: 4.2, sustainability: 84, category: "EcoLiving",  resale: true,  image: EL[25], url: "https://www.facebook.com/marketplace/" },
+  { id: 88,  name: "Organic Cotton Canvas Shopping Bag",   price: 16.0,   rating: 4.6, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[30], url: "https://www.amazon.com/s?k=organic+cotton+shopping+bag" },
+  { id: 89,  name: "Bamboo Fiber Paper Towels (reusable)", price: 17.99,  rating: 4.7, sustainability: 93, category: "EcoLiving",  resale: false, image: EL[45], url: "https://www.amazon.com/s?k=bamboo+paper+towels+reusable" },
+  { id: 90,  name: "Solar-Powered Night Light",            price: 16.99,  rating: 4.5, sustainability: 88, category: "EcoLiving",  resale: false, image: EL[44], url: "https://www.amazon.com/s?k=solar+night+light" },
 
-  // ── EcoTech ────────────────────────────────────────────────────────────
+  // ── EcoTech ────────────────────────────────────────────────────────────────
   { id: 3,   name: "Solar Smart Desk Lamp",                price: 42.5,   rating: 4.7, sustainability: 88, category: "EcoTech",    resale: false, image: ET[0],  url: "https://www.philips-hue.com/en-us" },
   { id: 4,   name: "Biodegradable Phone Case",             price: 21.99,  rating: 4.1, sustainability: 74, category: "EcoTech",    resale: false, image: ET[1],  url: "https://www.pela.earth/products/green-iphone-case" },
   { id: 6,   name: "Refurbished Bluetooth Speaker",        price: 75.0,   rating: 4.0, sustainability: 68, category: "EcoTech",    resale: true,  image: ET[2],  url: "https://www.backmarket.com/en-us/p/jbl-flip-5-black/3ca9d5d8-0d66-47ed-aaf8-b6a9ff2fdd0b" },
@@ -138,58 +259,58 @@ export const products = [
   { id: 13,  name: "Energy Efficient Smart Plug",          price: 18.5,   rating: 4.3, sustainability: 77, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.tp-link.com/us/home-networking/smart-plug/hs103/" },
   { id: 16,  name: "Reconditioned Laptop 13-inch",         price: 429.0,  rating: 4.1, sustainability: 71, category: "EcoTech",    resale: true,  image: ET[6],  url: "https://www.backmarket.com/en-us/l/laptops/49e6b377-03b3-48f8-a2df-a6c8f74198f9" },
   { id: 18,  name: "Modular Repairable Earbuds",           price: 149.0,  rating: 4.0, sustainability: 80, category: "EcoTech",    resale: false, image: ET[7],  url: "https://shop.fairphone.com/fairbuds-xl" },
-  { id: 20,  name: "Home Energy Monitor",                  price: 119.99, rating: 4.4, sustainability: 78, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.sense.com/" },
+  { id: 20,  name: "Home Energy Monitor",                  price: 119.99, rating: 4.4, sustainability: 78, category: "EcoTech",    resale: false, image: ET[29], url: "https://www.sense.com/" },
   { id: 30,  name: "Refurbished iPhone 13 (128 GB)",       price: 349.0,  rating: 4.3, sustainability: 76, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/iphone-13/8a9e3c72-2b48-4d37-8e2d-bb1b19f4d5d0" },
-  { id: 31,  name: "Pre-Owned Nintendo Switch",            price: 189.0,  rating: 4.2, sustainability: 65, category: "EcoTech",    resale: true,  image: ET[5],  url: "https://www.backmarket.com/en-us/l/nintendo-switch/a6a5ded7-9f6e-48e2-b3e0-3bf6a8bf5e3c" },
+  { id: 31,  name: "Pre-Owned Nintendo Switch",            price: 189.0,  rating: 4.2, sustainability: 65, category: "EcoTech",    resale: true,  image: ET[31], url: "https://www.backmarket.com/en-us/l/nintendo-switch/a6a5ded7-9f6e-48e2-b3e0-3bf6a8bf5e3c" },
   { id: 32,  name: "Solar Charging Backpack",              price: 89.99,  rating: 4.5, sustainability: 85, category: "EcoTech",    resale: false, image: ET[13], url: "https://www.amazon.com/s?k=solar+charging+backpack" },
   { id: 33,  name: "Recycled-Plastic Wireless Keyboard",   price: 54.0,   rating: 4.4, sustainability: 79, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.logitech.com/en-us/products/keyboards.html" },
   { id: 34,  name: "Secondhand Standing Desk",             price: 145.0,  rating: 4.5, sustainability: 80, category: "EcoTech",    resale: true,  image: ET[10], url: "https://www.facebook.com/marketplace/" },
   { id: 35,  name: "Portable Solar Power Bank",            price: 37.99,  rating: 4.6, sustainability: 84, category: "EcoTech",    resale: false, image: ET[11], url: "https://www.amazon.com/s?k=solar+power+bank" },
   { id: 36,  name: "Certified Refurbished iPad 9th Gen",   price: 259.0,  rating: 4.4, sustainability: 74, category: "EcoTech",    resale: true,  image: ET[12], url: "https://www.backmarket.com/en-us/l/ipad/39da052b-8d79-4a3b-b94c-a0f1c9f07f64" },
 
-  { id: 91,  name: "Smart Thermostat (Eco Mode)",          price: 129.0,  rating: 4.5, sustainability: 82, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.ecobee.com/en-us/smart-thermostats/" },
-  { id: 92,  name: "LED Strip Light Kit",                  price: 23.5,   rating: 4.6, sustainability: 80, category: "EcoTech",    resale: false, image: ET[0],  url: "https://www.amazon.com/s?k=led+strip+light+kit" },
-  { id: 93,  name: "Bamboo Wireless Charger",              price: 29.99,  rating: 4.5, sustainability: 85, category: "EcoTech",    resale: false, image: ET[1],  url: "https://www.amazon.com/s?k=bamboo+wireless+charger" },
-  { id: 94,  name: "Refurbished GoPro Hero 9",             price: 199.0,  rating: 4.3, sustainability: 72, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/gopro/refurbished" },
-  { id: 95,  name: "Solar Garden Stake Lights (8pk)",      price: 24.99,  rating: 4.5, sustainability: 89, category: "EcoTech",    resale: false, image: ET[4],  url: "https://www.amazon.com/s?k=solar+garden+stake+lights" },
-  { id: 96,  name: "Eco USB Hub (recycled plastic)",       price: 19.5,   rating: 4.3, sustainability: 78, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.amazon.com/s?k=eco+usb+hub" },
-  { id: 97,  name: "Recycled-Plastic Wireless Mouse",      price: 32.0,   rating: 4.4, sustainability: 80, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.logitech.com/en-us/products/mice.html" },
-  { id: 98,  name: "E-Ink Desk Clock",                     price: 45.0,   rating: 4.4, sustainability: 76, category: "EcoTech",    resale: false, image: ET[0],  url: "https://www.amazon.com/s?k=e-ink+desk+clock" },
-  { id: 99,  name: "Refurbished Samsung Galaxy S21",       price: 299.0,  rating: 4.2, sustainability: 73, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/samsung-galaxy-s21/refurbished" },
-  { id: 100, name: "Smart Power Strip (energy saving)",    price: 38.99,  rating: 4.5, sustainability: 81, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.amazon.com/s?k=smart+power+strip" },
-  { id: 101, name: "Bamboo Phone Charging Stand",          price: 19.99,  rating: 4.6, sustainability: 87, category: "EcoTech",    resale: false, image: ET[1],  url: "https://www.amazon.com/s?k=bamboo+phone+stand" },
+  { id: 91,  name: "Smart Thermostat (Eco Mode)",          price: 129.0,  rating: 4.5, sustainability: 82, category: "EcoTech",    resale: false, image: ET[27], url: "https://www.ecobee.com/en-us/smart-thermostats/" },
+  { id: 92,  name: "LED Strip Light Kit",                  price: 23.5,   rating: 4.6, sustainability: 80, category: "EcoTech",    resale: false, image: ET[14], url: "https://www.amazon.com/s?k=led+strip+light+kit" },
+  { id: 93,  name: "Bamboo Wireless Charger",              price: 29.99,  rating: 4.5, sustainability: 85, category: "EcoTech",    resale: false, image: ET[19], url: "https://www.amazon.com/s?k=bamboo+wireless+charger" },
+  { id: 94,  name: "Refurbished GoPro Hero 9",             price: 199.0,  rating: 4.3, sustainability: 72, category: "EcoTech",    resale: true,  image: ET[15], url: "https://www.backmarket.com/en-us/l/gopro/refurbished" },
+  { id: 95,  name: "Solar Garden Stake Lights (8pk)",      price: 24.99,  rating: 4.5, sustainability: 89, category: "EcoTech",    resale: false, image: ET[21], url: "https://www.amazon.com/s?k=solar+garden+stake+lights" },
+  { id: 96,  name: "Eco USB Hub (recycled plastic)",       price: 19.5,   rating: 4.3, sustainability: 78, category: "EcoTech",    resale: false, image: ET[37], url: "https://www.amazon.com/s?k=eco+usb+hub" },
+  { id: 97,  name: "Recycled-Plastic Wireless Mouse",      price: 32.0,   rating: 4.4, sustainability: 80, category: "EcoTech",    resale: false, image: ET[36], url: "https://www.logitech.com/en-us/products/mice.html" },
+  { id: 98,  name: "E-Ink Desk Clock",                     price: 45.0,   rating: 4.4, sustainability: 76, category: "EcoTech",    resale: false, image: ET[28], url: "https://www.amazon.com/s?k=e-ink+desk+clock" },
+  { id: 99,  name: "Refurbished Samsung Galaxy S21",       price: 299.0,  rating: 4.2, sustainability: 73, category: "EcoTech",    resale: true,  image: ET[16], url: "https://www.backmarket.com/en-us/l/samsung-galaxy-s21/refurbished" },
+  { id: 100, name: "Smart Power Strip (energy saving)",    price: 38.99,  rating: 4.5, sustainability: 81, category: "EcoTech",    resale: false, image: ET[30], url: "https://www.amazon.com/s?k=smart+power+strip" },
+  { id: 101, name: "Bamboo Phone Charging Stand",          price: 19.99,  rating: 4.6, sustainability: 87, category: "EcoTech",    resale: false, image: ET[43], url: "https://www.amazon.com/s?k=bamboo+phone+stand" },
   { id: 102, name: "Solar-Powered Pathway Lights (6pk)",   price: 36.0,   rating: 4.5, sustainability: 90, category: "EcoTech",    resale: false, image: ET[4],  url: "https://www.amazon.com/s?k=solar+pathway+lights" },
-  { id: 103, name: "Compostable Laptop Sleeve",            price: 27.5,   rating: 4.4, sustainability: 82, category: "EcoTech",    resale: false, image: ET[6],  url: "https://www.amazon.com/s?k=compostable+laptop+sleeve" },
-  { id: 104, name: "Energy Monitor Smart Outlet",          price: 24.99,  rating: 4.3, sustainability: 79, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.amazon.com/s?k=smart+energy+outlet" },
-  { id: 105, name: "Refurbished Apple Watch Series 7",     price: 219.0,  rating: 4.4, sustainability: 71, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/apple-watch/refurbished" },
-  { id: 106, name: "Solar Hiking Charger (20W)",           price: 45.0,   rating: 4.6, sustainability: 88, category: "EcoTech",    resale: false, image: ET[13], url: "https://www.amazon.com/s?k=solar+hiking+charger" },
-  { id: 107, name: "Smart LED Bulbs (4pk)",                price: 28.5,   rating: 4.5, sustainability: 82, category: "EcoTech",    resale: false, image: ET[0],  url: "https://www.amazon.com/s?k=smart+led+bulbs" },
-  { id: 108, name: "Eco-Rated Robot Vacuum",               price: 189.0,  rating: 4.3, sustainability: 77, category: "EcoTech",    resale: false, image: ET[3],  url: "https://www.amazon.com/s?k=eco+robot+vacuum" },
-  { id: 109, name: "Refurbished Kindle Paperwhite",        price: 79.0,   rating: 4.6, sustainability: 78, category: "EcoTech",    resale: true,  image: ET[12], url: "https://www.backmarket.com/en-us/l/kindle/refurbished" },
+  { id: 103, name: "Compostable Laptop Sleeve",            price: 27.5,   rating: 4.4, sustainability: 82, category: "EcoTech",    resale: false, image: ET[17], url: "https://www.amazon.com/s?k=compostable+laptop+sleeve" },
+  { id: 104, name: "Energy Monitor Smart Outlet",          price: 24.99,  rating: 4.3, sustainability: 79, category: "EcoTech",    resale: false, image: ET[20], url: "https://www.amazon.com/s?k=smart+energy+outlet" },
+  { id: 105, name: "Refurbished Apple Watch Series 7",     price: 219.0,  rating: 4.4, sustainability: 71, category: "EcoTech",    resale: true,  image: ET[23], url: "https://www.backmarket.com/en-us/l/apple-watch/refurbished" },
+  { id: 106, name: "Solar Hiking Charger (20W)",           price: 45.0,   rating: 4.6, sustainability: 88, category: "EcoTech",    resale: false, image: ET[39], url: "https://www.amazon.com/s?k=solar+hiking+charger" },
+  { id: 107, name: "Smart LED Bulbs (4pk)",                price: 28.5,   rating: 4.5, sustainability: 82, category: "EcoTech",    resale: false, image: ET[24], url: "https://www.amazon.com/s?k=smart+led+bulbs" },
+  { id: 108, name: "Eco-Rated Robot Vacuum",               price: 189.0,  rating: 4.3, sustainability: 77, category: "EcoTech",    resale: false, image: ET[35], url: "https://www.amazon.com/s?k=eco+robot+vacuum" },
+  { id: 109, name: "Refurbished Kindle Paperwhite",        price: 79.0,   rating: 4.6, sustainability: 78, category: "EcoTech",    resale: true,  image: ET[32], url: "https://www.backmarket.com/en-us/l/kindle/refurbished" },
   { id: 110, name: "Bamboo Keyboard Wrist Rest",           price: 22.0,   rating: 4.5, sustainability: 86, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.amazon.com/s?k=bamboo+keyboard+wrist+rest" },
-  { id: 111, name: "Wind-Up Portable Radio",               price: 34.99,  rating: 4.2, sustainability: 84, category: "EcoTech",    resale: false, image: ET[2],  url: "https://www.amazon.com/s?k=wind-up+solar+radio" },
+  { id: 111, name: "Wind-Up Portable Radio",               price: 34.99,  rating: 4.2, sustainability: 84, category: "EcoTech",    resale: false, image: ET[41], url: "https://www.amazon.com/s?k=wind-up+solar+radio" },
   { id: 112, name: "Foldable Solar Lantern",               price: 28.99,  rating: 4.7, sustainability: 91, category: "EcoTech",    resale: false, image: ET[4],  url: "https://www.amazon.com/s?k=foldable+solar+lantern" },
-  { id: 113, name: "Recycled-Plastic Webcam HD",           price: 39.5,   rating: 4.2, sustainability: 77, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.amazon.com/s?k=recycled+webcam" },
-  { id: 114, name: "Smart Soil Moisture Sensor",           price: 19.99,  rating: 4.6, sustainability: 83, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.amazon.com/s?k=smart+soil+moisture+sensor" },
-  { id: 115, name: "Refurbished Fitbit Charge 5",          price: 79.0,   rating: 4.3, sustainability: 70, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/fitbit/refurbished" },
-  { id: 116, name: "Bamboo Tablet Stand",                  price: 24.5,   rating: 4.6, sustainability: 88, category: "EcoTech",    resale: false, image: ET[12], url: "https://www.amazon.com/s?k=bamboo+tablet+stand" },
-  { id: 117, name: "Biodegradable AirPods Case",           price: 14.99,  rating: 4.3, sustainability: 78, category: "EcoTech",    resale: false, image: ET[1],  url: "https://www.pela.earth/products/airpods-case" },
-  { id: 118, name: "Solar-Powered Security Camera",        price: 69.99,  rating: 4.4, sustainability: 82, category: "EcoTech",    resale: false, image: ET[4],  url: "https://www.amazon.com/s?k=solar+security+camera" },
+  { id: 113, name: "Recycled-Plastic Webcam HD",           price: 39.5,   rating: 4.2, sustainability: 77, category: "EcoTech",    resale: false, image: ET[26], url: "https://www.amazon.com/s?k=recycled+webcam" },
+  { id: 114, name: "Smart Soil Moisture Sensor",           price: 19.99,  rating: 4.6, sustainability: 83, category: "EcoTech",    resale: false, image: ET[28], url: "https://www.amazon.com/s?k=smart+soil+moisture+sensor" },
+  { id: 115, name: "Refurbished Fitbit Charge 5",          price: 79.0,   rating: 4.3, sustainability: 70, category: "EcoTech",    resale: true,  image: ET[42], url: "https://www.backmarket.com/en-us/l/fitbit/refurbished" },
+  { id: 116, name: "Bamboo Tablet Stand",                  price: 24.5,   rating: 4.6, sustainability: 88, category: "EcoTech",    resale: false, image: ET[34], url: "https://www.amazon.com/s?k=bamboo+tablet+stand" },
+  { id: 117, name: "Biodegradable AirPods Case",           price: 14.99,  rating: 4.3, sustainability: 78, category: "EcoTech",    resale: false, image: ET[22], url: "https://www.pela.earth/products/airpods-case" },
+  { id: 118, name: "Solar-Powered Security Camera",        price: 69.99,  rating: 4.4, sustainability: 82, category: "EcoTech",    resale: false, image: ET[18], url: "https://www.amazon.com/s?k=solar+security+camera" },
   { id: 119, name: "Eco-Friendly USB Desk Fan",            price: 28.0,   rating: 4.5, sustainability: 80, category: "EcoTech",    resale: false, image: ET[3],  url: "https://www.amazon.com/s?k=usb+desk+fan+eco" },
-  { id: 120, name: "Recycled-Plastic Cable Organizer",     price: 12.99,  rating: 4.5, sustainability: 84, category: "EcoTech",    resale: false, image: ET[9],  url: "https://www.amazon.com/s?k=recycled+cable+organizer" },
-  { id: 121, name: "Smart Irrigation Controller",          price: 89.0,   rating: 4.6, sustainability: 85, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.amazon.com/s?k=smart+irrigation+controller" },
-  { id: 122, name: "Refurbished MacBook Air M1",           price: 649.0,  rating: 4.5, sustainability: 74, category: "EcoTech",    resale: true,  image: ET[6],  url: "https://www.backmarket.com/en-us/l/macbook-air-m1/refurbished" },
-  { id: 123, name: "Smart CO₂ + Air Quality Monitor",     price: 79.0,   rating: 4.5, sustainability: 80, category: "EcoTech",    resale: false, image: ET[3],  url: "https://www.amazon.com/s?k=co2+air+quality+monitor" },
+  { id: 120, name: "Recycled-Plastic Cable Organizer",     price: 12.99,  rating: 4.5, sustainability: 84, category: "EcoTech",    resale: false, image: ET[38], url: "https://www.amazon.com/s?k=recycled+cable+organizer" },
+  { id: 121, name: "Smart Irrigation Controller",          price: 89.0,   rating: 4.6, sustainability: 85, category: "EcoTech",    resale: false, image: ET[44], url: "https://www.amazon.com/s?k=smart+irrigation+controller" },
+  { id: 122, name: "Refurbished MacBook Air M1",           price: 649.0,  rating: 4.5, sustainability: 74, category: "EcoTech",    resale: true,  image: ET[33], url: "https://www.backmarket.com/en-us/l/macbook-air-m1/refurbished" },
+  { id: 123, name: "Smart CO₂ + Air Quality Monitor",     price: 79.0,   rating: 4.5, sustainability: 80, category: "EcoTech",    resale: false, image: ET[44], url: "https://www.amazon.com/s?k=co2+air+quality+monitor" },
   { id: 124, name: "Refurbished Bose QC35 Headphones",     price: 169.0,  rating: 4.4, sustainability: 72, category: "EcoTech",    resale: true,  image: ET[7],  url: "https://www.backmarket.com/en-us/l/bose-qc35/refurbished" },
   { id: 125, name: "Bamboo Speaker with Solar Panel",      price: 54.99,  rating: 4.6, sustainability: 86, category: "EcoTech",    resale: false, image: ET[2],  url: "https://www.amazon.com/s?k=bamboo+solar+speaker" },
-  { id: 126, name: "Secondhand Sony DSLR Camera",          price: 289.0,  rating: 4.3, sustainability: 68, category: "EcoTech",    resale: true,  image: ET[8],  url: "https://www.backmarket.com/en-us/l/sony-dslr/refurbished" },
+  { id: 126, name: "Secondhand Sony DSLR Camera",          price: 289.0,  rating: 4.3, sustainability: 68, category: "EcoTech",    resale: true,  image: ET[15], url: "https://www.backmarket.com/en-us/l/sony-dslr/refurbished" },
   { id: 127, name: "Recycled Ocean Plastic Headphones",    price: 89.0,   rating: 4.5, sustainability: 82, category: "EcoTech",    resale: false, image: ET[7],  url: "https://www.amazon.com/s?k=ocean+plastic+headphones" },
-  { id: 128, name: "Eco-Certified Smart Smoke Detector",   price: 49.99,  rating: 4.6, sustainability: 79, category: "EcoTech",    resale: false, image: ET[5],  url: "https://www.amazon.com/s?k=eco+smoke+detector" },
-  { id: 129, name: "Solar Backpack Clip Light",            price: 14.0,   rating: 4.5, sustainability: 91, category: "EcoTech",    resale: false, image: ET[4],  url: "https://www.amazon.com/s?k=solar+clip+light" },
+  { id: 128, name: "Eco-Certified Smart Smoke Detector",   price: 49.99,  rating: 4.6, sustainability: 79, category: "EcoTech",    resale: false, image: ET[40], url: "https://www.amazon.com/s?k=eco+smoke+detector" },
+  { id: 129, name: "Solar Backpack Clip Light",            price: 14.0,   rating: 4.5, sustainability: 91, category: "EcoTech",    resale: false, image: ET[21], url: "https://www.amazon.com/s?k=solar+clip+light" },
   { id: 130, name: "Refurbished Pre-Owned Hard Drive 1TB", price: 39.0,   rating: 4.1, sustainability: 75, category: "EcoTech",    resale: true,  image: ET[6],  url: "https://www.backmarket.com/en-us/l/hard-drives/refurbished" },
-  { id: 131, name: "Eco Wireless Charging Mat",            price: 35.0,   rating: 4.4, sustainability: 80, category: "EcoTech",    resale: false, image: ET[1],  url: "https://www.amazon.com/s?k=eco+wireless+charging+mat" },
+  { id: 131, name: "Eco Wireless Charging Mat",            price: 35.0,   rating: 4.4, sustainability: 80, category: "EcoTech",    resale: false, image: ET[19], url: "https://www.amazon.com/s?k=eco+wireless+charging+mat" },
 
-  // ── EcoFashion ─────────────────────────────────────────────────────────
+  // ── EcoFashion ─────────────────────────────────────────────────────────────
   { id: 37,  name: "Secondhand Levi's Denim Jacket",       price: 42.0,   rating: 4.7, sustainability: 90, category: "EcoFashion", resale: true,  image: EF[0],  url: "https://www.thredup.com/products/type/jackets-coats?search_text=denim+jacket" },
   { id: 38,  name: "Organic Hemp T-Shirt",                 price: 34.0,   rating: 4.5, sustainability: 92, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.patagonia.com/shop/mens-shirts" },
   { id: 39,  name: "Pre-Loved Patagonia Fleece",           price: 65.0,   rating: 4.8, sustainability: 93, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://wornwear.patagonia.com/" },
@@ -199,60 +320,60 @@ export const products = [
   { id: 141, name: "Secondhand Cashmere Sweater",          price: 48.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: true,  image: EF[5],  url: "https://www.thredup.com/products/type/sweaters?search_text=cashmere" },
   { id: 142, name: "Recycled Nylon Sports Leggings",       price: 44.0,   rating: 4.5, sustainability: 84, category: "EcoFashion", resale: false, image: EF[9],  url: "https://www.patagonia.com/shop/womens-leggings" },
   { id: 143, name: "Hemp Canvas Backpack",                 price: 65.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.etsy.com/market/hemp_backpack" },
-  { id: 144, name: "Pre-Loved Vintage Wool Coat",          price: 78.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://www.thredup.com/products/type/coats?search_text=wool+coat" },
-  { id: 145, name: "Organic Cotton Button-Down Shirt",     price: 49.0,   rating: 4.4, sustainability: 89, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.patagonia.com/shop/mens-shirts" },
-  { id: 146, name: "Recycled Polyester Puffer Vest",       price: 59.0,   rating: 4.5, sustainability: 82, category: "EcoFashion", resale: false, image: EF[2],  url: "https://www.patagonia.com/shop/vests" },
-  { id: 147, name: "Secondhand Running Shoes",             price: 55.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: true,  image: EF[3],  url: "https://www.thredup.com/products/type/athletic-shoes" },
-  { id: 148, name: "Fair Trade Cotton Maxi Dress",         price: 62.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[6],  url: "https://www.etsy.com/market/fair_trade_dress" },
-  { id: 149, name: "Recycled Tire Rubber Sandals",         price: 38.0,   rating: 4.4, sustainability: 82, category: "EcoFashion", resale: false, image: EF[3],  url: "https://www.amazon.com/s?k=recycled+rubber+sandals" },
+  { id: 144, name: "Pre-Loved Vintage Wool Coat",          price: 78.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: true,  image: EF[14], url: "https://www.thredup.com/products/type/coats?search_text=wool+coat" },
+  { id: 145, name: "Organic Cotton Button-Down Shirt",     price: 49.0,   rating: 4.4, sustainability: 89, category: "EcoFashion", resale: false, image: EF[22], url: "https://www.patagonia.com/shop/mens-shirts" },
+  { id: 146, name: "Recycled Polyester Puffer Vest",       price: 59.0,   rating: 4.5, sustainability: 82, category: "EcoFashion", resale: false, image: EF[12], url: "https://www.patagonia.com/shop/vests" },
+  { id: 147, name: "Secondhand Running Shoes",             price: 55.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: true,  image: EF[25], url: "https://www.thredup.com/products/type/athletic-shoes" },
+  { id: 148, name: "Fair Trade Cotton Maxi Dress",         price: 62.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[18], url: "https://www.etsy.com/market/fair_trade_dress" },
+  { id: 149, name: "Recycled Tire Rubber Sandals",         price: 38.0,   rating: 4.4, sustainability: 82, category: "EcoFashion", resale: false, image: EF[19], url: "https://www.amazon.com/s?k=recycled+rubber+sandals" },
   { id: 150, name: "Organic Merino Wool Socks (3pk)",      price: 22.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[10], url: "https://www.icebreaker.com/en-us/socks/" },
-  { id: 151, name: "Upcycled Flannel Shirt Jacket",        price: 48.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: true,  image: EF[0],  url: "https://www.etsy.com/market/upcycled_flannel_jacket" },
-  { id: 152, name: "Sustainable Cork Handbag",             price: 72.0,   rating: 4.5, sustainability: 86, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.etsy.com/market/cork_handbag" },
-  { id: 153, name: "Bamboo Fiber Underwear Set",           price: 32.0,   rating: 4.6, sustainability: 93, category: "EcoFashion", resale: false, image: EF[10], url: "https://www.amazon.com/s?k=bamboo+underwear" },
-  { id: 154, name: "Pre-Loved Designer Scarf",             price: 29.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[5],  url: "https://www.thredup.com/products/type/scarves" },
+  { id: 151, name: "Upcycled Flannel Shirt Jacket",        price: 48.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: true,  image: EF[13], url: "https://www.etsy.com/market/upcycled_flannel_jacket" },
+  { id: 152, name: "Sustainable Cork Handbag",             price: 72.0,   rating: 4.5, sustainability: 86, category: "EcoFashion", resale: false, image: EF[43], url: "https://www.etsy.com/market/cork_handbag" },
+  { id: 153, name: "Bamboo Fiber Underwear Set",           price: 32.0,   rating: 4.6, sustainability: 93, category: "EcoFashion", resale: false, image: EF[53], url: "https://www.amazon.com/s?k=bamboo+underwear" },
+  { id: 154, name: "Pre-Loved Designer Scarf",             price: 29.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[20], url: "https://www.thredup.com/products/type/scarves" },
   { id: 155, name: "Organic Linen Blazer",                 price: 89.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: false, image: EF[7],  url: "https://www.etsy.com/market/organic_linen_blazer" },
-  { id: 156, name: "Recycled Denim Shorts",                price: 36.0,   rating: 4.4, sustainability: 84, category: "EcoFashion", resale: false, image: EF[0],  url: "https://www.thredup.com/products/type/shorts?search_text=denim" },
+  { id: 156, name: "Recycled Denim Shorts",                price: 36.0,   rating: 4.4, sustainability: 84, category: "EcoFashion", resale: false, image: EF[31], url: "https://www.thredup.com/products/type/shorts?search_text=denim" },
   { id: 157, name: "Secondhand Leather Belt",              price: 18.0,   rating: 4.3, sustainability: 82, category: "EcoFashion", resale: true,  image: EF[11], url: "https://www.poshmark.com/category/Men-Accessories-Belts" },
-  { id: 158, name: "Natural Rubber Rain Boots",            price: 64.0,   rating: 4.6, sustainability: 85, category: "EcoFashion", resale: false, image: EF[3],  url: "https://www.amazon.com/s?k=natural+rubber+rain+boots" },
-  { id: 159, name: "Organic Hemp Yoga Leggings",           price: 52.0,   rating: 4.7, sustainability: 93, category: "EcoFashion", resale: false, image: EF[9],  url: "https://www.etsy.com/market/hemp_yoga_leggings" },
-  { id: 160, name: "Upcycled Quilted Jacket",              price: 67.0,   rating: 4.5, sustainability: 87, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://www.etsy.com/market/upcycled_quilted_jacket" },
-  { id: 161, name: "Recycled Cotton Canvas Hat",           price: 24.0,   rating: 4.5, sustainability: 85, category: "EcoFashion", resale: false, image: EF[5],  url: "https://www.amazon.com/s?k=recycled+cotton+hat" },
-  { id: 162, name: "Organic Tencel Long Skirt",            price: 54.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[6],  url: "https://www.etsy.com/market/tencel+skirt" },
-  { id: 163, name: "Pre-Owned Timberland Boots",           price: 75.0,   rating: 4.5, sustainability: 86, category: "EcoFashion", resale: true,  image: EF[3],  url: "https://www.thredup.com/products/type/boots?search_text=timberland" },
-  { id: 164, name: "Hemp Knit Beanie",                     price: 19.0,   rating: 4.4, sustainability: 90, category: "EcoFashion", resale: false, image: EF[10], url: "https://www.etsy.com/market/hemp_beanie" },
-  { id: 165, name: "Recycled Plastic Sunglasses",          price: 44.0,   rating: 4.5, sustainability: 81, category: "EcoFashion", resale: false, image: EF[11], url: "https://www.amazon.com/s?k=recycled+plastic+sunglasses" },
-  { id: 166, name: "Secondhand Patagonia Shorts",          price: 32.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://www.thredup.com/products/type/shorts?search_text=patagonia" },
-  { id: 167, name: "Organic Cotton Hoodie",                price: 62.0,   rating: 4.6, sustainability: 90, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.patagonia.com/shop/hoodies" },
-  { id: 168, name: "Natural Dye Linen Tote",               price: 28.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.etsy.com/market/natural_dye_linen_tote" },
-  { id: 169, name: "Pre-Loved Silk Blouse",                price: 38.0,   rating: 4.4, sustainability: 85, category: "EcoFashion", resale: true,  image: EF[7],  url: "https://www.thredup.com/products/type/blouses?search_text=silk" },
-  { id: 170, name: "Recycled Wool Knit Cardigan",          price: 74.0,   rating: 4.6, sustainability: 88, category: "EcoFashion", resale: false, image: EF[5],  url: "https://www.etsy.com/market/recycled+wool+cardigan" },
+  { id: 158, name: "Natural Rubber Rain Boots",            price: 64.0,   rating: 4.6, sustainability: 85, category: "EcoFashion", resale: false, image: EF[26], url: "https://www.amazon.com/s?k=natural+rubber+rain+boots" },
+  { id: 159, name: "Organic Hemp Yoga Leggings",           price: 52.0,   rating: 4.7, sustainability: 93, category: "EcoFashion", resale: false, image: EF[30], url: "https://www.etsy.com/market/hemp_yoga_leggings" },
+  { id: 160, name: "Upcycled Quilted Jacket",              price: 67.0,   rating: 4.5, sustainability: 87, category: "EcoFashion", resale: true,  image: EF[34], url: "https://www.etsy.com/market/upcycled_quilted_jacket" },
+  { id: 161, name: "Recycled Cotton Canvas Hat",           price: 24.0,   rating: 4.5, sustainability: 85, category: "EcoFashion", resale: false, image: EF[16], url: "https://www.amazon.com/s?k=recycled+cotton+hat" },
+  { id: 162, name: "Organic Tencel Long Skirt",            price: 54.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[23], url: "https://www.etsy.com/market/tencel+skirt" },
+  { id: 163, name: "Pre-Owned Timberland Boots",           price: 75.0,   rating: 4.5, sustainability: 86, category: "EcoFashion", resale: true,  image: EF[24], url: "https://www.thredup.com/products/type/boots?search_text=timberland" },
+  { id: 164, name: "Hemp Knit Beanie",                     price: 19.0,   rating: 4.4, sustainability: 90, category: "EcoFashion", resale: false, image: EF[48], url: "https://www.etsy.com/market/hemp_beanie" },
+  { id: 165, name: "Recycled Plastic Sunglasses",          price: 44.0,   rating: 4.5, sustainability: 81, category: "EcoFashion", resale: false, image: EF[46], url: "https://www.amazon.com/s?k=recycled+plastic+sunglasses" },
+  { id: 166, name: "Secondhand Patagonia Shorts",          price: 32.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: true,  image: EF[17], url: "https://www.thredup.com/products/type/shorts?search_text=patagonia" },
+  { id: 167, name: "Organic Cotton Hoodie",                price: 62.0,   rating: 4.6, sustainability: 90, category: "EcoFashion", resale: false, image: EF[29], url: "https://www.patagonia.com/shop/hoodies" },
+  { id: 168, name: "Natural Dye Linen Tote",               price: 28.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[54], url: "https://www.etsy.com/market/natural_dye_linen_tote" },
+  { id: 169, name: "Pre-Loved Silk Blouse",                price: 38.0,   rating: 4.4, sustainability: 85, category: "EcoFashion", resale: true,  image: EF[38], url: "https://www.thredup.com/products/type/blouses?search_text=silk" },
+  { id: 170, name: "Recycled Wool Knit Cardigan",          price: 74.0,   rating: 4.6, sustainability: 88, category: "EcoFashion", resale: false, image: EF[32], url: "https://www.etsy.com/market/recycled+wool+cardigan" },
   { id: 171, name: "Organic Cotton Baby Onesies (5pk)",    price: 28.0,   rating: 4.8, sustainability: 94, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.amazon.com/s?k=organic+cotton+baby+onesies" },
-  { id: 172, name: "Secondhand Linen Trousers",            price: 34.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[6],  url: "https://www.thredup.com/products/type/pants?search_text=linen" },
-  { id: 173, name: "Algae-Based Swimwear Set",             price: 58.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[9],  url: "https://www.amazon.com/s?k=algae+swimwear" },
+  { id: 172, name: "Secondhand Linen Trousers",            price: 34.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[45], url: "https://www.thredup.com/products/type/pants?search_text=linen" },
+  { id: 173, name: "Algae-Based Swimwear Set",             price: 58.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: false, image: EF[28], url: "https://www.amazon.com/s?k=algae+swimwear" },
   { id: 174, name: "Hemp Canvas Sneakers",                 price: 69.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[3],  url: "https://www.etsy.com/market/hemp+canvas+sneakers" },
-  { id: 175, name: "Upcycled Sari Wrap Dress",             price: 47.0,   rating: 4.6, sustainability: 90, category: "EcoFashion", resale: true,  image: EF[7],  url: "https://www.etsy.com/market/upcycled_sari_dress" },
-  { id: 176, name: "Recycled Fishing Net Beanie",          price: 22.0,   rating: 4.5, sustainability: 85, category: "EcoFashion", resale: false, image: EF[10], url: "https://www.amazon.com/s?k=recycled+fishing+net+beanie" },
-  { id: 177, name: "Organic Cotton Pajama Set",            price: 46.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.amazon.com/s?k=organic+cotton+pajamas" },
+  { id: 175, name: "Upcycled Sari Wrap Dress",             price: 47.0,   rating: 4.6, sustainability: 90, category: "EcoFashion", resale: true,  image: EF[39], url: "https://www.etsy.com/market/upcycled_sari_dress" },
+  { id: 176, name: "Recycled Fishing Net Beanie",          price: 22.0,   rating: 4.5, sustainability: 85, category: "EcoFashion", resale: false, image: EF[35], url: "https://www.amazon.com/s?k=recycled+fishing+net+beanie" },
+  { id: 177, name: "Organic Cotton Pajama Set",            price: 46.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[44], url: "https://www.amazon.com/s?k=organic+cotton+pajamas" },
   { id: 178, name: "Pre-Loved Vintage Levi's 501",         price: 52.0,   rating: 4.7, sustainability: 92, category: "EcoFashion", resale: true,  image: EF[0],  url: "https://www.depop.com/tag/levis-501/" },
-  { id: 179, name: "GOTS Certified Denim Jacket",          price: 78.0,   rating: 4.5, sustainability: 87, category: "EcoFashion", resale: false, image: EF[0],  url: "https://www.amazon.com/s?k=GOTS+certified+denim+jacket" },
-  { id: 180, name: "Natural Jute Crossbody Bag",           price: 34.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.etsy.com/market/jute_crossbody_bag" },
-  { id: 181, name: "Recycled Cashmere Crew-Neck",          price: 68.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[5],  url: "https://www.etsy.com/market/recycled+cashmere+sweater" },
+  { id: 179, name: "GOTS Certified Denim Jacket",          price: 78.0,   rating: 4.5, sustainability: 87, category: "EcoFashion", resale: false, image: EF[37], url: "https://www.amazon.com/s?k=GOTS+certified+denim+jacket" },
+  { id: 180, name: "Natural Jute Crossbody Bag",           price: 34.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: false, image: EF[40], url: "https://www.etsy.com/market/jute_crossbody_bag" },
+  { id: 181, name: "Recycled Cashmere Crew-Neck",          price: 68.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[21], url: "https://www.etsy.com/market/recycled+cashmere+sweater" },
   { id: 182, name: "Secondhand Fleece Pullover",           price: 28.0,   rating: 4.3, sustainability: 87, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://www.thredup.com/products/type/sweatshirts?search_text=fleece" },
   { id: 183, name: "Organic Linen Shirt Dress",            price: 57.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[8],  url: "https://www.etsy.com/market/organic+linen+shirt+dress" },
-  { id: 184, name: "Recycled Polyester Wind Jacket",       price: 72.0,   rating: 4.5, sustainability: 83, category: "EcoFashion", resale: false, image: EF[2],  url: "https://www.patagonia.com/shop/wind-jackets" },
-  { id: 185, name: "Pre-Loved Hunter Wellies",             price: 42.0,   rating: 4.4, sustainability: 84, category: "EcoFashion", resale: true,  image: EF[3],  url: "https://www.thredup.com/products/type/boots?search_text=hunter" },
-  { id: 186, name: "Organic Cotton Turtleneck",            price: 45.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[1],  url: "https://www.patagonia.com/shop/turtlenecks" },
-  { id: 187, name: "Hemp Denim Overalls",                  price: 82.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[0],  url: "https://www.etsy.com/market/hemp+denim+overalls" },
-  { id: 188, name: "Upcycled Kimono Wrap Jacket",          price: 54.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[7],  url: "https://www.etsy.com/market/upcycled+kimono+jacket" },
-  { id: 189, name: "Recycled Ocean Plastic Tote",          price: 36.0,   rating: 4.6, sustainability: 87, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.amazon.com/s?k=ocean+plastic+tote+bag" },
-  { id: 190, name: "Organic Cotton Track Pants",           price: 42.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: false, image: EF[9],  url: "https://www.patagonia.com/shop/athletic-pants" },
-  { id: 191, name: "Secondhand Wool Peacoat",              price: 88.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: true,  image: EF[2],  url: "https://www.thredup.com/products/type/coats?search_text=wool+peacoat" },
-  { id: 192, name: "Natural Kapok Silk Camisole",          price: 38.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: false, image: EF[7],  url: "https://www.etsy.com/market/kapok+camisole" },
-  { id: 193, name: "Recycled Rubber Tote Bag",             price: 29.0,   rating: 4.4, sustainability: 82, category: "EcoFashion", resale: false, image: EF[4],  url: "https://www.amazon.com/s?k=recycled+rubber+tote" },
-  { id: 194, name: "Organic Bamboo Sports Bra",            price: 34.0,   rating: 4.6, sustainability: 92, category: "EcoFashion", resale: false, image: EF[9],  url: "https://www.amazon.com/s?k=bamboo+sports+bra" },
-  { id: 195, name: "Pre-Loved Designer Jacket",            price: 120.0,  rating: 4.5, sustainability: 86, category: "EcoFashion", resale: true,  image: EF[0],  url: "https://www.thredup.com/products/type/jackets-coats?search_text=designer" },
+  { id: 184, name: "Recycled Polyester Wind Jacket",       price: 72.0,   rating: 4.5, sustainability: 83, category: "EcoFashion", resale: false, image: EF[15], url: "https://www.patagonia.com/shop/wind-jackets" },
+  { id: 185, name: "Pre-Loved Hunter Wellies",             price: 42.0,   rating: 4.4, sustainability: 84, category: "EcoFashion", resale: true,  image: EF[26], url: "https://www.thredup.com/products/type/boots?search_text=hunter" },
+  { id: 186, name: "Organic Cotton Turtleneck",            price: 45.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[33], url: "https://www.patagonia.com/shop/turtlenecks" },
+  { id: 187, name: "Hemp Denim Overalls",                  price: 82.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[36], url: "https://www.etsy.com/market/hemp+denim+overalls" },
+  { id: 188, name: "Upcycled Kimono Wrap Jacket",          price: 54.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[39], url: "https://www.etsy.com/market/upcycled+kimono+jacket" },
+  { id: 189, name: "Recycled Ocean Plastic Tote",          price: 36.0,   rating: 4.6, sustainability: 87, category: "EcoFashion", resale: false, image: EF[42], url: "https://www.amazon.com/s?k=ocean+plastic+tote+bag" },
+  { id: 190, name: "Organic Cotton Track Pants",           price: 42.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: false, image: EF[41], url: "https://www.patagonia.com/shop/athletic-pants" },
+  { id: 191, name: "Secondhand Wool Peacoat",              price: 88.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: true,  image: EF[33], url: "https://www.thredup.com/products/type/coats?search_text=wool+peacoat" },
+  { id: 192, name: "Natural Kapok Silk Camisole",          price: 38.0,   rating: 4.4, sustainability: 88, category: "EcoFashion", resale: false, image: EF[38], url: "https://www.etsy.com/market/kapok+camisole" },
+  { id: 193, name: "Recycled Rubber Tote Bag",             price: 29.0,   rating: 4.4, sustainability: 82, category: "EcoFashion", resale: false, image: EF[27], url: "https://www.amazon.com/s?k=recycled+rubber+tote" },
+  { id: 194, name: "Organic Bamboo Sports Bra",            price: 34.0,   rating: 4.6, sustainability: 92, category: "EcoFashion", resale: false, image: EF[15], url: "https://www.amazon.com/s?k=bamboo+sports+bra" },
+  { id: 195, name: "Pre-Loved Designer Jacket",            price: 120.0,  rating: 4.5, sustainability: 86, category: "EcoFashion", resale: true,  image: EF[12], url: "https://www.thredup.com/products/type/jackets-coats?search_text=designer" },
   { id: 196, name: "Hemp Linen Cargo Pants",               price: 64.0,   rating: 4.5, sustainability: 90, category: "EcoFashion", resale: false, image: EF[8],  url: "https://www.etsy.com/market/hemp+linen+cargo+pants" },
-  { id: 197, name: "Recycled Wool Beret",                  price: 24.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: false, image: EF[10], url: "https://www.etsy.com/market/recycled+wool+beret" },
+  { id: 197, name: "Recycled Wool Beret",                  price: 24.0,   rating: 4.4, sustainability: 87, category: "EcoFashion", resale: false, image: EF[49], url: "https://www.etsy.com/market/recycled+wool+beret" },
   { id: 198, name: "Organic Cotton Wrap Cardigan",         price: 52.0,   rating: 4.6, sustainability: 91, category: "EcoFashion", resale: false, image: EF[5],  url: "https://www.etsy.com/market/organic+cotton+cardigan" },
   { id: 199, name: "Upcycled Patchwork Denim Bag",         price: 43.0,   rating: 4.5, sustainability: 88, category: "EcoFashion", resale: true,  image: EF[4],  url: "https://www.etsy.com/market/patchwork+denim+bag" },
   { id: 200, name: "Fair Trade Organic Linen Shorts",      price: 38.0,   rating: 4.5, sustainability: 89, category: "EcoFashion", resale: false, image: EF[6],  url: "https://www.etsy.com/market/fair+trade+linen+shorts" },

@@ -16,7 +16,9 @@ import {
   FiImage,
   FiSmile,
   FiX,
-  FiCheck
+  FiCheck,
+  FiMoreHorizontal,
+  FiClock
 } from "react-icons/fi";
 import { MdEco, MdVolunteerActivism, MdNaturePeople } from "react-icons/md";
 import Navbar from "@/components/navbar";
@@ -30,6 +32,17 @@ import { createBrowserSupabase } from "@/lib/supabase";
 const causes = [
   "cleanup", "waste reduction", "marine",
   "restoration", "climate", "water", "education", "biodiversity"
+];
+
+const FEELINGS = [
+  { label: "Happy",     emoji: "😊" },
+  { label: "Grateful",  emoji: "🙏" },
+  { label: "Motivated", emoji: "💪" },
+  { label: "Inspired",  emoji: "✨" },
+  { label: "Hopeful",   emoji: "🌱" },
+  { label: "Committed", emoji: "🎯" },
+  { label: "Excited",   emoji: "🎉" },
+  { label: "Concerned", emoji: "😟" },
 ];
 
 const AVATAR_COLORS = [
@@ -69,6 +82,31 @@ function Avatar({ src, name, size = 40 }) {
     >
       {initials}
     </div>
+  );
+}
+
+const URL_REGEX = /(https?:\/\/[^\s]+)/g;
+
+function PostContent({ text }) {
+  const parts = text.split(URL_REGEX);
+  return (
+    <p className="snPostContent">
+      {parts.map((part, i) =>
+        URL_REGEX.test(part) ? (
+          <a
+            key={i}
+            href={part}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="snPostLink"
+          >
+            {part}
+          </a>
+        ) : (
+          part
+        )
+      )}
+    </p>
   );
 }
 
@@ -135,33 +173,84 @@ function PostCard({ post, currentUserId }) {
     }
   }
 
+  const totalComments = post.comments + comments.length;
+
   return (
     <article className="snPost glass">
+
+      {/* ── Header ── */}
       <div className="snPostHeader">
-        <Avatar name={post.author} size={44} />
+        <Avatar name={post.author} size={48} />
         <div className="snPostMeta">
-          <strong className="snPostAuthor">{post.author}</strong>
-          <span className="snPostRole">{post.role}</span>
-          <span className="snPostTime">{post.timeAgo}</span>
+          <div className="snPostMetaTop">
+            <strong className="snPostAuthor">{post.author}</strong>
+            {post.role && <span className="snPostRoleBadge">{post.role}</span>}
+          </div>
+          <div className="snPostMetaBottom">
+            <FiClock size={11} />
+            <span className="snPostTime">{post.timeAgo}</span>
+          </div>
         </div>
+        <button type="button" className="snPostOptionsBtn" aria-label="More options">
+          <FiMoreHorizontal size={19} />
+        </button>
       </div>
 
-      <p className="snPostContent">{post.content}</p>
+      {/* ── Feeling / Location meta ── */}
+      {(post.feeling || post.location) && (
+        <div className="snPostAttachMeta">
+          {post.feeling && (
+            <span className="snPostAttachChip">
+              {post.feeling.emoji} feeling <strong>{post.feeling.label}</strong>
+            </span>
+          )}
+          {post.location && (
+            <span className="snPostAttachChip">
+              <FiMapPin size={11} /> {post.location}
+            </span>
+          )}
+        </div>
+      )}
 
+      {/* ── Content ── */}
+      <PostContent text={post.content} />
+
+      {/* ── Tags ── */}
+      {(post.tags || []).length > 0 && (
+        <div className="snTagRow">
+          {(post.tags || []).map((tag) => (
+            <span className="snTag" key={tag}>#{tag}</span>
+          ))}
+        </div>
+      )}
+
+      {/* ── Image ── */}
       {post.imageUrl && (
         <div className="snPostImage">
           <img src={post.imageUrl} alt="Post image" />
         </div>
       )}
 
-      <div className="snTagRow">
-        {(post.tags || []).map((tag) => (
-          <span className="snTag" key={tag}>
-            <MdEco size={12} /> {tag}
-          </span>
-        ))}
-      </div>
+      {/* ── Engagement counts ── */}
+      {(likeCount > 0 || totalComments > 0) && (
+        <div className="snPostStats">
+          {likeCount > 0 && (
+            <span className="snPostStatItem">
+              <span className="snPostStatDot snPostStatDot--like">
+                <FiHeart size={10} />
+              </span>
+              {likeCount} {likeCount === 1 ? "like" : "likes"}
+            </span>
+          )}
+          {totalComments > 0 && (
+            <span className="snPostStatItem snPostStatSep">
+              {totalComments} {totalComments === 1 ? "comment" : "comments"}
+            </span>
+          )}
+        </div>
+      )}
 
+      {/* ── Action bar ── */}
       <div className="snPostActions">
         <button
           type="button"
@@ -169,24 +258,25 @@ function PostCard({ post, currentUserId }) {
           onClick={toggleLike}
           disabled={liking}
         >
-          <FiHeart size={16} />
-          <span>{likeCount}</span>
+          <FiHeart size={17} />
+          <span>Like</span>
         </button>
         <button type="button" className="snAction" onClick={loadComments}>
-          <FiMessageCircle size={16} />
-          <span>{post.comments + comments.length}</span>
+          <FiMessageCircle size={17} />
+          <span>Comment</span>
         </button>
         <button type="button" className="snAction" onClick={share}>
-          <FiShare2 size={16} />
+          <FiShare2 size={17} />
           <span>Share</span>
         </button>
       </div>
 
+      {/* ── Comments ── */}
       {showComments && (
         <div className="snComments">
           {comments.map((c, i) => (
             <div key={i} className="snComment">
-              <Avatar name={c.author} size={28} />
+              <Avatar name={c.author} size={30} />
               <div className="snCommentBody">
                 <strong>{c.author}</strong>
                 <p>{c.content}</p>
@@ -230,7 +320,13 @@ export default function CommunityPage() {
   const [postError, setPostError]           = useState("");
   const [imageFile, setImageFile]           = useState(null);
   const [imagePreview, setImagePreview]     = useState(null);
-  const fileRef = useRef();
+  const [feeling, setFeeling]               = useState(null);
+  const [showFeelingPicker, setShowFeelingPicker] = useState(false);
+  const [location, setLocation]             = useState("");
+  const [showLocationInput, setShowLocationInput] = useState(false);
+  const [locating, setLocating]             = useState(false);
+  const fileRef        = useRef();
+  const feelingRef     = useRef();
 
   async function fetchPosts() {
     try {
@@ -278,6 +374,28 @@ export default function CommunityPage() {
     setImagePreview(URL.createObjectURL(file));
   }
 
+  async function detectLocation() {
+    setLocating(true);
+    try {
+      const pos = await new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 8000 })
+      );
+      const { latitude, longitude } = pos.coords;
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+        { headers: { "Accept-Language": "en" } }
+      );
+      const data = await res.json();
+      const city  = data.address?.city || data.address?.town || data.address?.village || "";
+      const state = data.address?.state || "";
+      setLocation([city, state].filter(Boolean).join(", ") || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`);
+    } catch {
+      setLocation("Tampa, FL");
+    } finally {
+      setLocating(false);
+    }
+  }
+
   async function handlePost(e) {
     e.preventDefault();
     const content = postText.trim();
@@ -318,6 +436,8 @@ export default function CommunityPage() {
         content,
         tags: selectedCauses.slice(0, 3),
         imageUrl,
+        feeling: feeling || null,
+        location: location || null,
         likes: 0,
         comments: 0,
         timeAgo: "Just now",
@@ -328,6 +448,9 @@ export default function CommunityPage() {
       setPostText("");
       setImageFile(null);
       setImagePreview(null);
+      setFeeling(null);
+      setLocation("");
+      setShowLocationInput(false);
     } catch (err) {
       setPostError(err.message);
     } finally {
@@ -480,16 +603,79 @@ export default function CommunityPage() {
                   disabled={!user}
                 />
 
-                {imagePreview && (
-                  <div className="snComposerImagePreview">
-                    <img src={imagePreview} alt="preview" />
+                {/* ── Active attachment badges ── */}
+                {(imagePreview || feeling || location) && (
+                  <div className="snComposerBadges">
+                    {imagePreview && (
+                      <div className="snComposerImagePreview">
+                        <img src={imagePreview} alt="preview" />
+                        <button
+                          type="button"
+                          className="snRemoveImage"
+                          onClick={() => { setImageFile(null); setImagePreview(null); }}
+                        >
+                          <FiX size={14} />
+                        </button>
+                      </div>
+                    )}
+                    {feeling && (
+                      <span className="snComposerChip">
+                        {feeling.emoji} feeling {feeling.label}
+                        <button type="button" onClick={() => setFeeling(null)}><FiX size={11} /></button>
+                      </span>
+                    )}
+                    {location && (
+                      <span className="snComposerChip">
+                        <FiMapPin size={12} /> {location}
+                        <button type="button" onClick={() => setLocation("")}><FiX size={11} /></button>
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* ── Location input row ── */}
+                {showLocationInput && (
+                  <div className="snLocationRow">
+                    <FiMapPin size={15} style={{ color: "var(--accent-strong)", flexShrink: 0 }} />
+                    <input
+                      className="snLocationInput"
+                      placeholder="Type a location…"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); setShowLocationInput(false); } }}
+                      autoFocus
+                    />
                     <button
                       type="button"
-                      className="snRemoveImage"
-                      onClick={() => { setImageFile(null); setImagePreview(null); }}
+                      className="snLocationDetect"
+                      onClick={detectLocation}
+                      disabled={locating}
                     >
-                      <FiX size={14} />
+                      {locating ? "Detecting…" : "Use my location"}
                     </button>
+                    <button type="button" className="snLocationClose" onClick={() => setShowLocationInput(false)}>
+                      <FiCheck size={14} />
+                    </button>
+                  </div>
+                )}
+
+                {/* ── Feeling picker popover ── */}
+                {showFeelingPicker && (
+                  <div className="snFeelingPicker" ref={feelingRef}>
+                    <p className="snFeelingTitle">How are you feeling?</p>
+                    <div className="snFeelingGrid">
+                      {FEELINGS.map((f) => (
+                        <button
+                          key={f.label}
+                          type="button"
+                          className={`snFeelingOption ${feeling?.label === f.label ? "snFeelingOption--active" : ""}`}
+                          onClick={() => { setFeeling(feeling?.label === f.label ? null : f); setShowFeelingPicker(false); }}
+                        >
+                          <span className="snFeelingEmoji">{f.emoji}</span>
+                          <span>{f.label}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -497,7 +683,7 @@ export default function CommunityPage() {
                   <div className="snComposerTools">
                     <button
                       type="button"
-                      className="snToolBtn"
+                      className={`snToolBtn ${imageFile ? "snToolBtn--active" : ""}`}
                       onClick={() => user && fileRef.current?.click()}
                       disabled={!user}
                     >
@@ -510,10 +696,20 @@ export default function CommunityPage() {
                       onChange={handleFileChange}
                       style={{ display: "none" }}
                     />
-                    <button type="button" className="snToolBtn" disabled={!user}>
+                    <button
+                      type="button"
+                      className={`snToolBtn ${feeling ? "snToolBtn--active" : ""}`}
+                      onClick={() => { if (!user) return; setShowFeelingPicker((v) => !v); setShowLocationInput(false); }}
+                      disabled={!user}
+                    >
                       <FiSmile size={16} /> Feeling
                     </button>
-                    <button type="button" className="snToolBtn" disabled={!user}>
+                    <button
+                      type="button"
+                      className={`snToolBtn ${location ? "snToolBtn--active" : ""}`}
+                      onClick={() => { if (!user) return; setShowLocationInput((v) => !v); setShowFeelingPicker(false); }}
+                      disabled={!user}
+                    >
                       <FiMapPin size={16} /> Location
                     </button>
                   </div>
