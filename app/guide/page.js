@@ -1,29 +1,10 @@
 import Link from "next/link";
-import { FiCamera, FiSearch } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import Navbar from "@/components/navbar";
 import {
   MdStorefront, MdBiotech, MdBarChart, MdGroups,
   MdAssignment, MdSmartToy, MdCheckCircle
 } from "react-icons/md";
-
-function ImgSlot({ label, hint, gradient, icon: Icon = FiCamera, src, alt }) {
-  if (src) {
-    return (
-      <div className="imgSlot imgSlot--filled">
-        <img src={src} alt={alt || label} />
-      </div>
-    );
-  }
-  return (
-    <div className="imgSlot imgSlot--sm" style={{ "--slot-gradient": gradient }}>
-      <div className="imgSlotInner">
-        <Icon size={22} className="imgSlotIcon" />
-        <p className="imgSlotLabel">{label}</p>
-        <p className="imgSlotHint"><FiSearch size={10} /> {hint}</p>
-      </div>
-    </div>
-  );
-}
 
 const steps = [
   {
@@ -119,14 +100,31 @@ export default function GuidePage() {
             data-reveal
             style={{ "--reveal-delay": `${160 + i * 70}ms` }}
           >
-            {/* Image slot */}
-            <ImgSlot
-              src=""
-              label={step.imgLabel}
-              hint={step.imgHint}
-              gradient={step.imgGradient}
-              icon={step.icon}
-            />
+            {/* Step link panel */}
+            {step.href !== "#" ? (
+              <Link
+                href={step.href}
+                className="guideStepLink"
+                style={{ background: step.imgGradient }}
+              >
+                <step.icon size={32} style={{ color: step.color }} />
+                <span className="guideStepLinkLabel">{step.title}</span>
+                <span className="guideStepLinkCta">
+                  Go to page <FiArrowRight size={14} />
+                </span>
+              </Link>
+            ) : (
+              <div
+                className="guideStepLink guideStepLink--static"
+                style={{ background: step.imgGradient }}
+              >
+                <step.icon size={32} style={{ color: step.color }} />
+                <span className="guideStepLinkLabel">{step.title}</span>
+                <span className="guideStepLinkCta" style={{ opacity: 0.5 }}>
+                  Available on-page
+                </span>
+              </div>
+            )}
 
             {/* Step content */}
             <div className="guideStepV2Body">

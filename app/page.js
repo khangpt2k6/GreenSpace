@@ -29,8 +29,8 @@ const features = [
     src: "/products_flat_lay.jpg",
     alt: "Eco products flat lay",
     tag: { icon: MdSwapHoriz, label: "Marketplace" },
-    heading: "40+ curated eco products",
-    body: "Browse by sustainability score, price, and category — with student feedback from USF, HCC, and UTampa.",
+    heading: "190+ curated eco products",
+    body: "Browse by sustainability score, price, and category — with student feedback from USF, HCC, and UTampa. 190+ eco products curated.",
     link: { href: "/marketplace", label: "Browse marketplace" },
   },
   {
@@ -57,7 +57,7 @@ export default function HomePage() {
             className="lpHeroH1"
           />
           <p className="lpHeroSub lpHeroSubAnim">
-            AI sustainability scoring for 40+ eco products. Analyze any URL,
+            AI sustainability scoring for 190+ eco products. Analyze any URL,
             find better alternatives, and track your impact.
           </p>
           <div className="lpHeroActions lpHeroActionsAnim">
@@ -72,7 +72,7 @@ export default function HomePage() {
 
         <FloatingCard>
           <Image
-            src="/hero_sustainable shopping.webp"
+            src="/hero_sustainable_shopping.jpg"
             alt="Sustainable shopping"
             fill
             priority
@@ -129,8 +129,8 @@ export default function HomePage() {
         </ScrollReveal>
         <div className="lpResearchImg">
           <Image
-            src="/background_landing.jpg"
-            alt="Research background"
+            src="/research_thumbnail.png"
+            alt="Consumer Behavior & Sustainability research"
             fill
             className="lpFeatureImgEl"
             sizes="(max-width: 768px) 100vw, 45vw"
@@ -161,7 +161,7 @@ export default function HomePage() {
           {[
             { src: "/poster1.png", alt: "Eco Action Campaign poster", title: "Eco Action Campaign", desc: "Single-use plastic awareness & reusable swaps" },
             { src: "/poster2_green_living_guide.png", alt: "Green Living Guide poster", title: "Green Living Guide", desc: "Daily habits for lower carbon impact in dorms" },
-            { src: "/thumbnail.png", alt: "GreenCart thumbnail", title: "Future of Sustainable Shopping", desc: "How AI helps consumers make cleaner purchases" },
+            { src: "/poster3.png", alt: "Future of Sustainable Shopping poster", title: "Future of Sustainable Shopping", desc: "How AI helps consumers make cleaner purchases" },
           ].map((poster, i) => (
             <div key={poster.src} className="lpPosterItem lpPosterItemAnim" style={{ "--p-delay": `${i * 100}ms` }}>
               <div className="lpPosterImgWrap">
