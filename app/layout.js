@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           {children}
           <ChatBubble />
           <footer className="siteCredit">
-            Powered by Tuan Khang Phan - IDH 3350
+            Powered by Tuan Khang Phan - Bill Lam
           </footer>
         </body>
       </html>
